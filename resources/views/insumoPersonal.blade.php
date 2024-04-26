@@ -8,7 +8,7 @@
 <div class="container-user">
     <div class="container-text">
         <h4>
-            Insumos
+            Insumos.
         </h4>
 
         @if(Session::get('success'))

@@ -1,0 +1,153 @@
+body{
+    background-color: #F3F0EC;
+}
+
+h1{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+header{
+    margin-top: 30px;
+}
+
+footer{
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:30px;
+    width:100%;
+    background:#999;
+}
+
+h4{
+    color: brown;
+}
+
+.header-container{
+    background-color: white;
+    min-height: 90hv;
+
+}
+
+.container-btn{
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+.btn-box{
+    display: center;
+    text-align: center;
+    padding: 2px 1px 0;
+}
+#a-header{
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    text-align: center;
+    margin: 3% ;
+}
+#a-header:hover{
+    border-bottom:1px solid;
+    background: rgb(109, 109, 109);
+    border-radius: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.d-block{
+    height: 30%;
+}
+
+
+
+.login-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90hv;
+    padding-top: 10%;
+}
+
+.container-box{
+    background-color: #999;
+    padding-left: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-right: 40px;
+    border-radius: 5%;
+}
+
+.box{
+    background-color: #A4A4A4;
+    border-radius: 3%;
+    padding-left: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-right: 40px;
+
+}
+
+#iconoLogin{
+    height: 90px;
+    padding-left: 35%;
+    padding-bottom: 5%;
+    box-shadow: 1%;
+}
+
+.btn-conteiner{
+    display: flex;
+    padding-top: 10%;
+}
+
+#txt-iniciarSesion{
+    padding-left: 15%;
+}
+
+.form-group{
+    padding-left: 10%;
+}
+
+#btnIniciarSesion{
+    color: white;
+    background-color: #008419;
+    border-radius: 10%;
+    margin-left: 25%;
+}
+
+#btnCancelarSesion{
+    color: white;
+    background-color: #DB1111;
+    border-radius: 10%;
+}
+
+.container-mision{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.h3-mision{
+    margin-top: 40px;
+}
+
+#usernametutor{
+    border-radius: 3px;
+}
+
+#passwordtutor{
+    border-radius: 3px;
+}
+
+#usernamepersonal{
+    border-radius: 3px;
+}
+
+#passwordpersonal{
+    border-radius: 3px;
+}

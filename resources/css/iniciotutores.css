@@ -1,0 +1,102 @@
+body{
+    background-color: #F3F0EC;
+}
+
+h1{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+header{
+    margin-top: 30px;
+}
+
+footer{
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:30px;
+    width:100%;
+    background:#999;
+}
+
+h4{
+    font-family:'OpenSans-Bold';
+    color: black;
+    font-size: 40px;
+}
+
+@font-face {
+    font-family:'OpenSans-Bold';
+    src: url('font/OpenSans-Bold.ttf');
+}
+
+.header-container{
+    background-color: white;
+    min-height: 90hv;
+    margin-bottom: 40px;
+}
+
+.container-btn{
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+.btn-box{
+    display: center;
+    text-align: center;
+    padding: 2px 1px 0;
+}
+#a-header{
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    text-align: center;
+    margin: 3% ;
+}
+#a-header:hover{
+    border-bottom:1px solid;
+    background: rgb(109, 109, 109);
+    border-radius: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.container-user{
+    background-color: #A4A4A4;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 5px;
+}
+.container-text{
+    background-color: #c2c2c2;
+    border-radius: 5px;
+}
+.container-info{
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+}
+.user-1{
+    background-color: #848484;
+    display: flex;
+    margin-top: 5px;
+    border-radius: 5px;
+    margin-left: 5px;    
+}
+
+#table-pets{
+    background-color: #848484;
+    border-radius: 5px;
+}
+th{
+    color: black;
+}

@@ -19,7 +19,7 @@
           <a id="a-header" href="/perfil">Perfil</a>
           <a id="a-header" href="/tutores">Tutores</a>
           <a id="a-header" href="/mascotas">Mascotas</a>
-          <a id="a-header" href="/insumos">Insumos</a>
+          <a id="a-header" href="/insumo">Insumos</a>
           <a id="a-header" href="/citas">Citas</a>
 
 

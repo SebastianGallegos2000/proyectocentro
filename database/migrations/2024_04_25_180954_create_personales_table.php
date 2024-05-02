@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('telefono_Personal');
             $table->integer('id_Especialidad_Personal');
             $table->unsignedBigInteger('id_Rol_Personal');
-            $table->boolean('estado_Personal'); 
+            $table->integer('estado_Personal'); 
             $table->timestamps();
 
 

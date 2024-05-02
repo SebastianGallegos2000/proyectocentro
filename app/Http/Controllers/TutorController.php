@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Insumos;
+use App\Models\Tutor;
 use Illuminate\Http\Request;
 
-class InsumosController extends Controller
+class TutorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('insumoPersonal');
+        return view('tutor');
     }
 
     /**
@@ -20,7 +20,7 @@ class InsumosController extends Controller
      */
     public function create()
     {
-        return view('createInsumo');
+        return view('createTutor');
     }
 
     /**
@@ -28,22 +28,15 @@ class InsumosController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre_Insumo' =>'required',
-            'cantidad_Insumo' => 'required',
-            'costo_Insumo' => 'required'
+        //
+        //return redirect()->route('/loginTutor')->with('succes','Has creado tu usuario correctamente');    
 
-        ]);
-
-        Insumos::create($request->all());
-        //dd($request->all());
-        return redirect()->route('insumos.index')->with('succes','Insumo agregado con éxito al sistema');    
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Insumos $insumos)
+    public function show(Tutor $tutor)
     {
         //
     }
@@ -51,7 +44,7 @@ class InsumosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Insumos $insumos)
+    public function edit(Tutor $tutor)
     {
         //
     }
@@ -59,7 +52,7 @@ class InsumosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Insumos $insumos)
+    public function update(Request $request, Tutor $tutor)
     {
         //
     }
@@ -67,7 +60,7 @@ class InsumosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Insumos $insumos)
+    public function destroy(Tutor $tutor)
     {
         //
     }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_Insumo_IncrementoInventario');
             $table->timestamp('fechayhora_IncrementoInventario',precision:0);
             $table->string('cantidad_IncrementoInventario');
-            $table->boolean('estado_IncrementoInventario');
+            $table->integer('estado_IncrementoInventario');
 
             $table->foreign('rut_Personal_IncrementoInventario')->references('rut_Personal')->on('personales');
             $table->foreign('id_Insumo_IncrementoInventario')->references('id_Insumo')->on('insumos');

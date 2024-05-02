@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre_Insumo');
             $table->integer('cantidad_Insumo');
             $table->integer('costo_Insumo');
-            $table->boolean('estado_Insumo');
+            $table->integer('estado_Insumo');
             $table->timestamps();
         });
     }

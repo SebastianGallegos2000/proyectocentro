@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('fotocopiacarnet_Tutor');
             $table->string('registrosocial_Tutor');
             $table->unsignedBigInteger('id_Rol_Tutor');
-            $table->boolean('estado_Tutor');
+            $table->integer('estado_Tutor');
             $table->timestamps();
 
 

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('edad_Mascota');
             $table->string('especie_Mascota');
             $table->string('sexo_Mascota');
-            $table->boolean('estado_Mascota');
+            $table->integer('estado_Mascota');
             $table->timestamps();
 
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('razamascotas', function (Blueprint $table) {
             $table->id('id_Razamascota');
             $table->string('descripción_Razamascota');
-            $table->boolean('estado_Razamascota');
+            $table->integer('estado_Razamascota');
             $table->timestamps();
 
         });

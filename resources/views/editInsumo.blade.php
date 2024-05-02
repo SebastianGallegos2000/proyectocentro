@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-12">
         <div>
-            <h2>Agregar Insumo</h2>
+            <h2>Editar Insumo</h2>
         </div>
         <div>
             <a href="/insumo" class="btn btn-primary">Volver</a>
@@ -22,27 +22,32 @@
     </div>
 @endif
 
-    <form action="{{route('insumo.store')}}" method="POST">
-        @csrf
+    <form action="{{ route('insumo.update',$insumo) }}" method="POST">
+    @csrf
+    @method('PUT')
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+
                 <div class="form-group">
                     <strong>Nombre:</strong>
-                    <input type="text" name="nombre_Insumo" class="form-control" placeholder="Nombre ejemplo" value="{{old('nombre_Insumo')}}" >
+                    <input type="text" name="nombre_Insumo" class="form-control" placeholder="Nombre ejemplo" value="{{$insumo->nombre_Insumo}}" >
                 </div>
                 <div class="form-group">
                     <strong>Cantidad:</strong>
-                    <input type="text" name="cantidad_Insumo" class="form-control" placeholder="10" value="{{old('cantidad_Insumo')}}">
+                    <input type="text" name="cantidad_Insumo" class="form-control" placeholder="10" value="{{$insumo->cantidad_Insumo}}">
                 </div>
                 <div class="form-group">
                     <strong>Costo Unitario</strong>
-                    <input type="text" name="costo_Insumo" class="form-control" placeholder="14300" value="{{old('costo_Insumo')}}">
+                    <input type="text" name="costo_Insumo" class="form-control" placeholder="14300" value="{{$insumo->costo_Insumo}}">
                 </div>
-                <div class="form-group">
-                    <input type="text" name="estado_Insumo" class="form-control" placeholder="" value="0" hidden>
+                <div class="form-check form-switch">
+                    <input type="hidden" name="estado_Insumo" value="0">
+                    <input class="form-check-input" type="checkbox" name="estado_Insumo" id="flexSwitchCheckChecked" {{ $insumo->estado_Insumo ? 'checked' : '' }} value="1">
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Estado</label>
                 </div>
+                
             <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
             </div>
         </div>
     </form>

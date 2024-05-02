@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_EspecialidadPersonal');
             $table->unsignedBigInteger('rut_Personal_Nav');
             $table->unsignedBigInteger('id_Especialidad_Nav');
-            $table->boolean('estado_Especialidad_Personal_Nav');
+            $table->integer('estado_Especialidad_Personal_Nav');
             $table->timestamps();
 
 

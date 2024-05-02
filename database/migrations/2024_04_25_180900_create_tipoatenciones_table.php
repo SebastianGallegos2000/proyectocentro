@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_TipoAtencion');
             $table->string('descripcion_TipoAtencion');
             $table->integer('costo_TipoAtencion');
-            $table->boolean('estado_TipoAtencion');
+            $table->integer('estado_TipoAtencion');
             $table->timestamps();
 
         });

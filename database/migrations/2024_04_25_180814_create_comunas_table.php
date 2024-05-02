@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('comunas', function (Blueprint $table) {
             $table->id('id_Comuna');
             $table->string('nombre_Comuna');
-            $table->boolean('estado_Comuna');
+            $table->integer('estado_Comuna');
             $table->timestamps();
         });
     }

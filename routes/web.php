@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\InsumosController;
+use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\MyVController;
 use App\Http\Controllers\LogInTutoresController;
-use App\Http\Controllers\TutoresController;
+use App\Http\Controllers\TutorController;
 use App\Http\Controllers\LogInPersonalesController;
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,6 @@ Route::get('/about',AboutController::class);
 Route::get('/misionyvision',MyVController::class);
 Route::get('/loginTutores',LogInTutoresController::class);
 Route::get('/loginPersonal',LogInPersonalesController::class);
-Route::resource('/tutores',TutoresController::class);
+Route::resource('/tutor',TutorController::class);
 
-Route::resource('/insumos',InsumosController::class);
+Route::resource('/insumo',InsumoController::class);

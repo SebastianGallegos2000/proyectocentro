@@ -6,6 +6,6 @@ class LogInTutoresController
 {
     public function __invoke()
     {
-        return view('loginTutores');
+        return view('loginTutor');
     }
 }

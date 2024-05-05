@@ -24,7 +24,7 @@ Route::get('/', function () {
 });
 Route::get('/about',AboutController::class);
 Route::get('/misionyvision',MyVController::class);
-Route::get('/loginTutores',LogInTutoresController::class);
+Route::get('/loginTutores', LogInTutoresController::class)->name('loginTutor');
 Route::get('/loginPersonal',LogInPersonalesController::class);
 Route::resource('/tutor',TutorController::class);
 

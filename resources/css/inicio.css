@@ -1,12 +1,26 @@
+/* CSS Document */
+/* Path: resources/css/inicio.css */
+
+
+/* Configuración de back */
 body{
     background-color: #F3F0EC;
 }
+
+
+/* Configuración de letras */
 
 h1{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding-top: 30px;
     padding-bottom: 30px;
 }
+
+h4{
+    color: brown;
+}
+
+/* Configuración de header y footer */
 
 header{
     margin-top: 30px;
@@ -19,10 +33,6 @@ footer{
     height:30px;
     width:100%;
     background:#999;
-}
-
-h4{
-    color: brown;
 }
 
 .header-container{
@@ -65,7 +75,7 @@ h4{
     height: 30%;
 }
 
-
+/* Configuración de Login */
 
 .login-container{
     display:flex;
@@ -134,15 +144,6 @@ h4{
     border-radius: 10%;
 }
 
-.container-mision{
-    margin-top: 20px;
-    text-align: center;
-}
-
-.h3-mision{
-    margin-top: 40px;
-}
-
 #usernametutor{
     border-radius: 3px;
 }
@@ -161,4 +162,26 @@ h4{
 
 #botoncrear{
     margin-bottom: 50px;
+}
+
+
+/* Configuración de texto estático */
+
+.container-mision{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.h3-mision{
+    margin-top: 40px;
+}
+
+/* Configuración de tablas */
+table{
+    width: 100%;
+}
+th, td{
+    width: 25%;
+    vertical-align: top;
+
 }

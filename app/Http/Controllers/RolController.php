@@ -13,8 +13,8 @@ class RolController extends Controller
      */
     public function index()
     {
-        $rol = Rol::latest()->paginate(5);
-        return view('roles', ['rols'=>$rol]);
+        $rols = Rol::latest()->paginate(5);
+        return view('roles', ['rols'=>$rols]);
     }
 
     /**
@@ -31,7 +31,7 @@ class RolController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_Rol' =>'required',
+            'nombre_Rol' =>'required'
 
         ]);
 
@@ -51,17 +51,22 @@ class RolController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Rol $rol)
+    public function edit(Rol $role)
     {
-        return view('editRol',['rols'=> $rol]);
+        return view('editRol',['role'=> $role]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $rol)
+    public function update(Request $request, Rol $role)
     {
-        //
+        $request->validate([
+            'nombre_Rol' => 'required'
+        ]);
+
+        $role->update($request->all());
+        return redirect()->route('roles.index')->with('succes','Rol actualizado correctamente en el sistema');
     }
 
     /**

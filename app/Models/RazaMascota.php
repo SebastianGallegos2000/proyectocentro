@@ -10,9 +10,9 @@ class RazaMascota extends Model
     use HasFactory;
 
     protected $table = 'razamascotas';
-    protected $primaryKey = 'id_RazaMascota';
+    protected $primaryKey = 'id_Razamascota';
     protected $fillable = [
-        'nombre_RazaMascota',
-        'estado_RazaMascota'
+        'nombre_Razamascota',
+        'estado_Razamascota'
     ];
 }

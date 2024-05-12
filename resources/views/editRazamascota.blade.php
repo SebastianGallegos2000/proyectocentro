@@ -4,10 +4,10 @@
 <div class="row">
     <div class="col-12">
         <div>
-            <h2>Editar Comuna</h2>
+            <h2>Editar Raza de mascota</h2>
         </div>
         <div>
-            <a href="/comunas" class="btn btn-primary">Volver</a>
+            <a href="/razamascota" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -22,7 +22,7 @@
     </div>
 @endif
 
-    <form action="{{ route('comunas.update',$comuna) }}" method="POST">
+    <form action="{{ route('razamascota.update',$razamascotum) }}" method="POST">
     @csrf
     @method('PUT')
         <div class="row">
@@ -30,11 +30,11 @@
 
                 <div class="form-group">
                     <strong>Nombre:</strong>
-                    <input type="text" name="nombre_Comuna" class="form-control" placeholder="Nombre ejemplo" value="{{$comuna->nombre_Comuna}}" >
+                    <input type="text" name="nombre_Razamascota" class="form-control" placeholder="Nombre ejemplo" value="{{$razamascotum->nombre_Razamascota}}" >
                 </div>
                 <div class="form-check form-switch">
-                    <input type="hidden" name="estado_Comuna" value="0">
-                    <input class="form-check-input" type="checkbox" name="estado_Comunas" id="flexSwitchCheckChecked" {{ $comuna->estado_Comuna ? 'checked' : '' }} value="1">
+                    <input type="hidden" name="estado_Razamascota" value="0">
+                    <input class="form-check-input" type="checkbox" name="estado_Razamascota" id="flexSwitchCheckChecked" {{ $razamascotum->estado_Razamascota ? 'checked' : '' }} value="1">
                     <label class="form-check-label" for="flexSwitchCheckChecked">Estado</label>
                 </div>
                 

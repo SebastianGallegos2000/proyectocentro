@@ -20,7 +20,7 @@ class RazaMascotaController extends Controller
      */
     public function create()
     {
-        //
+        return view('createRazamascota');
     }
 
     /**
@@ -28,7 +28,12 @@ class RazaMascotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre_Razamascota' =>'required'
+        ]);
+
+        RazaMascota::create($request->all());
+        return redirect()->route('razamascota.index')->with('succes','La raza de la mascota fue agregado con éxito al sistema');
     }
 
     /**
@@ -42,17 +47,22 @@ class RazaMascotaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(RazaMascota $razaMascota)
+    public function edit(RazaMascota $razamascotum)
     {
-        //
+        return view('editRazamascota',['razamascotum' =>$razamascotum]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RazaMascota $razaMascota)
+    public function update(Request $request, RazaMascota $razamascotum)
     {
-        //
+        $request->validate([
+            'nombre_Razamascota' =>'required'
+        ]);
+
+        $razamascotum->update($request ->all());
+        return redirect()->route('razamascota.index')->with('succes','Se ha actualizado con éxito la raza de la mascota');
     }
 
     /**

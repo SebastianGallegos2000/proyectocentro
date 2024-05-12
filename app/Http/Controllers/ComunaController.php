@@ -36,7 +36,7 @@ class ComunaController extends Controller
 
         Comuna::create($request->all());
         //dd($request->all());
-        return redirect()->route('comuna.index')->with('succes','Comuna agregado con éxito al sistema');        }
+        return redirect()->route('comunas.index')->with('succes','Comuna agregado con éxito al sistema');        }
 
     /**
      * Display the specified resource.
@@ -51,7 +51,7 @@ class ComunaController extends Controller
      */
     public function edit(Comuna $comuna)
     {
-        return view('editComuna',['comunas'=> $comuna]);
+        return view('editComuna',['comuna'=> $comuna]);
     }
 
     /**
@@ -59,7 +59,11 @@ class ComunaController extends Controller
      */
     public function update(Request $request, Comuna $comuna)
     {
-        //
+        $request->validate([
+        'nombre_Comuna'
+        ]);
+        $comuna->update($request->all());
+        return redirect()->route('comunas.index')->with('succes','Comuna actualizada con éxito en el sistema');
     }
 
     /**

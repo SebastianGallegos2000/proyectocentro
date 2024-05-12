@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comunas;
+use App\Models\Admins;
 use Illuminate\Http\Request;
 
-class ComunasController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('indexAdmin');
     }
 
     /**
@@ -34,7 +34,7 @@ class ComunasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comunas $comunas)
+    public function show(Admins $admins)
     {
         //
     }
@@ -42,7 +42,7 @@ class ComunasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Comunas $comunas)
+    public function edit(Admins $admins)
     {
         //
     }
@@ -50,7 +50,7 @@ class ComunasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comunas $comunas)
+    public function update(Request $request, Admins $admins)
     {
         //
     }
@@ -58,7 +58,7 @@ class ComunasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comunas $comunas)
+    public function destroy(Admins $admins)
     {
         //
     }

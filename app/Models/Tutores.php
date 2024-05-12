@@ -12,13 +12,13 @@ class Tutores extends Model
     //relación uno a muchos (inversa) Comunas
     public function comuna()
     {
-        return $this->belongsTo('\App\Models\Comunas');
+        return $this->belongsTo('\App\Models\Comuna');
     }
     
     //relación uno a muchos (inversa) Comunas
     public function roles()
     {
-        return $this->belongsTo('\App\Models\Roles');
+        return $this->belongsTo('\App\Models\Rol');
     }
 
     protected $primaryKey = 'rut_Tutor';

@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RazaMascotas;
+use App\Models\RazaMascota;
 use Illuminate\Http\Request;
 
-class RazaMascotasController extends Controller
+class RazaMascotaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
+        $razaMascota = RazaMascota::latest()->paginate(5);
+        return view('razamascota', ['razaMascotas'=>$razaMascota]);    }
 
     /**
      * Show the form for creating a new resource.
@@ -34,7 +34,7 @@ class RazaMascotasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RazaMascotas $razaMascotas)
+    public function show(RazaMascota $razaMascota)
     {
         //
     }
@@ -42,7 +42,7 @@ class RazaMascotasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(RazaMascotas $razaMascotas)
+    public function edit(RazaMascota $razaMascota)
     {
         //
     }
@@ -50,7 +50,7 @@ class RazaMascotasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RazaMascotas $razaMascotas)
+    public function update(Request $request, RazaMascota $razaMascota)
     {
         //
     }
@@ -58,7 +58,7 @@ class RazaMascotasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RazaMascotas $razaMascotas)
+    public function destroy(RazaMascota $razaMascota)
     {
         //
     }

@@ -30,7 +30,7 @@ return new class extends Migration
 
 
             $table->foreign('id_Comuna_Tutor')->references('id_Comuna')->on('comunas');
-            $table->foreign('id_Rol_Tutor')->references('id_Rol')->on('roles');
+            $table->foreign('id_Rol_Tutor')->references('id_Rol')->on('rols');
 
         });
     }

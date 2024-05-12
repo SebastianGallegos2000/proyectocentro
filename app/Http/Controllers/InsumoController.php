@@ -15,7 +15,7 @@ class InsumoController extends Controller
     public function index():View
     {
         $insumos= Insumo::latest()->paginate(5);
-        return view('insumoPersonal', ['insumos'=>$insumos]);
+        return view('insumo', ['insumos'=>$insumos]);
     }
 
     /**

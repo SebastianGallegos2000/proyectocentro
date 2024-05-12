@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Roles;
+use App\Models\Comuna;
 use Illuminate\Http\Request;
 
-class RolesController extends Controller
+class ComunaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $comuna = Comuna::latest()->paginate(5);
+        return view('comuna', ['comunas'=>$comuna]);
     }
 
     /**
@@ -20,7 +21,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        return view('createComuna');
     }
 
     /**
@@ -28,13 +29,19 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'nombre_Comuna' =>'required'
+
+        ]);
+
+        Comuna::create($request->all());
+        //dd($request->all());
+        return redirect()->route('comuna.index')->with('succes','Comuna agregado con éxito al sistema');        }
 
     /**
      * Display the specified resource.
      */
-    public function show(Roles $roles)
+    public function show(Comuna $comuna)
     {
         //
     }
@@ -42,15 +49,15 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Roles $roles)
+    public function edit(Comuna $comuna)
     {
-        //
+        return view('editComuna',['comunas'=> $comuna]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Roles $roles)
+    public function update(Request $request, Comuna $comuna)
     {
         //
     }
@@ -58,7 +65,7 @@ class RolesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Roles $roles)
+    public function destroy(Comuna $comuna)
     {
         //
     }

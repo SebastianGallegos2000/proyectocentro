@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('id_Rol_Personal')->references('id_Rol')->on('roles');
+            $table->foreign('id_Rol_Personal')->references('id_Rol')->on('rols');
 
         });
     }

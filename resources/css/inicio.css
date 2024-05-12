@@ -120,7 +120,14 @@ h4{
     border-radius: 10%;
     margin-left: 25%;
 }
+.form-control{
+    width: 20%;
 
+}
+.form-select{
+    width: 20%;
+
+}
 #btnCancelarSesion{
     color: white;
     background-color: #DB1111;

@@ -84,23 +84,22 @@
                         <option value="7">Valparaíso</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <strong>Fotocopia carnet:</strong>
-                    <input type="file" name="fotocopiacarnet_Tutor" class="form-control" placeholder="--Ingresa el documento--" value="{{old('fotocopiacarnet_Tutor')}}">
+                    <input type="file" name="fotocopiacarnet_Tutor" class="form-control" placeholder="--Ingresa el documento--" value="{{old('fotocopiacarnet_Tutor')}}" accept=".pdf">
                 </div>
 
                 <div class="form-group">
                     <strong>Registro social:</strong>
-                    <input type="file" name="registrosocial_Tutor" class="form-control" placeholder="--Ingresa el documento--" value="{{old('registrosocial_Tutor')}}" >
+                    <input type="file" name="registrosocial_Tutor" class="form-control" placeholder="--Ingresa el documento--" value="{{old('registrosocial_Tutor')}}" accept=".pdf">
+                </div>
+        
+                <div class="form-group">
+                    <input type="text" name="id_Rol_Tutor" class="form-control" placeholder="" value="1" hidden >
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="id_Rol_Tutor" class="form-control" placeholder="Tarea" value="1" hidden >
-                </div>
-
-                <div class="form-group">
-                    <input type="text" name="estado_Tutor" class="form-control" placeholder="Tarea" value="1" hidden >
+                    <input type="text" name="estado_Tutor" class="form-control" placeholder="" value="1" hidden >
                 </div>
 
             <div id="botonCrear" class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">

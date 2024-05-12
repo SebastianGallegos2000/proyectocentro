@@ -1,6 +1,6 @@
 
-class rutValidador()
-{
+class rutValidador{
+
 
     constructor(rut) 
     {

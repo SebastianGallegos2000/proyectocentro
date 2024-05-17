@@ -13,7 +13,8 @@ class TutorController extends Controller
      */
     public function index()
     {
-        return view('tutor');
+        $tutor= Tutores::latest();
+        return view('tutor',$tutor);
     }
 
     /**
@@ -21,7 +22,7 @@ class TutorController extends Controller
      */
     public function create()
     {
-        return view('createTutor');
+        return view('/auth/createTutor');
     }
 
     /**

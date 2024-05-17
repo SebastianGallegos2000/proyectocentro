@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Tutores extends Model
 {
@@ -15,12 +16,12 @@ class Tutores extends Model
         return $this->belongsTo('\App\Models\Comuna');
     }
     
-    //relación uno a muchos (inversa) Comunas
+    //relación uno a muchos (inversa) Roles
     public function roles()
     {
         return $this->belongsTo('\App\Models\Rol');
     }
-
+    protected $dates = ['fechaNac_Tutor'];
     protected $primaryKey = 'rut_Tutor';
     protected $fillable = [
         'dv_Tutor',

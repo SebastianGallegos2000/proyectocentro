@@ -4,10 +4,10 @@
 <div class="row">
     <div class="col-12">
         <div>
-            <h2>Editar Comuna</h2>
+            <h2>Editar Personal</h2>
         </div>
         <div>
-            <a href="/comunas" class="btn btn-primary">Volver</a>
+            <a href="/personal" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -22,7 +22,7 @@
     </div>
 @endif
 
-    <form action="{{ route('comunas.update',$comuna) }}" method="POST">
+    <form action="{{ route('insumo.update',$insumo) }}" method="POST">
     @csrf
     @method('PUT')
         <div class="row">
@@ -30,11 +30,19 @@
 
                 <div class="form-group">
                     <strong>Nombre:</strong>
-                    <input type="text" name="nombre_Comuna" class="form-control" placeholder="Nombre ejemplo" value="{{$comuna->nombre_Comuna}}" >
+                    <input type="text" name="nombre_Insumo" class="form-control" placeholder="Nombre ejemplo" value="{{$insumo->nombre_Insumo}}" >
+                </div>
+                <div class="form-group">
+                    <strong>Cantidad:</strong>
+                    <input type="text" name="cantidad_Insumo" class="form-control" placeholder="10" value="{{$insumo->cantidad_Insumo}}">
+                </div>
+                <div class="form-group">
+                    <strong>Costo Unitario</strong>
+                    <input type="text" name="costo_Insumo" class="form-control" placeholder="14300" value="{{$insumo->costo_Insumo}}">
                 </div>
                 <div class="form-check form-switch">
-                    <input type="hidden" name="estado_Comuna" value="0">
-                    <input class="form-check-input" type="checkbox" name="estado_Comuna" id="flexSwitchCheckChecked" {{ $comuna->estado_Comuna ? 'checked' : '' }} value="1">
+                    <input type="hidden" name="estado_Insumo" value="0">
+                    <input class="form-check-input" type="checkbox" name="estado_Insumo" id="flexSwitchCheckChecked" {{ $insumo->estado_Insumo ? 'checked' : '' }} value="1">
                     <label class="form-check-label" for="flexSwitchCheckChecked">Estado</label>
                 </div>
                 

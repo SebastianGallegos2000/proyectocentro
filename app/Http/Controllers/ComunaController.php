@@ -12,7 +12,7 @@ class ComunaController extends Controller
      */
     public function index()
     {
-        $comuna = Comuna::latest()->paginate(5);
+        $comuna = Comuna::latest();
         return view('comuna', ['comunas'=>$comuna]);
     }
 
@@ -36,7 +36,8 @@ class ComunaController extends Controller
 
         Comuna::create($request->all());
         //dd($request->all());
-        return redirect()->route('comunas.index')->with('succes','Comuna agregado con éxito al sistema');        }
+        return redirect()->route('comunas.index')->with('succes','Comuna agregado con éxito al sistema');        
+    }
 
     /**
      * Display the specified resource.

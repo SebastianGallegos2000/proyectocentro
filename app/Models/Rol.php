@@ -15,6 +15,12 @@ class Rol extends Model
         return $this->hasMany('\App\Models\Tutores');
     }
 
+    //Relacion uno a muchos
+    public function personal()
+    {
+        return $this->hasMany('\App\Models\Personal');
+    }
+
     //
     protected $primaryKey = 'id_Rol';
     protected $fillable = [

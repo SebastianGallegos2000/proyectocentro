@@ -4,10 +4,10 @@
 <div class="row">
     <div class="col-12">
         <div>
-            <h2>Agregar Rol</h2>
+            <h2>Agregar Especialidad</h2>
         </div>
         <div>
-            <a href="/roles" class="btn btn-primary">Volver</a>
+            <a href="/especiliadad" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -22,16 +22,16 @@
     </div>
 @endif
 
-    <form action="{{route('roles.store')}}" method="POST">
+    <form action="{{route('especialidad.store')}}" method="POST">
         @csrf
-        <div class="container-fluid mt-3 w3-border w3-padding w3-round ws-grey">
-            <div class="col-xs-4 col-sm-4 col-md-4 mt-3">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
                 <div class="form-group">
                     <strong>Nombre:</strong>
-                    <input type="text" name="nombre_Rol" class="form-control" placeholder="Nombre ejemplo" value="{{old('nombre_Rol')}}" >
+                    <input type="text" name="nombre_Especialidad" class="form-control" placeholder="Nombre ejemplo" value="{{old('nombre_Especialidad')}}" >
                 </div>
                 <div class="form-group">
-                    <input type="text" name="estado_Rol" class="form-control" placeholder="" value="1" hidden>
+                    <input type="text" name="estado_Especialidad" class="form-control" placeholder="" value="1" hidden>
                 </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
                 <button type="submit" class="btn btn-primary">Crear</button>

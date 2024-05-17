@@ -2,14 +2,13 @@
 
 @section('title','Log In Tutores')
 
-
 @section('content')
 <div class="login-container">
     <div class="container-box">
         <div class="box">
             <img id="iconoLogin" src="/img/pataperro.png" alt="">
             <h2 id="txt-iniciarSesion">Iniciar sesión</h2>
-            <form action="#" method="post">
+            <form action="{{route('loginTutor')}}" method="post">
                 <div class="form-group">
                     <label for="usernametutor"><i class="fas fa-user"></i> Usuario:</label>
                     <input type="text" id="usernametutor" name="usernametutor">

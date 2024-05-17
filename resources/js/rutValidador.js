@@ -1,8 +1,10 @@
 
 class rutValidador{
+    //Constructor de la clase
+    //Recibe el rut y el digito verificador
+    
 
-
-    constructor(rut) 
+    constructor(rut,dv) 
     {
         this.rut = rut;
         this.dv = dv;

@@ -38,7 +38,7 @@
             <div class="row">
     <div class="col-12">
         <div>
-            <a href="" class="btn btn-info">Agregar Mascota</a>
+            <a href="mascota/create" class="btn btn-info">Agregar Mascota</a>
         </div>
     </div>
 

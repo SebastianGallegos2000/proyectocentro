@@ -8,9 +8,13 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\MyVController;
 use App\Http\Controllers\LogInTutoresController;
 use App\Http\Controllers\ComunaController;
+use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\RazaMascotaController;
 use App\Http\Controllers\TutorController;
+use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\LogInPersonalesController;
+use App\Http\Controllers\UsuarioController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +35,8 @@ Route::get('/misionyvision',MyVController::class);
 Route::get('/loginTutores', LogInTutoresController::class)->name('loginTutor');
 Route::get('/loginPersonal',LogInPersonalesController::class)->name('loginPersonal');
 
+Route::get('/usuarios',UsuarioController::class);
+
 Route::resource('/tutor',TutorController::class);
 
 Route::resource('/admin',AdminController::class);
@@ -42,3 +48,7 @@ Route::resource('/roles',RolController::class);
 Route::resource('/comunas',ComunaController::class);
 
 Route::resource('/razamascota',RazaMascotaController::class);
+
+Route::resource('/especialidad',EspecialidadController::class);
+
+Route::resource('/personal',PersonalController::class);

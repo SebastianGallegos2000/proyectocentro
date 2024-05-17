@@ -2,8 +2,8 @@
 
 @section('content')
 
-<script src="js/rutValidador.js"></script>
-<script src="js/funciones.js"></script>
+<!--<script src="js/rutValidador.js"></script> -->
+<!-- <script src="js/funciones.js"></script> -->
 <div class="row">
     <div class="col-12">
         <div>

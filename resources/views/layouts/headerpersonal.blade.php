@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="/css/iniciotutores.css">
     @vite(['resources/css/iniciotutores.css'])
 
+
+    <!-- Scripts para DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+
   </head>
 
 <body>

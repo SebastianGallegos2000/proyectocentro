@@ -1,7 +1,7 @@
 @extends('layouts.layoutpersonal')
 
 @section('content')
-<div class="row">
+<div class="container p-4">
     <div class="col-12">
         <div>
             <h2>Agregar Comuna</h2>
@@ -24,13 +24,13 @@
 
     <form action="{{route('comunas.store')}}" method="POST">
         @csrf
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                <div class="form-group">
+        <div class="container p-5">
+            <div class="mb-3 row">
+                <div class="mb-3">
                     <strong>Nombre:</strong>
                     <input type="text" name="nombre_Comuna" class="form-control" placeholder="Nombre ejemplo" value="{{old('nombre_Comuna')}}" >
                 </div>
-                <div class="form-group">
+                <div class="mb-3">
                     <input type="text" name="estado_Comuna" class="form-control" placeholder="" value="1" hidden>
                 </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">

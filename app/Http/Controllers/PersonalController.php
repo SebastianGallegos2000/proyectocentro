@@ -87,7 +87,7 @@ class PersonalController extends Controller
      */
     public function edit(Personal $personal)
     {
-        //
+        return view('editPersonal',['personal'=> $personal]);
     }
 
     /**

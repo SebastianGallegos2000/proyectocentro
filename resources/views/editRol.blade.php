@@ -1,7 +1,7 @@
 @extends('layouts.layoutadmin')
 
 @section('content')
-<div class="row">
+<div class="container p-4">
     <div class="col-12">
         <div>
             <h2>Editar Rol</h2>
@@ -25,10 +25,10 @@
     <form action="{{ route('roles.update', $role) }}" method="POST">
     @csrf
     @method('PUT')
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+    <div class="container p-5">
+        <div class="mb-3 row">
 
-                <div class="form-group">
+                <div class="mb-3">
                     <strong>Nombre:</strong>
                     <input type="text" name="nombre_Rol" class="form-control" placeholder="Nombre ejemplo" value="{{$role->nombre_Rol}}" >
                 </div>

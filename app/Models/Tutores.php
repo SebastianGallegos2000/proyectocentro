@@ -13,7 +13,7 @@ class Tutores extends Model
     //relación uno a muchos (inversa) Comunas
     public function comuna()
     {
-        return $this->belongsTo('\App\Models\Comuna');
+        return $this->belongsTo('\App\Models\Comuna', 'id_Comuna_Tutor');
     }
     
     //relación uno a muchos (inversa) Roles

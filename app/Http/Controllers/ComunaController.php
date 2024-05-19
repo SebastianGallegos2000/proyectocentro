@@ -12,7 +12,7 @@ class ComunaController extends Controller
      */
     public function index()
     {
-        $comuna = Comuna::latest();
+        $comuna = Comuna::all();
         return view('comuna', ['comunas'=>$comuna]);
     }
 

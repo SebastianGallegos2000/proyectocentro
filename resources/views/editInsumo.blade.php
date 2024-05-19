@@ -1,7 +1,7 @@
 @extends('layouts.layoutpersonal')
 
 @section('content')
-<div class="row">
+<div class="container p-4">
     <div class="col-12">
         <div>
             <h2>Editar Insumo</h2>
@@ -25,18 +25,18 @@
     <form action="{{ route('insumo.update',$insumo) }}" method="POST">
     @csrf
     @method('PUT')
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+        <div class="container p-4">
+            <div class="mb-3 row">
 
-                <div class="form-group">
+                <div class="mb-3">
                     <strong>Nombre:</strong>
                     <input type="text" name="nombre_Insumo" class="form-control" placeholder="Nombre ejemplo" value="{{$insumo->nombre_Insumo}}" >
                 </div>
-                <div class="form-group">
+                <div class="mb-3">
                     <strong>Cantidad:</strong>
                     <input type="text" name="cantidad_Insumo" class="form-control" placeholder="10" value="{{$insumo->cantidad_Insumo}}">
                 </div>
-                <div class="form-group">
+                <div class="mb-3">
                     <strong>Costo Unitario</strong>
                     <input type="text" name="costo_Insumo" class="form-control" placeholder="14300" value="{{$insumo->costo_Insumo}}">
                 </div>

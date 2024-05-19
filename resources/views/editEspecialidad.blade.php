@@ -1,7 +1,7 @@
 @extends('layouts.layoutadmin')
 
 @section('content')
-<div class="row">
+<div class="container p-4">
     <div class="col-12">
         <div>
             <h2>Editar Especialidad</h2>
@@ -25,10 +25,10 @@
     <form action="{{ route('especialidad.update',$especialidad) }}" method="POST">
     @csrf
     @method('PUT')
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+        <div class="container p-4">
+            <div class="mb-3 row">
 
-                <div class="form-group">
+                <div class="mb-3">
                     <strong>Nombre:</strong>
                     <input type="text" name="nombre_Especialidad" class="form-control" placeholder="Nombre ejemplo" value="{{$especialidad->nombre_Especialidad}}" >
                 </div>

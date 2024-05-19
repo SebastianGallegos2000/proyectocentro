@@ -135,7 +135,7 @@
         <td>{{$tutor->correo_Tutor}}</td>
         <td>{{ \Carbon\Carbon::parse($tutor->fechaNac_Tutor)->format('d-m-Y') }}</td>
         <td>{{$tutor->telefono_Tutor}}</td>
-        <td>{{$tutor->id_Comuna_Tutor}}</td>
+        <td>{{ $tutor->comuna ? $tutor->comuna->nombre_Comuna : 'N/A' }}</td>
         <td><a href="{{ asset('storage/fotocopiacarnet/' . $tutor->rut_Tutor .'_Fotocopia_Carnet.pdf') }}">Ver Fotocopia Carnet</a></td>
         <td><a href="{{ asset('storage/registrosocial/' . $tutor->rut_Tutor .'_Registro_Social.pdf') }}">Ver Registro Social</a></td>
         <td>{{$tutor->estado_Tutor }}</td>

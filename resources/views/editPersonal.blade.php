@@ -1,13 +1,13 @@
 @extends('layouts.layoutadmin')
 
 @section('content')
-<div class="row">
+<div class="container p-5">
     <div class="col-12">
         <div>
             <h2>Editar Personal</h2>
         </div>
         <div>
-            <a href="/personal" class="btn btn-primary">Volver</a>
+            <a href="/usuarios" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -22,34 +22,69 @@
     </div>
 @endif
 
-    <form action="{{ route('insumo.update',$insumo) }}" method="POST">
+<form action="{{route('personal.update',$personal)}}" method="POST" enctype="multipart/form-data">
     @csrf
-    @method('PUT')
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-
-                <div class="form-group">
-                    <strong>Nombre:</strong>
-                    <input type="text" name="nombre_Insumo" class="form-control" placeholder="Nombre ejemplo" value="{{$insumo->nombre_Insumo}}" >
-                </div>
-                <div class="form-group">
-                    <strong>Cantidad:</strong>
-                    <input type="text" name="cantidad_Insumo" class="form-control" placeholder="10" value="{{$insumo->cantidad_Insumo}}">
-                </div>
-                <div class="form-group">
-                    <strong>Costo Unitario</strong>
-                    <input type="text" name="costo_Insumo" class="form-control" placeholder="14300" value="{{$insumo->costo_Insumo}}">
-                </div>
-                <div class="form-check form-switch">
-                    <input type="hidden" name="estado_Insumo" value="0">
-                    <input class="form-check-input" type="checkbox" name="estado_Insumo" id="flexSwitchCheckChecked" {{ $insumo->estado_Insumo ? 'checked' : '' }} value="1">
-                    <label class="form-check-label" for="flexSwitchCheckChecked">Estado</label>
-                </div>
-                
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
-                <button type="submit" class="btn btn-primary">Actualizar</button>
+    <div class="container p-5">
+        <div class="mb-3 row">
+            <div class="mb-3">
+                <strong>Rut (sin digito verificador):</strong>
+                <input type="text" name="rut_Personal" class="form-control" placeholder="11222333" maxlength="8" value="{{$personal->rut_Personal}}" disabled >
             </div>
+
+            <div class="mb-3">
+                <strong>Digito verificador:</strong>
+                <input type="text" name="dv_Personal" class="form-control" placeholder="1" value="{{$personal->dv_Personal}}" disabled>
+            </div>
+
+            <div class="mb-3">
+                <strong>Crea tu contraseña:</strong>
+                <input type="password" name="password_Personal" class="form-control" placeholder="*******" value="{{$personal->password_Personal}}" >
+            </div>
+
+            <div class="mb-3">
+                <strong>Nombre:</strong>
+                <input type="text" name="nombre_Personal" class="form-control" placeholder="Nombre" value="{{$personal->nombre_Personal}}" >
+            </div>
+
+            <div class="mb-3">
+                <strong>Apellido:</strong>
+                <input type="text" name="apellido_Personal" class="form-control" placeholder="Apellido" value="{{$personal->apellido_Personal}}" >
+            </div>
+
+            <div class="mb-3">
+                <strong>Correo:</strong>
+                <input type="text" name="correo_Personal" class="form-control" placeholder="correo@ejemplo.com" value="{{$personal->correo_Personal}}" >
+            </div>
+
+            <div class="mb-3">
+                <strong>Fecha de nacimiento:</strong>
+                <input type="date" name="fechaNac_Personal" class="form-control" value="{{\Carbon\Carbon::parse($personal->fechaNac_Personal)->format('Y-m-d') }}">
+            </div>
+
+            <div class="mb-3">
+                <strong>Numero de Teléfono:</strong>
+                <input type="text" name="telefono_Personal" class="form-control" placeholder="+56912345678" value="{{$personal->telefono_Personal}}" >
+            </div>
+            <div class="mb-3">
+                <strong>Comuna:</strong>
+                <select name="id_Especialidad_Personal" class="form-select" id="">
+                    <option value="">-- Elige comuna --</option>
+                    <option value="1" {{ $personal->id_Especialidad_Personal == 1 ? 'selected' : '' }}>Veterinario</option>
+                    <option value="2" {{ $personal->id_Especialidad_Personal == 2 ? 'selected' : '' }}>Anestesista</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <input type="text" name="id_Rol_Personal" class="form-control" placeholder="" value="1" hidden >
+            </div>
+
+            <div class="mb-3">
+                <input type="text" name="estado_Personal" class="form-control" placeholder="" value="1" hidden >
+            </div>
+
+        <div id="botonCrear" class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
+            <button type="submit" class="btn btn-primary">Crear</button>
         </div>
-    </form>
+    </div>
+</form>
 </div>
 @endsection

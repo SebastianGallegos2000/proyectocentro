@@ -96,7 +96,7 @@ class TutorController extends Controller
      */
     public function edit(Tutores $tutor)
     {
-        //
+        return view('editTutor',['tutor'=> $tutor]);
     }
 
     /**
@@ -104,8 +104,22 @@ class TutorController extends Controller
      */
     public function update(Request $request, Tutores $tutor)
     {
-        //
-    }
+        $request->validate([
+            'password_Tutor',
+            'nombre_Tutor',
+            'apellido_Tutor',
+            'correo_Tutor',
+            'fechaNac_Tutor',
+            'telefono_Tutor',
+            'id_Comuna_Tutor',
+            'fotocopiacarnet_Tutor',
+            'registrosocial_Tutor',
+            'id_Rol_Tutor',
+            'estado_Tutor'
+            
+            ]);
+            $tutor->update($request->all());
+            return redirect('usuarios')->with('succes','Comuna actualizada con éxito en el sistema');    }
 
     /**
      * Remove the specified resource from storage.

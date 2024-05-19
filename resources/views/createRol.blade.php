@@ -1,7 +1,7 @@
 @extends('layouts.layoutadmin')
 
 @section('content')
-<div class="row">
+<div class="container p-4">
     <div class="col-12">
         <div>
             <h2>Agregar Rol</h2>
@@ -24,13 +24,13 @@
 
     <form action="{{route('roles.store')}}" method="POST">
         @csrf
-        <div class="container-fluid mt-3 w3-border w3-padding w3-round ws-grey">
-            <div class="col-xs-4 col-sm-4 col-md-4 mt-3">
-                <div class="form-group">
+        <div class="container p-5">
+            <div class="mb-3 row">
+                <div class="mb-3">
                     <strong>Nombre:</strong>
                     <input type="text" name="nombre_Rol" class="form-control" placeholder="Nombre ejemplo" value="{{old('nombre_Rol')}}" >
                 </div>
-                <div class="form-group">
+                <div class="mb-3">
                     <input type="text" name="estado_Rol" class="form-control" placeholder="" value="1" hidden>
                 </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">

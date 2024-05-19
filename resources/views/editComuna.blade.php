@@ -1,7 +1,7 @@
 @extends('layouts.layoutadmin')
 
 @section('content')
-<div class="row">
+<div class="container p-4">
     <div class="col-12">
         <div>
             <h2>Editar Comuna</h2>
@@ -25,17 +25,19 @@
     <form action="{{ route('comunas.update',$comuna) }}" method="POST">
     @csrf
     @method('PUT')
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+        <div class="container p-5">
+            <div class="mb-3 row">
 
-                <div class="form-group">
+                <div class="mb-3">
                     <strong>Nombre:</strong>
                     <input type="text" name="nombre_Comuna" class="form-control" placeholder="Nombre ejemplo" value="{{$comuna->nombre_Comuna}}" >
                 </div>
-                <div class="form-check form-switch">
-                    <input type="hidden" name="estado_Comuna" value="0">
-                    <input class="form-check-input" type="checkbox" name="estado_Comuna" id="flexSwitchCheckChecked" {{ $comuna->estado_Comuna ? 'checked' : '' }} value="1">
-                    <label class="form-check-label" for="flexSwitchCheckChecked">Estado</label>
+                <div class="mb-3">
+                    <div class="form-check form-switch">
+                        <input type="hidden" name="estado_Comuna" value="0">
+                        <input class="form-check-input" type="checkbox" name="estado_Comuna" id="flexSwitchCheckChecked" {{ $comuna->estado_Comuna ? 'checked' : '' }} value="1">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Estado</label>
+                    </div>
                 </div>
                 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">

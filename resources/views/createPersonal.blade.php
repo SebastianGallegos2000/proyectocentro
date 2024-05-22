@@ -27,7 +27,7 @@
 
 
 
-    <form action="{{route('personal.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('storePersonal')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="container p-4">
             <div class="mb-3 row">
@@ -71,15 +71,16 @@
                     <input type="text" name="telefono_Personal" class="form-control" placeholder="+56912345678" value="{{old('telefono_Personal')}}" >
                 </div>
                 <div class="mb-3">
-                    <strong>Comuna:</strong>
+                    <strong>Especialidad:</strong>
                     <select name="id_Especialidad_Personal" class="form-select" id="">
-                        <option value="">-- Elige comuna --</option>
-                        <option value="1">Veterinario</option>
-                        <option value="2">Anestesista</option>
+                    <option value="">-- Elige Especialidad --</option>
+                @foreach ($especialidades as $especialidad)
+                    <option value="{{$especialidad->id_Especialidad}}">{{$especialidad->nombre_Especialidad}}</option>
+                @endforeach
                     </select>
                 </div>
                 <div class="mb-3">
-                    <input type="text" name="id_Rol_Personal" class="form-control" placeholder="" value="1" hidden >
+                    <input type="text" name="id_Rol_Personal" class="form-control" placeholder="" value="2" hidden >
                 </div>
 
                 <div class="mb-3">

@@ -23,10 +23,8 @@
 @endif
 
 
-<form action="{{route('tutor.update',$tutor )}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('updateTutor',$tutor )}}" method="POST" enctype="multipart/form-data">
     @csrf
-    @method('PUT')
-
     <div class="container p-5">
         <div class="mb-3 row">
             <div class="mb-3">

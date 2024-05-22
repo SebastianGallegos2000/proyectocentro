@@ -25,30 +25,30 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin">Inicio</a>
+                    <a class="nav-link" href="/adminIndex">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/roles">Roles</a>
+                    <a class="nav-link" href="/rolesIndex">Roles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/insumo">Insumos</a>
+                    <a class="nav-link" href="/insumoIndex">Insumos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/usuarios">Usuarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/comunas">Comunas</a>
+                    <a class="nav-link" href="/comunaIndex">Comunas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/razamascota">Razas de Mascotas</a>
+                    <a class="nav-link" href="/razamascotaIndex">Razas de Mascotas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/especialidad">Especialidades</a>
+                    <a class="nav-link" href="/especialidadIndex">Especialidades</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"> Perfil</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+                        <li><a class="dropdown-item" href="/logout">Editar Perfil</a></li>
                         <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
                     </ul>
                 </li>

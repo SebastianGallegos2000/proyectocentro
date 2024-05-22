@@ -1,24 +1,22 @@
 @extends('layouts.layout')
 
-@section('title','Log In Tutores')
+@section('title','Log In Personal')
+
 
 @section('content')
 <div class="login-container">
     <div class="container-box">
         <div class="box">
-            <img id="iconoLogin" src="/img/pataperro.png" alt="">
+            <img id="iconoLogin" src="/img/iconopersonal.png" alt="">
             <h2 id="txt-iniciarSesion">Iniciar sesión</h2>
-            <form action="{{route('loginTutor')}}" method="post">
+            <form action="{{route('iniciarSesionPersonal')}}" method="POST">
                 <div class="form-group">
-                    <label for="usernametutor"><i class="fas fa-user"></i> Usuario:</label>
-                    <input type="text" id="usernametutor" name="usernametutor">
+                    <label for="usernamepersonal"><i class="fas fa-user"></i> Usuario:</label>
+                    <input type="text" id="usernamepersonal" name="usernamepersonal">
                 </div>
                 <div class="form-group">
-                    <label for="passwordtutor"><i class="fas fa-lock"></i> Contraseña:</label>
-                    <input type="password" id="passwordtutor" name="passwordtutor">
-                </div>
-                <div>
-                <a href="/tutor/create">No tienes cuenta? Créala aquí</a>
+                    <label for="passwordpersonal"><i class="fas fa-lock"></i> Contraseña:</label>
+                    <input type="password" id="passwordpersonal" name="passwordpersonal">
                 </div>
                 <div class="btn-conteiner">
                     <a href="/">

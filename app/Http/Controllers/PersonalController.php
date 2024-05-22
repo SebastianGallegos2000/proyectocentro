@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Personal;
+use App\Models\Especialidad;
 use Illuminate\Http\Request;
 
 class PersonalController extends Controller
@@ -21,7 +22,8 @@ class PersonalController extends Controller
      */
     public function create()
     {
-        return view('/createPersonal');
+        $especialidades = Especialidad::all();
+        return view('createPersonal', compact('especialidades'));
     }
 
     /**

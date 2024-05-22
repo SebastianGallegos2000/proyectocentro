@@ -7,7 +7,7 @@
             <h2>Editar Comuna</h2>
         </div>
         <div>
-            <a href="/comunas" class="btn btn-primary">Volver</a>
+            <a href="/comunaIndex" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -22,9 +22,8 @@
     </div>
 @endif
 
-    <form action="{{ route('comunas.update',$comuna) }}" method="POST">
+    <form action="{{ route('updateComuna',$comuna) }}" method="POST">
     @csrf
-    @method('PUT')
         <div class="container p-5">
             <div class="mb-3 row">
 

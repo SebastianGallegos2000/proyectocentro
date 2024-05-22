@@ -22,7 +22,7 @@
     </div>
 @endif
 
-    <form action="{{route('especialidad.store')}}" method="POST">
+    <form action="{{route('storeEspecialidad')}}" method="POST">
         @csrf
         <div class="container p-5">
             <div class="mb-3 row">

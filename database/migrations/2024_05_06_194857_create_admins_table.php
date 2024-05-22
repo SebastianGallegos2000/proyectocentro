@@ -12,19 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->id('rut_Admin');
-            $table->integer('dv_Admin');
-            $table->string('password_Admin');
-
-            $table->string('nombre_Admin');
-            $table->string('apellido_Admin');
-            $table->string('correo_Admin');
-            $table->string('telefono_Admin');
-            $table->unsignedBigInteger('id_Rol_Admin');
+            $table->id('id_Admin');
+            $table->unsignedBigInteger('id_Persona_Admin');
             $table->integer('estado_Admin');
             $table->timestamps();
 
-            $table->foreign('id_Rol_Admin')->references('id_Rol')->on('rols');
+            //Dependencias
+            $table->foreign('id_Persona_Admin')->references('id_Persona')->on('personas');
 
         });
     }

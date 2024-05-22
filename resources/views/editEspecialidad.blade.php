@@ -7,7 +7,7 @@
             <h2>Editar Especialidad</h2>
         </div>
         <div>
-            <a href="/especialidad" class="btn btn-primary">Volver</a>
+            <a href="/especialidadIndex" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -22,9 +22,8 @@
     </div>
 @endif
 
-    <form action="{{ route('especialidad.update',$especialidad) }}" method="POST">
+    <form action="{{ route('updateEspecialidad',$especialidad) }}" method="POST">
     @csrf
-    @method('PUT')
         <div class="container p-4">
             <div class="mb-3 row">
 

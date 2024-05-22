@@ -1,22 +1,25 @@
 @extends('layouts.layout')
 
-@section('title','Log In Personal')
-
+@section('title','Log In Tutores')
 
 @section('content')
 <div class="login-container">
     <div class="container-box">
         <div class="box">
-            <img id="iconoLogin" src="/img/iconopersonal.png" alt="">
+            <img id="iconoLogin" src="/img/pataperro.png" alt="">
             <h2 id="txt-iniciarSesion">Iniciar sesión</h2>
-            <form action="#" method="post">
+            <form action="{{route('inicia-sesion')}}" method="POST">
+                @csrf
                 <div class="form-group">
-                    <label for="usernamepersonal"><i class="fas fa-user"></i> Usuario:</label>
-                    <input type="text" id="usernamepersonal" name="usernamepersonal">
+                    <label for="usernametutor"><i class="fas fa-user"></i> Usuario:</label>
+                    <input type="text" id="usernametutor" name="usernametutor">
                 </div>
                 <div class="form-group">
-                    <label for="passwordpersonal"><i class="fas fa-lock"></i> Contraseña:</label>
-                    <input type="password" id="passwordpersonal" name="passwordpersonal">
+                    <label for="passwordtutor"><i class="fas fa-lock"></i> Contraseña:</label>
+                    <input type="password" id="passwordtutor" name="passwordtutor">
+                </div>
+                <div>
+                <a href="{{route('registroTutor')}}">No tienes cuenta? Créala aquí</a>
                 </div>
                 <div class="btn-conteiner">
                     <a href="/">

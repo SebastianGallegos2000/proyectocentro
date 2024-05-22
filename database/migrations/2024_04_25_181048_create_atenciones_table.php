@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('atenciones', function (Blueprint $table) {
             $table->unsignedBigInteger('id_SolicitudCita_Atencion');
-            $table->unsignedBigInteger('rut_Personal_Atencion');
+            $table->unsignedBigInteger('id_Personal_Atencion');
             $table->string('observacion_Atencion');
             $table->integer('peso_Atencion');
             $table->boolean('estado_Atencion');
@@ -21,7 +21,7 @@ return new class extends Migration
 
 
             $table->foreign('id_SolicitudCita_Atencion')->references('id_SolicitudCita')->on('solicitudcitas');
-            $table->foreign('rut_Personal_Atencion')->references('rut_Personal')->on('personales');
+            $table->foreign('id_Personal_Atencion')->references('id_Personal')->on('personales');
 
         });
     }

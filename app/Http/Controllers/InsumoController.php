@@ -14,8 +14,8 @@ class InsumoController extends Controller
      */
     public function index():View
     {
-        $insumos= Insumo::latest()->paginate(5);
-        return view('insumo', ['insumos'=>$insumos]);
+        $insumos= Insumo::all();
+        return view('insumoIndex', ['insumos'=>$insumos]);
     }
 
     /**
@@ -72,7 +72,7 @@ class InsumoController extends Controller
 
         ]);
         $insumo->update($request->all());
-        return redirect()->route('insumo.index')->with('succes','Insumo actualizado con éxito al sistema');    
+        return redirect()->route('insumoIndex')->with('succes','Insumo actualizado con éxito al sistema');    
     }
 
     /**

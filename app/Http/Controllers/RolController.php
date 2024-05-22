@@ -13,8 +13,8 @@ class RolController extends Controller
      */
     public function index()
     {
-        $rols = Rol::latest()->paginate(5);
-        return view('roles', ['rols'=>$rols]);
+        $rols = Rol::all();
+        return view('rolesIndex', ['rols'=>$rols]);
     }
 
     /**
@@ -37,7 +37,7 @@ class RolController extends Controller
 
         Rol::create($request->all());
         //dd($request->all());
-        return redirect()->route('roles.index')->with('succes','Rol agregado con éxito al sistema');  
+        return redirect()->route('rolesIndex')->with('succes','Rol agregado con éxito al sistema');  
     }
 
     /**
@@ -66,7 +66,7 @@ class RolController extends Controller
         ]);
 
         $role->update($request->all());
-        return redirect()->route('roles.index')->with('succes','Rol actualizado correctamente en el sistema');
+        return redirect()->route('rolesIndex')->with('succes','Rol actualizado correctamente en el sistema');
     }
 
     /**

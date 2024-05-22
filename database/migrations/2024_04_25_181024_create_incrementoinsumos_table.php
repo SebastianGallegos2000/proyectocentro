@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('incrementoinsumos', function (Blueprint $table) {
-            $table->unsignedBigInteger('rut_Personal_IncrementoInventario');
+            $table->unsignedBigInteger('id_Personal_IncrementoInventario');
             $table->unsignedBigInteger('id_Insumo_IncrementoInventario');
             $table->timestamp('fechayhora_IncrementoInventario',precision:0);
             $table->string('cantidad_IncrementoInventario');
             $table->integer('estado_IncrementoInventario');
 
-            $table->foreign('rut_Personal_IncrementoInventario')->references('rut_Personal')->on('personales');
+            $table->foreign('id_Personal_IncrementoInventario')->references('id_Personal')->on('personales');
             $table->foreign('id_Insumo_IncrementoInventario')->references('id_Insumo')->on('insumos');
 
         });

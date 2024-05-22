@@ -12,8 +12,9 @@ class RazaMascotaController extends Controller
      */
     public function index()
     {
-        $razaMascota = RazaMascota::latest()->paginate(5);
-        return view('razamascota', ['razaMascotas'=>$razaMascota]);    }
+        $razaMascota = RazaMascota::all();
+        return view('razamascotaIndex', ['razaMascotas'=>$razaMascota]);    
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -33,7 +34,7 @@ class RazaMascotaController extends Controller
         ]);
 
         RazaMascota::create($request->all());
-        return redirect()->route('razamascota.index')->with('succes','La raza de la mascota fue agregado con éxito al sistema');
+        return redirect()->route('razamascotaIndex')->with('succes','La raza de la mascota fue agregado con éxito al sistema');
     }
 
     /**
@@ -62,7 +63,7 @@ class RazaMascotaController extends Controller
         ]);
 
         $razamascotum->update($request ->all());
-        return redirect()->route('razamascota.index')->with('succes','Se ha actualizado con éxito la raza de la mascota');
+        return redirect()->route('razamascotaIndex')->with('succes','Se ha actualizado con éxito la raza de la mascota');
     }
 
     /**

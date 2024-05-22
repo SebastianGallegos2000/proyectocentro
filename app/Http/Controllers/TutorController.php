@@ -2,86 +2,76 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tutor;
+use App\Models\Comuna;
 use App\Models\Tutores;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class TutorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $tutor= Tutores::latest();
-        return view('tutor',$tutor);
-    }
+    //public function index()
+    //{
+    //    $tutor= Tutores::all();
+    //    return view('tutorIndex',$tutor);
+    //}
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('/auth/createTutor');
-    }
+    //public function create()
+    //{
+    //    $comunas = Comuna::all();
+    //    return view('createTutor', compact('comunas'));
+    //}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'rut_Tutor' => 'required',
-            'dv_Tutor' => 'required',
-            'nombre_Tutor' => 'required',
-            'apellido_Tutor' => 'required',
-            'correo_Tutor' => 'required',
-            'fechaNac_Tutor' => 'required',
-            'telefono_Tutor' => 'required',
-            'id_Comuna_Tutor' => 'required',
-            'fotocopiacarnet_Tutor' => 'required',
-            'registrosocial_Tutor' => 'required',
-            'id_Rol_Tutor' => 'required',
-            'estado_Tutor' => 'required'
-        ]);
-
-        $rut = $request->input('rut_Tutor');
-        $dv = $request->input('dv_Tutor');
-        $password = $request->input('password_Tutor');
-        $name = $request->input('nombre_Tutor');
-        $apellido = $request->input('apellido_Tutor');
-        $email = $request->input('correo_Tutor');
-        $fechaNac = $request->input('fechaNac_Tutor');
-        $telefono = $request->input('telefono_Tutor');
-        $comuna = $request->input('id_Comuna_Tutor');
-        $pathFotocopiaCarnet = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $rut .'_'.'Fotocopia_Carnet'. '.pdf');
-        $pathRegistroSocial = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $rut .'_'.'Registro_Social'. '.pdf');
-        $rol = $request->input('id_Rol_Tutor');
-        $estado = $request->input('estado_Tutor');
-
-        Tutores::insert([
-            'rut_Tutor' => $rut,
-            'dv_Tutor' => $dv,
-            'password_Tutor' => $password,
-            'nombre_Tutor' => $name,
-            'apellido_Tutor' => $apellido,
-            'correo_Tutor' => $email,
-            'fechaNac_Tutor' => $fechaNac,
-            'telefono_Tutor' => $telefono,
-            'id_Comuna_Tutor' => $comuna,
-            'fotocopiacarnet_Tutor' => $pathFotocopiaCarnet,
-            'registrosocial_Tutor' => $pathRegistroSocial,
-            'id_Rol_Tutor' => $rol,
-            'estado_Tutor' => $estado
-        ]);
-
-
-
-        //dd($request);
-        
-        return redirect()->route('loginTutor')->with('succes','Has creado tu usuario correctamente');    
-
-    }
+    //public function store(Request $request)
+    //{
+    //    $request->validate([
+    //        'rut_Tutor' => 'required',
+    //        'dv_Tutor' => 'required',
+    //        'nombre_Tutor' => 'required',
+    //        'apellido_Tutor' => 'required',
+    //        'correo_Tutor' => 'required',
+    //        'fechaNac_Tutor' => 'required',
+    //        'telefono_Tutor' => 'required',
+    //        'id_Comuna_Tutor' => 'required',
+    //        'fotocopiacarnet_Tutor' => 'required',
+    //        'registrosocial_Tutor' => 'required',
+    //        'id_Rol_Tutor' => 'required',
+    //        'estado_Tutor' => 'required'
+    //    ]);
+    //
+    //    $tutor = new Tutores();
+    //
+    //    $tutor->rut_Tutor = $request->rut_Tutor;
+    //    $tutor->dv_Tutor = $request->dv_Tutor;
+    //    $tutor->password_Tutor = Hash::make($request->password_Tutor);
+    //    $tutor->nombre_Tutor = $request->nombre_Tutor;
+    //    $tutor->apellido_Tutor = $request->apellido_Tutor;
+    //    $tutor->correo_Tutor = $request->correo_Tutor;
+    //    $tutor->fechaNac_Tutor = $request->fechaNac_Tutor;
+    //    $tutor->telefono_Tutor = $request->telefono_Tutor;
+    //    $tutor->id_Comuna_Tutor = $request->id_Comuna_Tutor;
+    //    $tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $tutor->rut_Tutor.'_'.'Fotocopia_Carnet'.'.pdf');
+    //    $tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $tutor->rut_Tutor .'_'.'Registro_Social'. '.pdf');
+    //    $tutor->id_Rol_Tutor = $request->id_Rol_Tutor;
+    //    $tutor->estado_Tutor = $request->estado_Tutor;
+    //    $tutor->save();
+    //
+    //
+    //    //dd($request);
+    //    Auth::login($tutor);
+    //    return redirect()->route('tutorIndex')->with('success','Has creado tu usuario correctamente');
+    //
+    //}
 
     /**
      * Display the specified resource.

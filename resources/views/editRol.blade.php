@@ -7,7 +7,7 @@
             <h2>Editar Rol</h2>
         </div>
         <div>
-            <a href="/roles" class="btn btn-primary">Volver</a>
+            <a href="/rolesIndex" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -22,9 +22,8 @@
     </div>
 @endif
 
-    <form action="{{ route('roles.update', $role) }}" method="POST">
+    <form action="{{ route('updateRol', $role) }}" method="POST">
     @csrf
-    @method('PUT')
     <div class="container p-5">
         <div class="mb-3 row">
 

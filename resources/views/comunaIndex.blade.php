@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-sm-8">
                 <div>
-                    <a href="comunas/create" class="btn btn-info">Agregar Comuna</a>
+                    <a href="comuna/create" class="btn btn-info">Agregar Comuna</a>
                 </div>
             </div>
                 @if(Session::get('success'))
@@ -40,7 +40,7 @@
                 <td>{{$comuna->nombre_Comuna}}</td>
                 <td>{{$comuna->estado_Comuna }}</td>
                 <td>
-                    <a href="comunas/{{$comuna->id_Comuna}}/edit" class="btn btn-dark">Editar</a>
+                    <a href="comuna/{{$comuna->id_Comuna}}/edit" class="btn btn-dark">Editar</a>
                     <!--<form action="" method="post" class="d-inline">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>-->

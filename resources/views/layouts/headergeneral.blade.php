@@ -20,7 +20,7 @@
           <a id="a-header" href="/">Inicio</a>
           <a id="a-header" href="/about">Quienes somos</a>
           <a id="a-header" href="/misionyvision">Misión y visión</a>
-          <a id="a-header" href="/loginTutores" >Mi mascota</a>
+          <a id="a-header" href="/loginTutor" >Mi mascota</a>
           <a id="a-header" href="/loginPersonal" >Internos</a>
         </div>
       </div>

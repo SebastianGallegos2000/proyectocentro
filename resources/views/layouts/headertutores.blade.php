@@ -17,6 +17,8 @@
         <div class="btn-box">
           <a id="a-header" href="/tutor">Inicio</a>
           <a id="a-header" href="/perfil">Perfil</a>
+          <a id="a-header" href="{{route('logout')}}">Cerrar sesión</a>
+
         </div>
       </div>
     </div>

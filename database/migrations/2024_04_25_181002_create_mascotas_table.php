@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('mascotas', function (Blueprint $table) {
             $table->id('id_Mascota');
             $table->unsignedBigInteger('id_Razamascota_Mascota');
-            $table->unsignedBigInteger('rut_Tutor_Mascota');
+            $table->unsignedBigInteger('id_Tutor_Mascota');
             $table->string('nombre_Mascota');
             $table->integer('nroChip_Mascota');
             $table->integer('peso_Mascota');
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('rut_Tutor_Mascota')->references('rut_Tutor')->on('tutores');
+            $table->foreign('id_Tutor_Mascota')->references('id_Tutor')->on('tutores');
             $table->foreign('id_Razamascota_Mascota')->references('id_Razamascota')->on('razamascotas');
 
         });

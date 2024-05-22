@@ -7,48 +7,114 @@ use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\MyVController;
 use App\Http\Controllers\LogInTutoresController;
+use App\Http\Controllers\LogInPersonalesController;
 use App\Http\Controllers\ComunaController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\RazaMascotaController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\PersonalController;
-use App\Http\Controllers\LogInPersonalesController;
 use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
+
+
+/*
+|--------------------------------------------------------------------------	
+| Login Routes
+|--------------------------------------------------------------------------
+*/
+Route::view('/loginTutor', 'loginTutor')->name('loginTutor');
+Route::view('/loginPersonal', 'loginPersonal')->name('loginPersonal');
+
+Route::get('/registroTutor', [LogInTutoresController::class, 'registerView'])->name('registroTutor');
+
+Route::view('/tutorIndex',"tutorIndex")->name('privada');
+
+
+Route::post('/validar-registro', [LogInTutoresController::class, 'register'])->name('validar-registro');
+Route::post('/validarPersonal', [LogInPersonalesController::class, 'validarPersonal'])->name('validarPersonal');
+
+Route::post('/inicia-sesion', [LogInTutoresController::class, 'login'])->name('inicia-sesion');
+Route::post('/iniciarSesionPersonal', [LogInPersonalesController::class, 'iniciarSesionPersonal'])->name('iniciarSesionPersonal');
+
+Route::get('/logoutTutores', [LogInTutoresController::class, 'logout'])->name('logout');
+Route::get('/logoutPersonal', [LogInPersonalesController::class, 'logoutPersonal'])->name('logoutPersonal');
+
+
+/*
+|--------------------------------------------------------------------------	
+| Texto estático Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/', function () {
     return view('indexg');
 });
 
 Route::get('/about',AboutController::class);
 Route::get('/misionyvision',MyVController::class);
-Route::get('/loginTutores', LogInTutoresController::class)->name('loginTutor');
-Route::get('/loginPersonal',LogInPersonalesController::class)->name('loginPersonal');
+
+
+/*
+|--------------------------------------------------------------------------	
+| Resources Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/usuarios',UsuarioController::class);
 
-Route::resource('/tutor',TutorController::class);
 
-Route::resource('/admin',AdminController::class);
+//Route::get('/registroTutor', [TutorController::class, 'create'])->name('registroTutor');
+Route::post('/tutor/store', [TutorController::class, 'store'])->name('storeTutor');
+Route::get('/tutor/{tutor}/edit', [TutorController::class, 'edit'])->name('editTutor');
+Route::post('/tutor/{tutor}/update', [TutorController::class, 'update'])->name('updateTutor');
 
-Route::resource('/insumo',InsumoController::class);
 
-Route::resource('/roles',RolController::class);
+Route::get('/adminIndex', [AdminController::class, 'index'])->name('adminIndex');
+Route::get('/admin/create', [AdminController::class, 'create'])->name('createAdmin');
+Route::post('/admin/store', [AdminController::class, 'store'])->name('storeAdmin');
+Route::get('/admin/{admin}/edit', [AdminController::class, 'edit'])->name('editAdmin');
+Route::post('/admin/{admin}/update', [AdminController::class, 'update'])->name('updateAdmin');
 
-Route::resource('/comunas',ComunaController::class);
+Route::get('/insumoIndex', [InsumoController::class, 'index'])->name('insumoIndex');
+Route::get('/insumo/create', [InsumoController::class, 'create'])->name('createInsumo');
+Route::post('/insumo/store', [InsumoController::class, 'store'])->name('storeInsumo');
+Route::get('/insumo/{insumo}/edit', [InsumoController::class, 'edit'])->name('editInsumo');
+Route::post('/insumo/{insumo}/update', [InsumoController::class, 'update'])->name('updateInsumo'); 
 
-Route::resource('/razamascota',RazaMascotaController::class);
 
-Route::resource('/especialidad',EspecialidadController::class);
+Route::get('/rolesIndex', [RolController::class, 'index'])->name('rolesIndex');
+Route::get('/roles/create', [RolController::class, 'create'])->name('createRol');
+Route::post('/roles/store', [RolController::class, 'store'])->name('storeRol');
+Route::get('/roles/{role}/edit', [RolController::class, 'edit'])->name('editRol');
+Route::post('/roles/{role}/update', [RolController::class, 'update'])->name('updateRol');
 
-Route::resource('/personal',PersonalController::class);
+
+Route::get('/comunaIndex', [ComunaController::class, 'index'])->name('comunasIndex');
+Route::get('/comuna/create', [ComunaController::class, 'create'])->name('createComuna');
+Route::post('/comuna/store', [ComunaController::class, 'store'])->name('storeComuna');
+Route::get('/comuna/{comuna}/edit', [ComunaController::class, 'edit'])->name('editComuna');
+Route::post('/comuna/{comuna}/update', [ComunaController::class, 'update'])->name('updateComuna');
+
+Route::get('/razamascotaIndex', [RazaMascotaController::class, 'index'])->name('razamascotaIndex');
+Route::get('/razamascota/create', [RazaMascotaController::class, 'create'])->name('createRazaMascota');
+Route::post('/razamascota/store', [RazaMascotaController::class, 'store'])->name('storeRazaMascota');
+Route::get('/razamascota/{razamascotum}/edit', [RazaMascotaController::class, 'edit'])->name('editRazaMascota');
+Route::post('/razamascota/{razamascotum}/update', [RazaMascotaController::class, 'update'])->name('updateRazaMascota');
+
+Route::get('/especialidadIndex', [EspecialidadController::class, 'index'])->name('especialidadIndex');
+Route::get('/especialidad/create', [EspecialidadController::class, 'create'])->name('createEspecialidad');
+Route::post('/especialidad/store', [EspecialidadController::class, 'store'])->name('storeEspecialidad');
+Route::get('/especialidad/{especialidad}/edit', [EspecialidadController::class, 'edit'])->name('editEspecialidad');
+Route::post('/especialidad/{especialidad}/update', [EspecialidadController::class, 'update'])->name('updateEspecialidad');
+
+Route::get('/personalIndex', [PersonalController::class, 'index'])->name('personalIndex');
+Route::get('/personal/create', [PersonalController::class, 'create'])->name('createPersonal');
+Route::post('/personal/store', [PersonalController::class, 'store'])->name('storePersonal');
+Route::get('/personal/{personal}/edit', [PersonalController::class, 'edit'])->name('editPersonal');
+Route::post('/personal/{personal}/update', [PersonalController::class, 'update'])->name('updatePersonal');
+

@@ -7,7 +7,7 @@
             <h2>Editar Raza de mascota</h2>
         </div>
         <div>
-            <a href="/razamascota" class="btn btn-primary">Volver</a>
+            <a href="/razamascotaIndex" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -22,9 +22,8 @@
     </div>
 @endif
 
-    <form action="{{ route('razamascota.update',$razamascotum) }}" method="POST">
+    <form action="{{ route('updateRazaMascota',$razamascotum) }}" method="POST">
     @csrf
-    @method('PUT')
         <div class="container p-4">
             <div class="mb-3 row">
 

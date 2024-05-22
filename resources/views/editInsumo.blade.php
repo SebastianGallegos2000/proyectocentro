@@ -7,7 +7,7 @@
             <h2>Editar Insumo</h2>
         </div>
         <div>
-            <a href="/insumo" class="btn btn-primary">Volver</a>
+            <a href="/insumoIndex" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -22,9 +22,8 @@
     </div>
 @endif
 
-    <form action="{{ route('insumo.update',$insumo) }}" method="POST">
+    <form action="{{ route('updateInsumo',$insumo) }}" method="POST">
     @csrf
-    @method('PUT')
         <div class="container p-4">
             <div class="mb-3 row">
 

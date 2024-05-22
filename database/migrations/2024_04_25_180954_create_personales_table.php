@@ -12,22 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('personales', function (Blueprint $table) {
-            $table->id('rut_Personal');
-            $table->integer('dv_Personal');
-            $table->string('password_Personal');
-            $table->string('nombre_Personal');
-            $table->string('apellido_Personal');
-            $table->string('correo_Personal');
-            $table->timestampTz('fechaNac_Personal',precision:0);
-            $table->string('telefono_Personal');
-            $table->integer('id_Especialidad_Personal');
-            $table->unsignedBigInteger('id_Rol_Personal');
+            $table->id('id_Personal');
+            $table->unsignedBigInteger('id_Persona_Personal');
+            $table->unsignedBigInteger('id_Especialidad_Personal');
             $table->integer('estado_Personal'); 
             $table->timestamps();
 
-
-            $table->foreign('id_Rol_Personal')->references('id_Rol')->on('rols');
-
+            //Dependencias
+            $table->foreign('id_Persona_Personal')->references('id_Persona')->on('personas');
+            $table->foreign('id_Especialidad_Personal')->references('id_Especialidad')->on('especialidades');
         });
     }
 

@@ -12,8 +12,8 @@ class EspecialidadController extends Controller
      */
     public function index()
     {
-        $especialidad = Especialidad::latest()->paginate(5);
-        return view('especialidad', ['especialidades'=>$especialidad]);
+        $especialidad = Especialidad::latest();
+        return view('especialidadIndex', ['especialidades'=>$especialidad]);
     }
 
     /**
@@ -36,7 +36,7 @@ class EspecialidadController extends Controller
 
         Especialidad::create($request->all());
         //dd($request->all());
-        return redirect()->route('especialidad.index')->with('succes','Especialidad agregado con éxito al sistema');    }
+        return redirect()->route('especialidadIndex')->with('succes','Especialidad agregado con éxito al sistema');    }
 
     /**
      * Display the specified resource.
@@ -63,7 +63,7 @@ class EspecialidadController extends Controller
             'nombre_Especialidad'
             ]);
             $especialidad->update($request->all());
-            return redirect()->route('especialidad.index')->with('succes','Especialidad actualizada con éxito en el sistema');
+            return redirect()->route('especialidadIndex')->with('succes','Especialidad actualizada con éxito en el sistema');
     }
 
     /**

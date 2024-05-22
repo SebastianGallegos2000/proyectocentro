@@ -10,7 +10,7 @@
             <h2>Crear Cuenta</h2>
         </div>
         <div>
-            <a href="/loginTutores" class="btn btn-primary">Volver</a>
+            <a href="/loginTutor" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -27,7 +27,7 @@
 
 
 
-    <form action="{{route('tutor.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('validar-registro')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="container p-4">
             <div class="mb-3 row">
@@ -74,14 +74,10 @@
                 <div class="mb-3">
                     <strong>Comuna:</strong>
                     <select name="id_Comuna_Tutor" class="form-select" id="">
-                        <option value="">-- Elige comuna --</option>
-                        <option value="1">Viña del mar</option>
-                        <option value="2">Casablanca</option>
-                        <option value="3">Concón</option>
-                        <option value="4">Juan Fernández</option>
-                        <option value="5">Puchuncaví</option>
-                        <option value="6">Quintero</option>
-                        <option value="7">Valparaíso</option>
+                    <option value="">-- Elige comuna --</option>
+                @foreach ($comunas as $comuna)
+                    <option value="{{$comuna->id_Comuna}}">{{$comuna->nombre_Comuna}}</option>
+                    @endforeach
                     </select>
                 </div>
                 <div class="mb-3">

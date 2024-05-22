@@ -22,7 +22,7 @@
     </div>
 @endif
 
-    <form action="{{route('roles.store')}}" method="POST">
+    <form action="{{route('storeRol')}}" method="POST">
         @csrf
         <div class="container p-5">
             <div class="mb-3 row">

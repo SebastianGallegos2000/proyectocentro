@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('especialidad_personal', function (Blueprint $table) {
             
-            $table->unsignedBigInteger('rut_Personal_Nav');
+            $table->unsignedBigInteger('id_Personal_Nav');
             $table->unsignedBigInteger('id_Especialidad_Nav');
 
 
-            $table->foreign('rut_Personal_Nav')->references('rut_Personal')->on('personales');
+            $table->foreign('id_Personal_Nav')->references('id_Personal')->on('personales');
             $table->foreign('id_Especialidad_Nav')->references('id_Especialidad')->on('especialidades');
 
         });

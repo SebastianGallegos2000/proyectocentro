@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Persona;    
-use App\Models\Tutores;
+use App\Models\Tutor;
 use App\Models\Comuna;
 
 
@@ -21,77 +21,96 @@ class LogInTutoresController extends Controller
 
         //validar los datos
         $request->validate([
-            'rut_Tutor' => 'required',
-            'dv_Tutor' => 'required',
-            'nombre_Tutor' => 'required',
-            'apellido_Tutor' => 'required',
-            'correo_Tutor' => 'required',
-            'fechaNac_Tutor' => 'required',
-            'telefono_Tutor' => 'required',
-            'id_Comuna_Tutor' => 'required',
-            'fotocopiacarnet_Tutor' => 'required',
-            'registrosocial_Tutor' => 'required',
-            'id_Rol_Tutor' => 'required',
-            'estado_Tutor' => 'required'
+            'rut_Persona' => 'required|integer',
+            'dv_Persona' => 'required|string|max:1',
+            'nombre_Persona' => 'required|string|max:50',
+            'apellido_Persona' => 'required|string|max:50',
+            'correo_Persona' => 'required|email|max:50',
+            'fechaNac_Persona' => 'required|date',
+            'telefono_Persona' => 'required|string|max:12',
+            'estado_Persona' => 'required|integer',
+            'password_Usuario' => 'required|string|max:50',
+            'estado_Usuario' => 'required|integer',
+            'rol_id' => 'required|integer',
+            'fotocopiacarnet_Tutor' => 'required|file|max:2048',
+            'registrosocial_Tutor' => 'required|file|max:2048',
+            'comuna_id' => 'required|integer',
+            'estado_Tutor' => 'required|integer'
         ]);
 
-        //Insertar valores a Usuario
-        $usuario = new User();
-        
-        $usuario->rut_Usuario = $request->rut_Persona;
-        $usuario->password_Usuario = Hash::make($request->password_Persona);
-        $usuario->estado_Usuario = 1;
-        $usuario->save();
 
-        //Insertar valores a Persona
-        $persona = new Persona();
-
-        $persona->rut_Persona = $request->rut_Persona;
-        $persona->dv_Persona = $request->dv_Persona;
-        $persona->nombre_Persona = $request->nombre_Persona;
-        $persona->apellido_Persona = $request->apellido_Persona;
-        $persona->correo_Persona = $request->correo_Persona;
-        $persona->fechaNac_Persona = $request->fechaNac_Persona;
-        $persona->telefono_Persona = $request->telefono_Persona;
-        $persona->estado_Persona = 1;
-        $persona->save();
+    // Insertar en la tabla usuarios
+    $usuario = new User();
+    $usuario->id= User::all()->max('id') + 1;
+    $usuario->password_Usuario = Hash::make($request->password_Usuario);
+    $usuario->estado_Usuario = $request->estado_Usuario;
+    $usuario->rol_id = $request->rol_id;
+    $usuario->save();
 
 
+    // Insertar en la tabla personas
+    $persona = new Persona();
+    //entregarle un id incremental a la persona
+    $persona->id = Persona::all()->max('id') + 1;
+    $persona->user_id = $usuario->id;
+    $persona->rut_Persona = $request->rut_Persona;
+    $persona->dv_Persona = $request->dv_Persona;
+    $persona->nombre_Persona = $request->nombre_Persona;
+    $persona->apellido_Persona = $request->apellido_Persona;
+    $persona->correo_Persona = $request->correo_Persona;
+    $persona->fechaNac_Persona = $request->fechaNac_Persona;
+    $persona->telefono_Persona = $request->telefono_Persona;
+    $persona->estado_Persona = $request->estado_Persona;
+    $persona->save();
 
 
-        //Insertar los datos
-        $tutor = new Tutores();
+    
 
-        $tutor->rut_Tutor = $request->rut_Tutor;
-        $tutor->dv_Tutor = $request->dv_Tutor;
-        $tutor->id_Comuna_Tutor = $request->id_Comuna_Tutor;
-        $tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $tutor->rut_Tutor.'_'.'Fotocopia_Carnet'.'.pdf');
-        $tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $tutor->rut_Tutor .'_'.'Registro_Social'. '.pdf');
-        $tutor->id_Rol_Tutor = $request->id_Rol_Tutor;
-        $tutor->estado_Tutor = $request->estado_Tutor;
-        $tutor->save();
+    // Insertar en la tabla tutores
+    $tutor = new Tutor();
+    $tutor->persona_id = $persona->id;
+    $tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $tutor->rut_Tutor.'_'.'Fotocopia_Carnet'.'.pdf');
+    $tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $tutor->rut_Tutor .'_'.'Registro_Social'. '.pdf');
+    $tutor->comuna_id = $request->comuna_id;
+    $tutor->estado_Tutor = $request->estado_Tutor;
+    $tutor->save();
 
-        Auth::login($tutor);
+        Auth::login($usuario);
         return redirect(route('privada'));
     }
 
-    public function login(Request $request){
-        //Validaciones de los datos (Falta)
-
-        $credenciales=[
-            'rut_Tutor' => $request->rut_Tutor,
-            'password_Tutor' => $request->password_Tutor,
-            'estado_Tutor' => 1
-        ];
-
-        $remember = ($request->has('remember') ? true : false);
-        if(Auth::attempt($credenciales, $remember)){
-            $request->session()->regenerate();
-            return redirect()->intended(route('privada'));
-        }else{
-            return back()->withErrors(['rut_Tutor' => 'Las credenciales ingresadas no son correctas']);
+    public function login(Request $request)
+    {
+        // Validacion de los datos
+        $validatedData = $request->validate([
+            'rut_Persona' => 'required',
+            'password_Usuario' => 'required',
+        ]);
+        
+        // Se obtiene a la persona asociada al RUT
+        $persona = Persona::where('rut_Persona', $validatedData['rut_Persona'])->first();
+        
+        if (!$persona) {
+            return back()->withErrors(['rut_Persona' => 'Usuario no encontrado con ese RUT']);
         }
+        
+        // Se obtiene al usuario asociado a la persona
+        $usuario = User::find($persona->user_id);
+        
+        if (!$usuario) {
+            return back()->withErrors(['rut_Persona' => 'Ningún usuario asociado con el RUT']);
+        }
+        
+        if (!Hash::check($validatedData['password_Usuario'], $usuario->password_Usuario)) {
+            return back()->withErrors(['password_Usuario' => 'La contraseña no es correcta']);
+        }
+        
+        // Autenticación del usuario
+        Auth::login($usuario);
 
+        $request->session()->regenerate();
+
+        return redirect()->intended(route('privada'));
     }
 
     public function logout(Request $request){

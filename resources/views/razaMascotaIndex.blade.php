@@ -38,12 +38,12 @@
         @foreach ($razaMascotas as $razaMascota)
         <tr>
 
-            <td class="fw-bold">{{$razaMascota->id_Razamascota}}</td>
+            <td class="fw-bold">{{$razaMascota->id}}</td>
             <td>{{$razaMascota->nombre_Razamascota}}</td>
             <td>{{$razaMascota->estado_Razamascota }}</td>
             <td>
                 <!--<a href="" class="btn btn-danger">Agregar</a>-->
-                <a href="razamascota/{{$razaMascota->id_Razamascota}}/edit" class="btn btn-dark">Editar</a>
+                <a href="razamascota/{{$razaMascota->id}}/edit" class="btn btn-dark">Editar</a>
                 <!--<form action="" method="post" class="d-inline">
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>-->

@@ -12,25 +12,25 @@ class Persona extends Model
     //Relacion uno a uno con Tutor
     public function tutor()
     {
-        return $this->hasOne('\App\Models\Tutor', 'rut_Tutor');
+        return $this->hasOne('\App\Models\Tutor', 'id_Tutor');
     }
 
     //Relacion uno a uno con User
     public function user()
     {
-        return $this->hasOne('\App\Models\User', 'rut_Usuario');
+        return $this->belongsTo('\App\Models\User');
     }
 
     //Relación uno a uno con Personal
     public function personal()
     {
-        return $this->hasOne('\App\Models\Personal', 'rut_Personal');
+        return $this->hasOne('\App\Models\Personal');
     }
 
     //Relación uno a uno con Admins
     public function administrador()
     {
-        return $this->hasOne('\App\Models\Admins', 'rut_Administrador');
+        return $this->hasOne('\App\Models\Admins');
     }
 
     protected $table = 'personas';

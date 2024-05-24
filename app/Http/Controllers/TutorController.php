@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comuna;
-use App\Models\Tutores;
+use App\Models\Tutor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +16,7 @@ class TutorController extends Controller
      */
     //public function index()
     //{
-    //    $tutor= Tutores::all();
+    //    $tutor= Tutor::all();
     //    return view('tutorIndex',$tutor);
     //}
 
@@ -49,7 +49,7 @@ class TutorController extends Controller
     //        'estado_Tutor' => 'required'
     //    ]);
     //
-    //    $tutor = new Tutores();
+    //    $tutor = new Tutor();
     //
     //    $tutor->rut_Tutor = $request->rut_Tutor;
     //    $tutor->dv_Tutor = $request->dv_Tutor;
@@ -76,7 +76,7 @@ class TutorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tutores $tutor)
+    public function show(Tutor $tutor)
     {
         //
     }
@@ -84,7 +84,7 @@ class TutorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tutores $tutor)
+    public function edit(Tutor $tutor)
     {
         return view('editTutor',['tutor'=> $tutor]);
     }
@@ -92,7 +92,7 @@ class TutorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tutores $tutor)
+    public function update(Request $request, Tutor $tutor)
     {
         $request->validate([
             'password_Tutor',
@@ -114,7 +114,7 @@ class TutorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tutores $tutor)
+    public function destroy(Tutor $tutor)
     {
         //
     }

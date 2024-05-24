@@ -12,11 +12,11 @@
                 @csrf
                 <div class="form-group">
                     <label for="usernametutor"><i class="fas fa-user"></i> Usuario:</label>
-                    <input type="text" id="usernametutor" name="usernametutor">
+                    <input type="text" id="usernametutor" name="rut_Persona">
                 </div>
                 <div class="form-group">
                     <label for="passwordtutor"><i class="fas fa-lock"></i> Contraseña:</label>
-                    <input type="password" id="passwordtutor" name="passwordtutor">
+                    <input type="password" id="passwordtutor" name="password_Usuario">
                 </div>
                 <div>
                 <a href="{{route('registroTutor')}}">No tienes cuenta? Créala aquí</a>

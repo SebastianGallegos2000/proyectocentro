@@ -36,7 +36,7 @@
         <tbody>
         @foreach ($comunas as $comuna)
             <tr>
-                <td>{{$comuna->id_Comuna}}</td>
+                <td>{{$comuna->id}}</td>
                 <td>{{$comuna->nombre_Comuna}}</td>
                 <td>{{$comuna->estado_Comuna }}</td>
                 <td>

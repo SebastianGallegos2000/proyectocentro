@@ -127,15 +127,14 @@
 <tbody>
     @foreach ($tutores as $tutor)
     <tr>
-
-        <td class="fw-bold">{{$tutor->rut_Tutor}}</td>
-        <td>{{$tutor->password_Tutor}}</td>
-        <td>{{$tutor->nombre_Tutor}}</td>
-        <td>{{$tutor->apellido_Tutor}}</td>
-        <td>{{$tutor->correo_Tutor}}</td>
-        <td>{{ \Carbon\Carbon::parse($tutor->fechaNac_Tutor)->format('d-m-Y') }}</td>
-        <td>{{$tutor->telefono_Tutor}}</td>
-        <td>{{ $tutor->comuna ? $tutor->comuna->nombre_Comuna : 'N/A' }}</td>
+        <td class="fw-bold">{{$tutor->persona->rut_Persona}}</td>
+        <td>{{$tutor->password_Usuario}}</td>
+        <td>{{$tutor->persona->nombre_Persona}}</td>
+        <td>{{$tutor->persona->apellido_Persona}}</td>
+        <td>{{$tutor->persona->correo_Persona}}</td>
+        <td>{{ \Carbon\Carbon::parse($tutor->persona->fechaNac_Persona)->format('d-m-Y') }}</td>
+        <td>{{$tutor->persona->telefono_Persona}}</td>
+        <td>{{ $tutor->persona->tutor->comuna->nombre_Comuna }}</td>
         <td><a href="{{ asset('storage/fotocopiacarnet/' . $tutor->rut_Tutor .'_Fotocopia_Carnet.pdf') }}">Ver Fotocopia Carnet</a></td>
         <td><a href="{{ asset('storage/registrosocial/' . $tutor->rut_Tutor .'_Registro_Social.pdf') }}">Ver Registro Social</a></td>
         <td>{{$tutor->estado_Tutor }}</td>

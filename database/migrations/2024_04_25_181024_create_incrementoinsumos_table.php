@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('cantidad_IncrementoInventario');
             $table->integer('estado_IncrementoInventario');
 
-            $table->foreign('id_Personal_IncrementoInventario')->references('id_Personal')->on('personales');
-            $table->foreign('id_Insumo_IncrementoInventario')->references('id_Insumo')->on('insumos');
+            $table->foreign('id_Personal_IncrementoInventario')->references('id')->on('personales');
+            $table->foreign('id_Insumo_IncrementoInventario')->references('id')->on('insumos');
 
         });
     }

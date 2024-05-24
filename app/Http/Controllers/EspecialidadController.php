@@ -12,7 +12,7 @@ class EspecialidadController extends Controller
      */
     public function index()
     {
-        $especialidad = Especialidad::latest();
+        $especialidad = Especialidad::all();
         return view('especialidadIndex', ['especialidades'=>$especialidad]);
     }
 

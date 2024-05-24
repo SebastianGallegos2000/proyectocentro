@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->id('id_Admin');
-            $table->unsignedBigInteger('id_Persona_Admin');
+            $table->id();
+            $table->unsignedBigInteger('persona_id');
             $table->integer('estado_Admin');
             $table->timestamps();
 
             //Dependencias
-            $table->foreign('id_Persona_Admin')->references('id_Persona')->on('personas');
+            $table->foreign('persona_id')->references('id')->on('personas');
 
         });
     }

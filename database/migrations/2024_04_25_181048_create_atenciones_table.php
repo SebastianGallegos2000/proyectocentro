@@ -20,8 +20,8 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('id_SolicitudCita_Atencion')->references('id_SolicitudCita')->on('solicitudcitas');
-            $table->foreign('id_Personal_Atencion')->references('id_Personal')->on('personales');
+            $table->foreign('id_SolicitudCita_Atencion')->references('id')->on('solicitudcitas');
+            $table->foreign('id_Personal_Atencion')->references('id')->on('personales');
 
         });
     }

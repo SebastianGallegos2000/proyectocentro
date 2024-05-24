@@ -42,14 +42,14 @@
         @foreach ($insumos as $insumo)
         <tr>
 
-            <td class="fw-bold">{{$insumo->id_Insumo}}</td>
+            <td class="fw-bold">{{$insumo->id}}</td>
             <td>{{$insumo->nombre_Insumo}}</td>
             <td>{{$insumo->cantidad_Insumo}}</td>
             <td>{{$insumo->costo_Insumo}}</td>
             <td>{{$insumo->estado_Insumo }}</td>
             <td>
                 <!--<a href="" class="btn btn-danger">Agregar</a>-->
-                <a href="insumo/{{$insumo->id_Insumo}}/edit" class="btn btn-dark">Editar</a>
+                <a href="insumo/{{$insumo->id}}/edit" class="btn btn-dark">Editar</a>
                 <!--<form action="" method="post" class="d-inline">
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>-->

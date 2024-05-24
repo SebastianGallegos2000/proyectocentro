@@ -17,7 +17,21 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
+     //Relación uno a muchos inversa con Rol
+    public function rol(){
+        return $this->belongsTo('\App\Models\Rol');
+    }
+
+
+     //Relación uno a uno con Persona
+    public function persona(){
+        return $this->hasOne('\App\Models\Persona');
+    }
+
     protected $fillable = [
+        'persona_id',
         'rut_Usuario',
         'password_Usuario',
         'estado_Usuario',

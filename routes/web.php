@@ -10,6 +10,7 @@ use App\Http\Controllers\LogInTutoresController;
 use App\Http\Controllers\LogInPersonalesController;
 use App\Http\Controllers\ComunaController;
 use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\RazaMascotaController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\PersonalController;
@@ -33,8 +34,7 @@ Route::view('/loginPersonal', 'loginPersonal')->name('loginPersonal');
 
 Route::get('/registroTutor', [LogInTutoresController::class, 'registerView'])->name('registroTutor');
 
-Route::view('/tutorIndex',"tutorIndex")->name('privada');
-
+Route::get('/tutorIndex', [MascotasController::class, 'index'])->middleware('auth')->name('privada');
 
 Route::post('/validar-registro', [LogInTutoresController::class, 'register'])->name('validar-registro');
 Route::post('/validarPersonal', [LogInPersonalesController::class, 'validarPersonal'])->name('validarPersonal');
@@ -73,6 +73,12 @@ Route::post('/tutor/store', [TutorController::class, 'store'])->name('storeTutor
 Route::get('/tutor/{tutor}/edit', [TutorController::class, 'edit'])->name('editTutor');
 Route::post('/tutor/{tutor}/update', [TutorController::class, 'update'])->name('updateTutor');
 
+Route::get('/mascotaIndex', [MascotasController::class, 'index'])->name('mascotaIndex');
+Route::get('/crearMascota', [MascotasController::class, 'create'])->name('createMascota');
+Route::post('/mascota/store', [MascotasController::class, 'store'])->name('storeMascota');
+Route::get('/mascota/{mascota}/edit', [MascotasController::class, 'edit'])->name('editMascota');
+Route::post('/mascota/{mascota}/update', [MascotasController::class, 'update'])->name('updateMascota');
+
 
 Route::get('/adminIndex', [AdminController::class, 'index'])->name('adminIndex');
 Route::get('/admin/create', [AdminController::class, 'create'])->name('createAdmin');
@@ -94,7 +100,7 @@ Route::get('/roles/{role}/edit', [RolController::class, 'edit'])->name('editRol'
 Route::post('/roles/{role}/update', [RolController::class, 'update'])->name('updateRol');
 
 
-Route::get('/comunaIndex', [ComunaController::class, 'index'])->name('comunasIndex');
+Route::get('/comunaIndex', [ComunaController::class, 'index'])->name('comunaIndex');
 Route::get('/comuna/create', [ComunaController::class, 'create'])->name('createComuna');
 Route::post('/comuna/store', [ComunaController::class, 'store'])->name('storeComuna');
 Route::get('/comuna/{comuna}/edit', [ComunaController::class, 'edit'])->name('editComuna');

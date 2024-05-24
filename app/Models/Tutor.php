@@ -5,41 +5,34 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tutores extends Model
+class Tutor extends Model
 {
     use  HasFactory;
     
     //relación uno a muchos (inversa) Comunas
     public function comuna()
     {
-        return $this->belongsTo('\App\Models\Comuna', 'id_Comuna_Tutor');
+        return $this->belongsTo('\App\Models\Comuna');
     }
     
-    //relación uno a muchos (inversa) Roles
-    public function roles()
-    {
-        return $this->belongsTo('\App\Models\Rol');
-    }
+
 
     //relación uno a uno (inversa) Personas
     public function persona()
     {
-        return $this->belongsTo('\App\Models\Persona', 'rut_Tutor');
+        return $this->belongsTo('\App\Models\Persona');
     }
 
     protected $table = 'tutores';
     protected $dates = ['fechaNac_Tutor'];
-    protected $primaryKey = 'rut_Tutor';
     protected $fillable = [
-
-        'id_Comuna_Tutor',
+        'persona_id',
+        'id_comuna',
         'fotocopiacarnet_Tutor'=>'required',//mimes:pdf
         'registrosocial_Tutor'=>'required',//mimes:pdf
-        'id_Rol_Tutor',
         'estado_Tutor'
     ];
 
 
 
 }
-

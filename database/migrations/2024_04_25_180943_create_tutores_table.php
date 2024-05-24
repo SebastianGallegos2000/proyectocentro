@@ -12,19 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tutores', function (Blueprint $table) {
-            $table->id('id_Tutor');
-            $table->unsignedBigInteger('id_Persona_Tutor');
+            $table->id();
+            $table->unsignedBigInteger('persona_id');
+            $table->unsignedBigInteger('comuna_id');
             $table->string('fotocopiacarnet_Tutor');
             $table->string('registrosocial_Tutor');
-            $table->unsignedBigInteger('id_Comuna_Tutor');
             $table->integer('estado_Tutor');
             $table->rememberToken();
             $table->timestamps();
 
             //Dependencias
-            $table->foreign('id_Persona_Tutor')->references('id_Persona')->on('personas');
-            $table->foreign('id_Comuna_Tutor')->references('id_Comuna')->on('comunas');
-
+            $table->foreign('persona_id')->references('id')->on('personas');
+            $table->foreign('comuna_id')->references('id')->on('comunas');
         });
     }
 

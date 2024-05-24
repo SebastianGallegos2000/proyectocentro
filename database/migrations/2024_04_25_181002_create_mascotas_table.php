@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mascotas', function (Blueprint $table) {
-            $table->id('id_Mascota');
-            $table->unsignedBigInteger('id_Razamascota_Mascota');
-            $table->unsignedBigInteger('id_Tutor_Mascota');
+            $table->id();
+            $table->unsignedBigInteger('tutor_id');
             $table->string('nombre_Mascota');
-            $table->integer('nroChip_Mascota');
-            $table->integer('peso_Mascota');
+            $table->unsignedBigInteger('razamascota_id');
+            $table->bigInteger('nroChip_Mascota')->nullable();
+            $table->float('peso_Mascota',8,4);
             $table->integer('edad_Mascota');
             $table->string('especie_Mascota');
             $table->string('sexo_Mascota');
@@ -25,8 +25,8 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('id_Tutor_Mascota')->references('id_Tutor')->on('tutores');
-            $table->foreign('id_Razamascota_Mascota')->references('id_Razamascota')->on('razamascotas');
+            $table->foreign('tutor_id')->references('id')->on('tutores');
+            $table->foreign('razamascota_id')->references('id')->on('razamascotas');
 
         });
     }

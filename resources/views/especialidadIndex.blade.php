@@ -37,12 +37,12 @@
             @foreach ($especialidades as $especialidad)
             <tr>
 
-                <td class="fw-bold">{{$especialidad->id_Especialidad}}</td>
+                <td class="fw-bold">{{$especialidad->id}}</td>
                 <td>{{$especialidad->nombre_Especialidad}}</td>
                 <td>{{$especialidad->estado_Especialidad }}</td>
                 <td>
                     <!--<a href="" class="btn btn-danger">Agregar</a>-->
-                    <a href="especialidad/{{$especialidad->id_Especialidad}}/edit" class="btn btn-dark">Editar</a>
+                    <a href="especialidad/{{$especialidad->id}}/edit" class="btn btn-dark">Editar</a>
                     <!--<form action="" method="post" class="d-inline">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>-->

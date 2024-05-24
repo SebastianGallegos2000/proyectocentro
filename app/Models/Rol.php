@@ -9,20 +9,12 @@ class Rol extends Model
 {
     use HasFactory;
 
-    //Relación uno a muchos
-    public function tutores()
-    {
-        return $this->hasMany('\App\Models\Tutores');
+    //Relación uno a muchos con User
+    public function user(){
+        return $this->hasMany('\App\Models\User');
     }
 
-    //Relacion uno a muchos
-    public function personal()
-    {
-        return $this->hasMany('\App\Models\Personal');
-    }
 
-    //
-    protected $primaryKey = 'id_Rol';
     protected $fillable = [
         'nombre_Rol',
         'estado_Rol'

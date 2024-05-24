@@ -12,7 +12,7 @@ class Comuna extends Model
         //Relación uno a muchos
         public function tutores()
         {
-            return $this->hasMany('\App\Models\Tutores');
+            return $this->hasMany('\App\Models\Tutor');
         }
 
         protected $primaryKey = 'id_Comuna';

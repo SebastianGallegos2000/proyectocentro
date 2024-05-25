@@ -12,7 +12,7 @@ class Persona extends Model
     //Relacion uno a uno con Tutor
     public function tutor()
     {
-        return $this->hasOne('\App\Models\Tutor', 'id_Tutor');
+        return $this->hasOne('\App\Models\Tutor','persona_id');
     }
 
     //Relacion uno a uno con User
@@ -24,7 +24,7 @@ class Persona extends Model
     //Relación uno a uno con Personal
     public function personal()
     {
-        return $this->hasOne('\App\Models\Personal');
+        return $this->hasOne('\App\Models\Personal','persona_id');
     }
 
     //Relación uno a uno con Admins

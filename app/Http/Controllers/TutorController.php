@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comuna;
+use App\Models\Persona;
 use App\Models\Tutor;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -78,38 +80,57 @@ class TutorController extends Controller
      */
     public function show(Tutor $tutor)
     {
-        //
+        return view('perfilTutor',$tutor);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tutor $tutor)
+    public function edit(Tutor $tutor, Persona $persona, User $usuario)
     {
-        return view('editTutor',['tutor'=> $tutor]);
+        $persona = Persona::find($tutor->persona_id);
+        $usuario = User::find($persona->user_id);
+        return view('editTutor', compact('tutor','persona','usuario'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tutor $tutor)
+    public function update(Request $request, Tutor $tutor, Persona $persona, User $usuario)
     {
+        //Validación de los campos
         $request->validate([
-            'password_Tutor',
-            'nombre_Tutor',
-            'apellido_Tutor',
-            'correo_Tutor',
-            'fechaNac_Tutor',
-            'telefono_Tutor',
-            'id_Comuna_Tutor',
-            'fotocopiacarnet_Tutor',
-            'registrosocial_Tutor',
-            'id_Rol_Tutor',
-            'estado_Tutor'
-            
-            ]);
-            $tutor->update($request->all());
-            return redirect('usuarios')->with('succes','Comuna actualizada con éxito en el sistema');    }
+            'rut_Persona'=>'required',
+            'dv_Persona'=>'required',
+            'password_Usuario'=>'required',
+            'nombre_Persona'=>'required',
+            'apellido_Persona'=>'required',
+            'correo_Persona'=>'required',
+            'fechaNac_Persona'=>'required',
+            'telefono_Persona'=>'required',
+            'comuna_id'=>'required',
+            'fotocopiacarnet_Tutor'=>'required',
+            'registrosocial_Tutor'=>'required',
+            'estado_Persona'=>'required',
+            'estado_Usuario'=>'required',
+            'estado_Tutor'=>'required'
+        ]);
+            $persona->update($request->rut_Persona);
+            $persona->update($request->dv_Persona);
+            $usuario->update($request->password_Usuario);
+            $persona->update($request->nombre_Persona);
+            $persona->update($request->apellido_Persona);
+            $persona->update($request->correo_Persona);
+            $persona->update($request->fechaNac_Persona);
+            $persona->update($request->telefono_Persona);
+            $tutor->update($request->comuna_id);
+            $tutor->update($request->fotocopiacarnet_Tutor);
+            $tutor->update($request->registrosocial_Tutor);
+            $persona->update($request->estado_Persona);
+            $usuario->update($request->estado_Usuario);
+            $tutor->update($request->estado_Tutor);
+
+            return redirect('usuarios')->with('success','Usuario actualizado con éxito en el sistema');    }
 
     /**
      * Remove the specified resource from storage.

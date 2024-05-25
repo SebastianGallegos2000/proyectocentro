@@ -40,7 +40,7 @@ class InsumoController extends Controller
 
         Insumo::create($request->all());
         //dd($request->all());
-        return redirect()->route('insumo.index')->with('succes','Insumo agregado con éxito al sistema');    
+        return redirect()->route('insumoIndex')->with('succes','Insumo agregado con éxito al sistema');    
     }
 
     /**
@@ -72,7 +72,7 @@ class InsumoController extends Controller
 
         ]);
         $insumo->update($request->all());
-        return redirect()->route('insumoIndex')->with('succes','Insumo actualizado con éxito al sistema');    
+        return redirect()->route('insumoIndex')->with('success','Insumo actualizado con éxito al sistema');    
     }
 
     /**

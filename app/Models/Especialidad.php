@@ -16,7 +16,6 @@ class Especialidad extends Model
         }
 
     protected $table = 'especialidades';
-    protected $primaryKey = 'id_Especialidad';
     protected $fillable = [
         'nombre_Especialidad',
         'estado_Especialidad'

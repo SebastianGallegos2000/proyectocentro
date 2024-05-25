@@ -15,7 +15,6 @@ class Comuna extends Model
             return $this->hasMany('\App\Models\Tutor');
         }
 
-        protected $primaryKey = 'id_Comuna';
         protected $fillable = [
             'nombre_Comuna',
             'estado_Comuna'

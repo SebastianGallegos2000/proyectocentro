@@ -7,7 +7,7 @@
             <h2>Agregar Insumo</h2>
         </div>
         <div>
-            <a href="/insumo" class="btn btn-primary">Volver</a>
+            <a href="{{route('insumoIndex')}}" class="btn btn-primary">Volver</a>
         </div>
     </div>
 

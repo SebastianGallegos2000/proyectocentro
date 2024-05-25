@@ -91,7 +91,7 @@ class LogInTutoresController extends Controller
         $persona = Persona::where('rut_Persona', $validatedData['rut_Persona'])->first();
         
         if (!$persona) {
-            return back()->withErrors(['rut_Persona' => 'Usuario no encontrado con ese RUT']);
+            return back()->withErrors(['rut_Persona' => 'Rut ingresado no existe en la base de datos']);
         }
         
         // Se obtiene al usuario asociado a la persona

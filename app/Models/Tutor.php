@@ -12,11 +12,9 @@ class Tutor extends Model
     //relación uno a muchos (inversa) Comunas
     public function comuna()
     {
-        return $this->belongsTo('\App\Models\Comuna');
+        return $this->belongsTo('\App\Models\Comuna','comuna_id');
     }
     
-
-
     //relación uno a uno (inversa) Personas
     public function persona()
     {
@@ -27,7 +25,7 @@ class Tutor extends Model
     protected $dates = ['fechaNac_Tutor'];
     protected $fillable = [
         'persona_id',
-        'id_comuna',
+        'comuna_id',
         'fotocopiacarnet_Tutor'=>'required',//mimes:pdf
         'registrosocial_Tutor'=>'required',//mimes:pdf
         'estado_Tutor'

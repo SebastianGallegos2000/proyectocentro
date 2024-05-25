@@ -12,8 +12,8 @@ class UsuarioController extends Controller
 {
     public function __invoke()
     {
-        $personal = Personal::all();
-        $tutores = User::where('id_Rol_Usuario', '1')->with(['persona','persona.tutor','persona.tutor.comuna'])->get();
+        $personal = User::where('rol_id', '2')->with(['persona.personal.especialidad'])->get();
+        $tutores = User::where('rol_id', '1')->with(['persona.tutor.comuna'])->get();
         return view('usuarios', ['personal' => $personal, 'tutores' => $tutores]);
     }
 }

@@ -33,54 +33,62 @@
             <div class="mb-3 row">
                 <div class="mb-3">
                     <strong>Rut (sin digito verificador):</strong>
-                    <input type="text" name="rut_Personal" class="form-control" placeholder="11222333" maxlength="8" value="{{old('rut_Personal')}}" >
+                    <input type="text" name="rut_Persona" class="form-control" placeholder="11222333" maxlength="8" value="{{old('rut_Persona')}}" >
                 </div>
 
                 <div class="mb-3">
                     <strong>Digito verificador:</strong>
-                    <input type="text" name="dv_Personal" class="form-control" placeholder="1" value="{{old('dv_Personal')}}" >
+                    <input type="text" name="dv_Persona" class="form-control" placeholder="1" maxlength="1" value="{{old('dv_Persona')}}" >
                 </div>
 
                 <div class="mb-3">
                     <strong>Crea tu contraseña:</strong>
-                    <input type="password" name="password_Personal" class="form-control" placeholder="*******" value="{{old('password_Personal')}}" >
+                    <input type="password" name="password_Usuario" class="form-control" placeholder="*******" value="{{old('password_Usuario')}}" >
                 </div>
 
                 <div class="mb-3">
                     <strong>Nombre:</strong>
-                    <input type="text" name="nombre_Personal" class="form-control" placeholder="Nombre" value="{{old('nombre_Personal')}}" >
+                    <input type="text" name="nombre_Persona" class="form-control" placeholder="Nombre" value="{{old('nombre_Persona')}}" >
                 </div>
 
                 <div class="mb-3">
                     <strong>Apellido:</strong>
-                    <input type="text" name="apellido_Personal" class="form-control" placeholder="Apellido" value="{{old('apellido_Personal')}}" >
+                    <input type="text" name="apellido_Persona" class="form-control" placeholder="Apellido" value="{{old('apellido_Persona')}}" >
                 </div>
 
                 <div class="mb-3">
                     <strong>Correo:</strong>
-                    <input type="text" name="correo_Personal" class="form-control" placeholder="correo@ejemplo.com" value="{{old('correo_Personal')}}" >
+                    <input type="text" name="correo_Persona" class="form-control" placeholder="correo@ejemplo.com" value="{{old('correo_Persona')}}" >
                 </div>
 
                 <div class="mb-3">
                     <strong>Fecha de nacimiento:</strong>
-                    <input type="date" name="fechaNac_Personal" class="form-control" value="{{old('fechaNac_Personal')}}">
+                    <input type="date" name="fechaNac_Persona" class="form-control" value="{{old('fechaNac_Persona')}}">
                 </div>
 
                 <div class="mb-3">
                     <strong>Numero de Teléfono:</strong>
-                    <input type="text" name="telefono_Personal" class="form-control" placeholder="+56912345678" value="{{old('telefono_Personal')}}" >
+                    <input type="text" name="telefono_Persona" class="form-control" maxlength="12" placeholder="+56912345678" value="{{old('telefono_Persona')}}" >
                 </div>
                 <div class="mb-3">
                     <strong>Especialidad:</strong>
-                    <select name="id_Especialidad_Personal" class="form-select" id="">
+                    <select name="especialidad_id" class="form-select" id="">
                     <option value="">-- Elige Especialidad --</option>
                 @foreach ($especialidades as $especialidad)
-                    <option value="{{$especialidad->id_Especialidad}}">{{$especialidad->nombre_Especialidad}}</option>
+                    <option value="{{$especialidad->id}}">{{$especialidad->nombre_Especialidad}}</option>
                 @endforeach
                     </select>
                 </div>
                 <div class="mb-3">
-                    <input type="text" name="id_Rol_Personal" class="form-control" placeholder="" value="2" hidden >
+                    <input type="text" name="rol_id" class="form-control" placeholder="" value="2" hidden >
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" name="estado_Persona" class="form-control" placeholder="" value="1" hidden >
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" name="estado_Usuario" class="form-control" placeholder="" value="1" hidden >
                 </div>
 
                 <div class="mb-3">

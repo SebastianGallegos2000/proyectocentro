@@ -35,15 +35,15 @@ Route::view('/loginPersonal', 'loginPersonal')->name('loginPersonal');
 Route::get('/registroTutor', [LogInTutoresController::class, 'registerView'])->name('registroTutor');
 
 Route::get('/tutorIndex', [MascotasController::class, 'index'])->middleware('auth')->name('privada');
+Route::get('/personalIndex', [PersonalController::class, 'indexPersonal'])->middleware('auth')->name('privadaPersonal');
 
 Route::post('/validar-registro', [LogInTutoresController::class, 'register'])->name('validar-registro');
-Route::post('/validarPersonal', [LogInPersonalesController::class, 'validarPersonal'])->name('validarPersonal');
 
 Route::post('/inicia-sesion', [LogInTutoresController::class, 'login'])->name('inicia-sesion');
-Route::post('/iniciarSesionPersonal', [LogInPersonalesController::class, 'iniciarSesionPersonal'])->name('iniciarSesionPersonal');
+Route::post('/inicia-sesion-personal', [LogInPersonalesController::class, 'login'])->name('inicia-sesion-personal');
 
 Route::get('/logoutTutores', [LogInTutoresController::class, 'logout'])->name('logout');
-Route::get('/logoutPersonal', [LogInPersonalesController::class, 'logoutPersonal'])->name('logoutPersonal');
+Route::get('/logoutPersonal', [LogInPersonalesController::class, 'logout'])->name('logout');
 
 
 /*
@@ -72,6 +72,8 @@ Route::get('/usuarios',UsuarioController::class);
 Route::post('/tutor/store', [TutorController::class, 'store'])->name('storeTutor');
 Route::get('/tutor/{tutor}/edit', [TutorController::class, 'edit'])->name('editTutor');
 Route::post('/tutor/{tutor}/update', [TutorController::class, 'update'])->name('updateTutor');
+
+Route::get('/perfilTutor', [TutorController::class, 'show'])->name('perfilTutor');
 
 Route::get('/mascotaIndex', [MascotasController::class, 'index'])->name('mascotaIndex');
 Route::get('/crearMascota', [MascotasController::class, 'create'])->name('createMascota');
@@ -118,9 +120,11 @@ Route::post('/especialidad/store', [EspecialidadController::class, 'store'])->na
 Route::get('/especialidad/{especialidad}/edit', [EspecialidadController::class, 'edit'])->name('editEspecialidad');
 Route::post('/especialidad/{especialidad}/update', [EspecialidadController::class, 'update'])->name('updateEspecialidad');
 
-Route::get('/personalIndex', [PersonalController::class, 'index'])->name('personalIndex');
+Route::get('/editPersonalUser', [PersonalController::class, 'editUserView'])->name('editPersonalView');
+Route::post('/updatePersonalUser', [PersonalController::class, 'UpdateUser'])->name('updatePersonalUser');
 Route::get('/personal/create', [PersonalController::class, 'create'])->name('createPersonal');
 Route::post('/personal/store', [PersonalController::class, 'store'])->name('storePersonal');
 Route::get('/personal/{personal}/edit', [PersonalController::class, 'edit'])->name('editPersonal');
 Route::post('/personal/{personal}/update', [PersonalController::class, 'update'])->name('updatePersonal');
+Route::get('/perfilPersonal', [PersonalController::class, 'show'])->name('perfilPersonal');
 

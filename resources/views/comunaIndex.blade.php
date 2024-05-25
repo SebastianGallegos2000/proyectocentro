@@ -40,7 +40,7 @@
                 <td>{{$comuna->nombre_Comuna}}</td>
                 <td>{{$comuna->estado_Comuna }}</td>
                 <td>
-                    <a href="comuna/{{$comuna->id_Comuna}}/edit" class="btn btn-dark">Editar</a>
+                    <a href="comuna/{{$comuna->id}}/edit" class="btn btn-dark">Editar</a>
                     <!--<form action="" method="post" class="d-inline">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>-->

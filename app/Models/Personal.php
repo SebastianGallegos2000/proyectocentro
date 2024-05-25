@@ -15,31 +15,23 @@ class Personal extends Model
         //    return $this->belongsTo('\App\Models\Comuna');
         //}
         //
-        //relación uno a muchos (inversa) Comunas
-        public function roles()
+
+        //relación uno a uno (inversa) Personas
+        public function persona()
         {
-            return $this->belongsTo('\App\Models\Rol');
+            return $this->belongsTo('\App\Models\Persona');
         }
 
         //relación muchos a muchos (inversa) Especialidades
         public function especialidad()
         {
-            return $this->belongsToMany('\App\Models\Especialidad');
+            return $this->belongsToMany('\App\Models\Especialidad','especialidad_id');
         }
 
-    protected $dates = ['fechaNac_Personal'];
     protected $table = 'personales';
-    protected $primaryKey = 'rut_Personal';
     protected $fillable = [
-        'dv_Personal',
-        'password_Personal',
-        'nombre_Personal',
-        'apellido_Personal',
-        'correo_Personal',
-        'fechaNac_Personal',
-        'telefono_Personal',
-        'id_Especialidad_Personal',
-        'id_Rol_Personal',
+        'persona_id',
+        'especialidad_id',
         'estado_Personal'
     ];
 }

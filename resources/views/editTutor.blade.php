@@ -23,13 +23,13 @@
 @endif
 
 
-<form action="{{route('updateTutor',$tutor )}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('updateTutor',$tutor,$persona,$usuario )}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="container p-5">
         <div class="mb-3 row">
             <div class="mb-3">
                 <strong>Rut (sin digito verificador):</strong>
-                <input type="text" name="rut_Tutor" class="form-control" placeholder="11222333" maxlength="8" value="{{$tutor->rut_Tutor}}" disabled >
+                <input type="text" name="rut_Persona" class="form-control" placeholder="11222333" maxlength="8" value="{{$tutor->persona->rut_Persona}}" disabled >
             </div>
 
             <div class="mb-3">

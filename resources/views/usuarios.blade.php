@@ -51,15 +51,15 @@
         @foreach ($personal as $personal)
         <tr>
 
-            <td class="fw-bold">{{$personal->rut_Personal}}</td>
-            <td>{{$personal->password_Personal}}</td>
-            <td>{{$personal->nombre_Personal}}</td>
-            <td>{{$personal->apellido_Personal}}</td>
-            <td>{{$personal->correo_Personal}}</td>
-            <td>{{ \Carbon\Carbon::parse($personal->fechaNac_Personal)->format('d-m-Y') }}</td>
-            <td>{{$personal->telefono_Personal}}</td>
-            <td>{{$personal->id_Especialidad_Personal}}</td>
-            <td>{{$personal->estado_Personal }}</td>
+            <td class="fw-bold">{{$personal->persona->rut_Persona}}</td>
+            <td>{{$personal->password_Usuario}}</td>
+            <td>{{$personal->persona->nombre_Persona}}</td>
+            <td>{{$personal->persona->apellido_Persona}}</td>
+            <td>{{$personal->persona->correo_Persona}}</td>
+            <td>{{ \Carbon\Carbon::parse($personal->persona->fechaNac_Persona)->format('d-m-Y') }}</td>
+            <td>{{$personal->persona->telefono_Persona}}</td>
+            <td>{{$personal->especialidad_id}}</td>
+            <td>{{$personal->persona->estado_Persona }}</td>
             <td>
                 <!--<a href="" class="btn btn-danger">Agregar</a>-->
                 <a href="personal/{{$personal->rut_Personal}}/edit" class="btn btn-dark">Editar</a>
@@ -134,16 +134,22 @@
         <td>{{$tutor->persona->correo_Persona}}</td>
         <td>{{ \Carbon\Carbon::parse($tutor->persona->fechaNac_Persona)->format('d-m-Y') }}</td>
         <td>{{$tutor->persona->telefono_Persona}}</td>
-        <td>{{ $tutor->persona->tutor->comuna->nombre_Comuna }}</td>
+        <td>
+            @if($tutor->persona && $tutor->persona->tutor && $tutor->persona->tutor)
+                {{ $tutor->persona->tutor->comuna_id }}
+            @else
+                No disponible
+            @endif
+        </td>
         <td><a href="{{ asset('storage/fotocopiacarnet/' . $tutor->rut_Tutor .'_Fotocopia_Carnet.pdf') }}">Ver Fotocopia Carnet</a></td>
         <td><a href="{{ asset('storage/registrosocial/' . $tutor->rut_Tutor .'_Registro_Social.pdf') }}">Ver Registro Social</a></td>
-        <td>{{$tutor->estado_Tutor }}</td>
+        <td>{{$tutor->persona->estado_Persona }}</td>
 
 
 
         <td>
             <!--<a href="" class="btn btn-danger">Agregar</a>-->
-            <a href="tutor/{{$tutor->rut_Tutor}}/edit" class="btn btn-dark">Editar</a>
+            <a href="tutor/{{$tutor->id}}/edit" class="btn btn-dark">Editar</a>
             <!--<form action="" method="post" class="d-inline">
                 <button type="submit" class="btn btn-danger">Eliminar</button>
             </form>-->

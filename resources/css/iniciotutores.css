@@ -71,25 +71,31 @@ h4{
 }
 
 #container-user{
-    background-color: #8E8BB4;
+    background-color: #ffffff;
     border-radius: 5px;
     padding-top: 10px;
     padding-bottom: 30px;
     padding-left: 30px;
     padding-right: 30px;
     margin-top: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;}
+
+.thead{
+    border: 1px;
 }
 
 #container-text{
-    background-color: #BDC3D7;
+    background-color: #F3F0EC;
+    padding-bottom: 1%;
     border-radius: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 .container-info{
     display: grid;
     grid-template-columns: 200px 200px 200px;
 }
 #user-1{
-    background-color: #5B7C8F;
+    background-color: #ffffff;
     display: flex;
     margin-top: 5px;
     border-radius: 5px;
@@ -99,7 +105,7 @@ h4{
 }
 
 #user-perfil{
-    background-color: #5B7C8F;
+    background-color: #ffffff;
     display: flex;
     margin-top: 5px;
     border-radius: 5px;
@@ -116,4 +122,13 @@ h4{
 
 th{
     color: black;
+}
+
+/* Configuración de perfilPersonal */
+#btn-editardato{
+    margin-top: 1%;
+    margin-bottom: 8px;
+    background-color: #008419;
+    border-color: #008419;
+    box-shadow: 3px 3px 3px #999;
 }

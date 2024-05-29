@@ -58,7 +58,7 @@
 
                 <div class="mb-3">
                     <strong>Correo:</strong>
-                    <input type="text" name="correo_Persona" class="form-control" placeholder="correo@ejemplo.com" value="{{old('correo_Persona')}}" >
+                    <input type="email" name="correo_Persona" class="form-control" placeholder="correo@ejemplo.com" value="{{old('correo_Persona')}}" >
                 </div>
 
                 <div class="mb-3">

@@ -39,6 +39,12 @@ class LogInPersonalesController
         if (!Hash::check($validatedData['password_Usuario'], $usuario->password_Usuario)) {
             return back()->withErrors(['password_Usuario' => 'La contraseña no es correcta']);
         }
+
+        //Verificar que el rol sea 1
+        if ($usuario->rol_id !== 2) {
+            return back()->withErrors(['rut_Persona' => 'El usuario no tiene permisos para acceder']);
+        }
+        
         
         // Autenticación del usuario
         Auth::login($usuario);

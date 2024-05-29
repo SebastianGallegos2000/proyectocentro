@@ -1,4 +1,4 @@
-@extends('layouts.layoutadmin')
+@extends('layouts.layoutpersonal')
 
 @section('content')
 <div class="container p-5">
@@ -7,7 +7,7 @@
             <h2>Editar Personal</h2>
         </div>
         <div>
-            <a href="/usuarios" class="btn btn-primary">Volver</a>
+            <a href="{{route('perfilPersonal')}}" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -22,67 +22,60 @@
     </div>
 @endif
 
-<form action="{{route('updatePersonal',$personal)}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('updatePersonal',$personal,$persona,$user,$especialidades)}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="container p-5">
         <div class="mb-3 row">
             <div class="mb-3">
                 <strong>Rut (sin digito verificador):</strong>
-                <input type="text" name="rut_Personal" class="form-control" placeholder="11222333" maxlength="8" value="{{$personal->rut_Personal}}" disabled >
+                <input type="text" name="rut_Persona" class="form-control" placeholder="11222333" maxlength="8" value="{{$persona->rut_Persona}}" disabled >
             </div>
 
             <div class="mb-3">
                 <strong>Digito verificador:</strong>
-                <input type="text" name="dv_Personal" class="form-control" placeholder="1" value="{{$personal->dv_Personal}}" disabled>
+                <input type="text" name="dv_Persona" class="form-control" placeholder="1" value="{{$persona->dv_Persona}}" disabled>
             </div>
 
             <div class="mb-3">
-                <strong>Crea tu contraseña:</strong>
-                <input type="password" name="password_Personal" class="form-control" placeholder="*******" value="{{$personal->password_Personal}}" >
+                <strong>Contraseña:</strong>
+                <input type="password" name="password_Persona" class="form-control" placeholder="*******" value="{{$user->password_Usuario}}" >
             </div>
 
             <div class="mb-3">
                 <strong>Nombre:</strong>
-                <input type="text" name="nombre_Personal" class="form-control" placeholder="Nombre" value="{{$personal->nombre_Personal}}" >
+                <input type="text" name="nombre_Persona" class="form-control" placeholder="Nombre" value="{{$persona->nombre_Persona}}" >
             </div>
 
             <div class="mb-3">
                 <strong>Apellido:</strong>
-                <input type="text" name="apellido_Personal" class="form-control" placeholder="Apellido" value="{{$personal->apellido_Personal}}" >
+                <input type="text" name="apellido_Persona" class="form-control" placeholder="Apellido" value="{{$persona->apellido_Persona}}" >
             </div>
 
             <div class="mb-3">
                 <strong>Correo:</strong>
-                <input type="text" name="correo_Personal" class="form-control" placeholder="correo@ejemplo.com" value="{{$personal->correo_Personal}}" >
+                <input type="text" name="correo_Persona" class="form-control" placeholder="correo@ejemplo.com" value="{{$persona->correo_Persona}}" >
             </div>
 
             <div class="mb-3">
                 <strong>Fecha de nacimiento:</strong>
-                <input type="date" name="fechaNac_Personal" class="form-control" value="{{\Carbon\Carbon::parse($personal->fechaNac_Personal)->format('Y-m-d') }}">
+                <input type="date" name="fechaNac_Persona" class="form-control" value="{{\Carbon\Carbon::parse($persona->fechaNac_Persona)->format('Y-m-d') }}">
             </div>
 
             <div class="mb-3">
                 <strong>Numero de Teléfono:</strong>
-                <input type="text" name="telefono_Personal" class="form-control" placeholder="+56912345678" value="{{$personal->telefono_Personal}}" >
+                <input type="text" name="telefono_Persona" class="form-control" placeholder="+56912345678" value="{{$persona->telefono_Persona}}" >
             </div>
             <div class="mb-3">
                 <strong>Comuna:</strong>
-                <select name="id_Especialidad_Personal" class="form-select" id="">
-                    <option value="">-- Elige comuna --</option>
-                    <option value="1" {{ $personal->id_Especialidad_Personal == 1 ? 'selected' : '' }}>Veterinario</option>
-                    <option value="2" {{ $personal->id_Especialidad_Personal == 2 ? 'selected' : '' }}>Anestesista</option>
+                <select name="especialidad_id" class="form-select" id="">
+                    <option value="">-- Elige Especialidad --</option>
+                    @foreach ($especialidades as $especialidad)
+                    <option value="{{$especialidad->id}}" {{$personal->especialidad_id == $especialidad->id ? 'selected':''}}>{{$especialidad->nombre_Especialidad}}</option>
+                    @endforeach
                 </select>
             </div>
-            <div class="mb-3">
-                <input type="text" name="id_Rol_Personal" class="form-control" placeholder="" value="1" hidden >
-            </div>
-
-            <div class="mb-3">
-                <input type="text" name="estado_Personal" class="form-control" placeholder="" value="1" hidden >
-            </div>
-
         <div id="botonCrear" class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
-            <button type="submit" class="btn btn-primary">Crear</button>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
         </div>
     </div>
 </form>

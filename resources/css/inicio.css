@@ -17,7 +17,7 @@ h1{
 }
 
 h4{
-    color: brown;
+    color: rgb(177, 56, 0);
 }
 
 /* Configuración de header y footer */
@@ -92,6 +92,7 @@ footer{
     padding-bottom: 40px;
     padding-right: 40px;
     border-radius: 5%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .box{
@@ -240,4 +241,12 @@ footer{
 .col-sm-3{
     margin-top: 1%;
     margin-left: 1%;
+}
+
+/* Configuración de perfilPersonal */
+#btn-editardato{
+    margin-bottom: 8px;
+    background-color: #008419;
+    border-color: #008419;
+    box-shadow: 3px 3px 3px #999;
 }

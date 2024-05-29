@@ -1,11 +1,13 @@
 @extends('layouts.layoutpersonal')
 
 @section('content')
-<div class="container p-4">
-    <div class="col-12">
+<div class="container" id="container-user">
+    <div class="row" id="container-text">
+    <div class="col-sm-3">
         <div>
             <h2>Agregar Insumo</h2>
         </div>
+        <div class="row"></div>
         <div>
             <a href="{{route('insumoIndex')}}" class="btn btn-primary">Volver</a>
         </div>
@@ -46,5 +48,6 @@
             </div>
         </div>
     </form>
+</div>
 </div>
 @endsection

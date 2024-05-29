@@ -15,6 +15,7 @@ use App\Http\Controllers\RazaMascotaController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\UsuarioController;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +35,8 @@ Route::view('/loginPersonal', 'loginPersonal')->name('loginPersonal');
 
 Route::get('/registroTutor', [LogInTutoresController::class, 'registerView'])->name('registroTutor');
 
-Route::get('/tutorIndex', [MascotasController::class, 'index'])->middleware('auth')->name('privada');
-Route::get('/personalIndex', [PersonalController::class, 'indexPersonal'])->middleware('auth')->name('privadaPersonal');
+Route::get('/tutorIndex', [MascotasController::class, 'index'])->middleware('auth','roltutor')->name('privada');
+Route::get('/personalIndex', [PersonalController::class, 'indexPersonal'])->middleware(['auth','rolpersonal'])->name('privadaPersonal');
 
 Route::post('/validar-registro', [LogInTutoresController::class, 'register'])->name('validar-registro');
 
@@ -61,6 +62,16 @@ Route::get('/misionyvision',MyVController::class);
 
 /*
 |--------------------------------------------------------------------------	
+| Error Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('no-autorizado',function(){
+    return "Usted no está autorizado para ingresar a esta página";
+});
+
+/*
+|--------------------------------------------------------------------------	
 | Resources Routes
 |--------------------------------------------------------------------------
 */
@@ -73,13 +84,15 @@ Route::post('/tutor/store', [TutorController::class, 'store'])->name('storeTutor
 Route::get('/tutor/{tutor}/edit', [TutorController::class, 'edit'])->name('editTutor');
 Route::post('/tutor/{tutor}/update', [TutorController::class, 'update'])->name('updateTutor');
 
-Route::get('/perfilTutor', [TutorController::class, 'show'])->name('perfilTutor');
+//El rol del usuario debe ser 1 para ingresar a la vista de perfilTutor
+Route::get('/perfilTutor', [TutorController::class, 'show'])->middleware(['auth','roltutor'])->name('perfilTutor');
+//Route::get('/perfilTutor', [TutorController::class, 'show'])->middleware('auth')->name('perfilTutor');
 
-Route::get('/mascotaIndex', [MascotasController::class, 'index'])->name('mascotaIndex');
-Route::get('/crearMascota', [MascotasController::class, 'create'])->name('createMascota');
-Route::post('/mascota/store', [MascotasController::class, 'store'])->name('storeMascota');
-Route::get('/mascota/{mascota}/edit', [MascotasController::class, 'edit'])->name('editMascota');
-Route::post('/mascota/{mascota}/update', [MascotasController::class, 'update'])->name('updateMascota');
+Route::get('/mascotaIndex', [MascotasController::class, 'index'])->middleware(['auth','roltutor'])->name('mascotaIndex');
+Route::get('/crearMascota', [MascotasController::class, 'create'])->middleware(['auth','roltutor'])->name('createMascota');
+Route::post('/mascota/store', [MascotasController::class, 'store'])->middleware(['auth','roltutor'])->name('storeMascota');
+Route::get('/mascota/{mascota}/edit', [MascotasController::class, 'edit'])->middleware(['auth','roltutor'])->name('editMascota');
+Route::post('/mascota/{mascota}/update', [MascotasController::class, 'update'])->middleware(['auth','roltutor'])->name('updateMascota');
 
 
 Route::get('/adminIndex', [AdminController::class, 'index'])->name('adminIndex');
@@ -88,11 +101,11 @@ Route::post('/admin/store', [AdminController::class, 'store'])->name('storeAdmin
 Route::get('/admin/{admin}/edit', [AdminController::class, 'edit'])->name('editAdmin');
 Route::post('/admin/{admin}/update', [AdminController::class, 'update'])->name('updateAdmin');
 
-Route::get('/insumoIndex', [InsumoController::class, 'index'])->name('insumoIndex');
-Route::get('/insumo/create', [InsumoController::class, 'create'])->name('createInsumo');
-Route::post('/insumo/store', [InsumoController::class, 'store'])->name('storeInsumo');
-Route::get('/insumo/{insumo}/edit', [InsumoController::class, 'edit'])->name('editInsumo');
-Route::post('/insumo/{insumo}/update', [InsumoController::class, 'update'])->name('updateInsumo'); 
+Route::get('/insumoIndex', [InsumoController::class, 'index'])->middleware(['auth','rolpersonal'])->name('insumoIndex');
+Route::get('/insumo/create', [InsumoController::class, 'create'])->middleware(['auth','rolpersonal'])->name('createInsumo');
+Route::post('/insumo/store', [InsumoController::class, 'store'])->middleware(['auth','rolpersonal'])->name('storeInsumo');
+Route::get('/insumo/{insumo}/edit', [InsumoController::class, 'edit'])->middleware(['auth','rolpersonal'])->name('editInsumo');
+Route::post('/insumo/{insumo}/update', [InsumoController::class, 'update'])->middleware(['auth','rolpersonal'])->name('updateInsumo'); 
 
 
 Route::get('/rolesIndex', [RolController::class, 'index'])->name('rolesIndex');
@@ -120,11 +133,12 @@ Route::post('/especialidad/store', [EspecialidadController::class, 'store'])->na
 Route::get('/especialidad/{especialidad}/edit', [EspecialidadController::class, 'edit'])->name('editEspecialidad');
 Route::post('/especialidad/{especialidad}/update', [EspecialidadController::class, 'update'])->name('updateEspecialidad');
 
-Route::get('/editPersonalUser', [PersonalController::class, 'editUserView'])->name('editPersonalView');
+Route::get('/personal/{id}/edit', [PersonalController::class, 'edit'])->name('editPersonal');
+
+//Route::get('/editPersonalUser', [PersonalController::class, 'editUserView'])->name('editPersonalView');
 Route::post('/updatePersonalUser', [PersonalController::class, 'UpdateUser'])->name('updatePersonalUser');
 Route::get('/personal/create', [PersonalController::class, 'create'])->name('createPersonal');
 Route::post('/personal/store', [PersonalController::class, 'store'])->name('storePersonal');
-Route::get('/personal/{personal}/edit', [PersonalController::class, 'edit'])->name('editPersonal');
 Route::post('/personal/{personal}/update', [PersonalController::class, 'update'])->name('updatePersonal');
-Route::get('/perfilPersonal', [PersonalController::class, 'show'])->name('perfilPersonal');
+Route::get('/perfilPersonal', [PersonalController::class, 'show'])->middleware(['auth','rolpersonal'])->name('perfilPersonal');
 

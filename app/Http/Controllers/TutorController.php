@@ -81,6 +81,7 @@ class TutorController extends Controller
     public function show(Tutor $tutor)
     {
         return view('perfilTutor',$tutor);
+        
     }
 
     /**
@@ -88,49 +89,35 @@ class TutorController extends Controller
      */
     public function edit(Tutor $tutor, Persona $persona, User $usuario)
     {
-        $persona = Persona::find($tutor->persona_id);
-        $usuario = User::find($persona->user_id);
-        return view('editTutor', compact('tutor','persona','usuario'));
+        //Busca el id de la persona que está logueada
+        $user = Auth::user();
+        $persona = Persona::where('user_id', $user->id)->first();
+        $tutor = Tutor::where('persona_id', $persona->id)->first();
+        $comunas = Comuna::all();
+        return view('editTutor', compact('tutor','persona','user','comunas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tutor $tutor, Persona $persona, User $usuario)
+    public function update(Request $request)
     {
+        $user = Auth::user();
+        $persona = Persona::where('user_id', $user->id)->first();
+        $tutor = Tutor::where('persona_id', $persona->id)->first();
         //Validación de los campos
-        $request->validate([
-            'rut_Persona'=>'required',
-            'dv_Persona'=>'required',
-            'password_Usuario'=>'required',
-            'nombre_Persona'=>'required',
-            'apellido_Persona'=>'required',
-            'correo_Persona'=>'required',
-            'fechaNac_Persona'=>'required',
-            'telefono_Persona'=>'required',
-            'comuna_id'=>'required',
-            'fotocopiacarnet_Tutor'=>'required',
-            'registrosocial_Tutor'=>'required',
-            'estado_Persona'=>'required',
-            'estado_Usuario'=>'required',
-            'estado_Tutor'=>'required'
-        ]);
-            $persona->update($request->rut_Persona);
-            $persona->update($request->dv_Persona);
-            $usuario->update($request->password_Usuario);
-            $persona->update($request->nombre_Persona);
-            $persona->update($request->apellido_Persona);
-            $persona->update($request->correo_Persona);
-            $persona->update($request->fechaNac_Persona);
-            $persona->update($request->telefono_Persona);
-            $tutor->update($request->comuna_id);
-            $tutor->update($request->fotocopiacarnet_Tutor);
-            $tutor->update($request->registrosocial_Tutor);
-            $persona->update($request->estado_Persona);
-            $usuario->update($request->estado_Usuario);
-            $tutor->update($request->estado_Tutor);
+        
 
-            return redirect('usuarios')->with('success','Usuario actualizado con éxito en el sistema');    }
+        //Actualizar los datos
+        $persona->update($request->all());
+        $user->update([
+            'password_Usuario' => Hash::make($request->password_Usuario)
+        ]);
+        $tutor->update($request->all());
+
+            return redirect(route('perfilTutor'))->with('success','Usuario actualizado con éxito en el sistema');   
+        
+    }
 
     /**
      * Remove the specified resource from storage.

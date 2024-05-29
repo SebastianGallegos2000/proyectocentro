@@ -9,11 +9,6 @@
             Datos de {{ auth()->user()->persona->nombre_Persona}}
         </h4>
         <div class="row">
-            <div class="col-sm-8">
-                <div>
-                    <a href="{{route('editPersonalView')}}" class="btn btn-info">Editar datos</a>
-                </div>
-            </div>
                 @if(Session::get('success'))
                 <div class="alert alert-success mt-2">
                     <strong>{{Session::get('success')}}</strong>
@@ -61,7 +56,15 @@
                 @else
                     <!-- Maneja el caso en que el personal no existe -->
                     No disponible
-                @endif</label>
+                @endif
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm" >
+                <div>
+                    <a href="/personal/{{auth()->user()->id}}/edit" class="btn btn-info" id="btn-editardato">Editar datos</a>
+                </div>
             </div>
         </div>
 

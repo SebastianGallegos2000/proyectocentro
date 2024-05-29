@@ -106,68 +106,86 @@ class PersonalController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Personal $personal)
+    public function edit(Personal $personal, Persona $persona, User $usuario)
     {
-        return view('editPersonal',['personal'=> $personal]);
-    }
-
-    public function editUserView(Personal $personal, Persona $persona, User $usuario)
-    {
-        $persona = Persona::find(Auth::user()->persona->id);
-        $usuario = User::find(Auth::id());
-        $personal = Personal::find(Auth::user()->persona->personal->id);
+        //Busca el id de la persona que está logueada
+        $user = Auth::user();
+        $persona = Persona::where('user_id', $user->id)->first();
+        $personal = Personal::where('persona_id', $persona->id)->first();
         $especialidades = Especialidad::all();
-        return view('editPersonalView', compact('especialidades'));
+
+        return view('editPersonal', compact('user','persona','personal','especialidades'));
     }
 
-    public function UpdateUser(Request $request)
+    public function update(Request $request, Personal $personal)
     {
-        //Validar los datos
-        $request->validate([
-            'rut_Persona' => 'required|integer',
-            'dv_Persona' => 'required|string|max:1',
-            'nombre_Persona' => 'required|string|max:50',
-            'apellido_Persona' => 'required|string|max:50',
-            'correo_Persona' => 'required|email|max:50',
-            'fechaNac_Persona' => 'required|date',
-            'telefono_Persona' => 'required|string|max:12',
-            'estado_Persona' => 'required|integer',
-            'password_Usuario' => 'required|string|max:50',
-            'estado_Usuario' => 'required|integer',
-            'especialidad_id' => 'required|integer',
-            'estado_Personal' => 'required|integer'
+        $user = Auth::user();
+        $persona = Persona::where('user_id', $user->id)->first();
+        $personal = Personal::where('persona_id', $persona->id)->first();
+        //Validación de los campos
+        
+
+        //Actualizar los datos
+        $persona->update($request->all());
+        $user->update([
+            'password_Usuario' => Hash::make($request->password_Usuario)
         ]);
+        $personal->update($request->all());
 
-        $personal = Personal::find(Auth::user()->persona->personal->id);
-        $persona = Persona::find(Auth::user()->persona->id);
-        $usuario = User::find(Auth::id());
-
-        $persona->update($request->rut_Persona);
-        $persona->update($request->dv_Persona);
-        $usuario->update($request->password_Usuario);
-        $persona->update($request->nombre_Persona);
-        $persona->update($request->apellido_Persona);
-        $persona->update($request->correo_Persona);
-        $persona->update($request->fechaNac_Persona);
-        $persona->update($request->telefono_Persona);
-        $personal->update($request->especialidad_id);
-        $persona->update($request->estado_Persona);
-        $usuario->update($request->estado_Usuario);
-        $personal->update($request->estado_Personal);
-
-        return redirect()->route('perfilPersonal')->with('success','Has actualizado tu perfil correctamente');
-
-
-
+            return redirect(route('perfilPersonal'))->with('success','Usuario actualizado con éxito en el sistema');     
     }
+
+    //public function editUserView(Personal $personal, Persona $persona, User $usuario)
+    //{
+    //    $persona = Persona::find(Auth::user()->persona->id);
+    //    $usuario = User::find(Auth::id());
+    //    $personal = Personal::find(Auth::user()->persona->personal->id);
+    //    $especialidades = Especialidad::all();
+    //    return view('editPersonalView', compact('especialidades'));
+    //}
+
+    //public function UpdateUser(Request $request)
+    //{
+    //    //Validar los datos
+    //    $request->validate([
+    //        'rut_Persona' => 'required|integer',
+    //        'dv_Persona' => 'required|string|max:1',
+    //        'nombre_Persona' => 'required|string|max:50',
+    //        'apellido_Persona' => 'required|string|max:50',
+    //        'correo_Persona' => 'required|email|max:50',
+    //        'fechaNac_Persona' => 'required|date',
+    //        'telefono_Persona' => 'required|string|max:12',
+    //        'estado_Persona' => 'required|integer',
+    //        'password_Usuario' => 'required|string|max:50',
+    //        'estado_Usuario' => 'required|integer',
+    //        'especialidad_id' => 'required|integer',
+    //        'estado_Personal' => 'required|integer'
+    //    ]);
+//
+    //    $personal = Personal::find(Auth::user()->persona->personal->id);
+    //    $persona = Persona::find(Auth::user()->persona->id);
+    //    $usuario = User::find(Auth::id());
+//
+    //    $persona->update($request->rut_Persona);
+    //    $persona->update($request->dv_Persona);
+    //    $usuario->update($request->password_Usuario);
+    //    $persona->update($request->nombre_Persona);
+    //    $persona->update($request->apellido_Persona);
+    //    $persona->update($request->correo_Persona);
+    //    $persona->update($request->fechaNac_Persona);
+    //    $persona->update($request->telefono_Persona);
+    //    $personal->update($request->especialidad_id);
+    //    $persona->update($request->estado_Persona);
+    //    $usuario->update($request->estado_Usuario);
+    //    $personal->update($request->estado_Personal);
+//
+    //    return redirect()->route('perfilPersonal')->with('success','Has actualizado tu perfil correctamente');
+    //}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Personal $personal)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.

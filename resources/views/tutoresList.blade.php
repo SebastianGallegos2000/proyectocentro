@@ -1,24 +1,17 @@
 
-
 @extends('layouts.layoutpersonal')
 @section('title','Insumos')
 @section('content')
 
-</div>
 <div class="container" id="container-user">
     <div class="row" id="container-text">
         <div class="col-sm-3">
             <h4>
-                Insumos
+                Tutores
             </h4>
         </div>
 
             <div class="row">
-                <div class="col-sm-8">
-                    <div>
-                        <a href="/insumo/create" class="btn btn-info">Agregar Insumo</a>
-                    </div>
-                </div>
                     @if(Session::get('success'))
                     <div class="alert alert-success mt-2">
                         <strong>{{Session::get('success')}}</strong>
@@ -27,32 +20,33 @@
             </div>
         
     <div class="container p-5 my-5 border">
-        <table id="table-insumos" class="display responsive nowrap" width="100%">
+        <table id="table-tutores" class="display responsive nowrap" width="100%">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>Rut</th>
                 <th>Nombre</th>
-                <th>Cantidad Disponible</th>
-                <th>Costo</th>
-                <th>Estado</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>F. de Nacimiento</th>
+                <th>Teléfono</th>
+                <th>Fotocopia de carnet</th>
+                <th>Registro social</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($insumos as $insumo)
-            <tr>
-
-                <td class="fw-bold">{{$insumo->id}}</td>
-                <td>{{$insumo->nombre_Insumo}}</td>
-                <td>{{$insumo->cantidad_Insumo}}</td>
-                <td>{{$insumo->costo_Insumo}}</td>
-                <td>{{$insumo->estado_Insumo }}</td>
-                <td>
-                    <!--<a href="" class="btn btn-danger">Agregar</a>-->
-                    <a href="insumo/{{$insumo->id}}/edit" class="btn btn-dark">Editar</a>
-                    <!--<form action="" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>-->
+            @foreach ($tutores as $tutor)
+                <tr>
+                    <td class="fw-bold">{{$tutor->persona->rut_Persona}}</td>
+                    <td>{{$tutor->persona->nombre_Persona}}</td>
+                    <td>{{$tutor->persona->apellido_Persona}}</td>
+                    <td>{{$tutor->persona->correo_Persona}}</td>
+                    <td>{{ \Carbon\Carbon::parse($tutor->persona->fechaNac_Persona)->format('d-m-Y') }}</td>
+                    <td>{{$tutor->persona->telefono_Persona}}</td>
+                    <td><a href="{{ asset('storage/fotocopiacarnet/' . $tutor->persona->apellido_Persona .'_Fotocopia_Carnet.pdf') }}">Ver Fotocopia Carnet</a></td>
+                    <td><a href="{{ asset('storage/registrosocial/' . $tutor->persona->apellido_Persona .'_Registro_Social.pdf') }}">Ver Registro Social</a></td>
+                    <td class="d-flex flex-wrap justify-content-start">
+                    <a href="" class="btn btn-dark mr-2 mb-2" id="boton-accion">MASCOTAS</a>
                 </td>
             </tr>
             @endforeach
@@ -63,7 +57,7 @@
         <script>
             $(document).ready( function () { //cambia el idioma a español
                 
-                $('#table-insumos').DataTable({
+                $('#table-tutores').DataTable({
                     language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
                 }

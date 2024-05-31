@@ -46,7 +46,7 @@ class MascotasController extends Controller
         $mascota = new Mascotas();
         $mascota->id = Mascotas::max('id')+1;
         $mascota->tutor_id = auth()->id();
-        $mascota->nombre_Mascota = $request->nombre_Mascota;
+        $mascota->nombre_Mascota = ucfirst($request->nombre_Mascota);
         $mascota->razamascota_id = $request->razamascota_id;
         $mascota->nroChip_Mascota = $request->nroChip_Mascota;
         $mascota->peso_Mascota = $request->peso_Mascota;
@@ -65,6 +65,15 @@ class MascotasController extends Controller
     public function show(Mascotas $mascotas)
     {
         //
+    }
+
+    public function list()
+    {
+        //Obtener todas las mascotas
+        $mascotas = Mascotas::all();
+        $razamascotas = RazaMascota::all();
+
+        return view('mascotaList', compact('mascotas','razamascotas'));
     }
 
     /**

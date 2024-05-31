@@ -1,24 +1,17 @@
 
-
 @extends('layouts.layoutpersonal')
-@section('title','Insumos')
+@section('title','Mascotas')
 @section('content')
 
-</div>
 <div class="container" id="container-user">
     <div class="row" id="container-text">
         <div class="col-sm-3">
             <h4>
-                Insumos
+                Mascotas
             </h4>
         </div>
 
             <div class="row">
-                <div class="col-sm-8">
-                    <div>
-                        <a href="/insumo/create" class="btn btn-info">Agregar Insumo</a>
-                    </div>
-                </div>
                     @if(Session::get('success'))
                     <div class="alert alert-success mt-2">
                         <strong>{{Session::get('success')}}</strong>
@@ -27,32 +20,35 @@
             </div>
         
     <div class="container p-5 my-5 border">
-        <table id="table-insumos" class="display responsive nowrap" width="100%">
+        <table id="table-mascotas" class="display responsive nowrap" width="100%">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>Nro de Chip</th>
                 <th>Nombre</th>
-                <th>Cantidad Disponible</th>
-                <th>Costo</th>
-                <th>Estado</th>
+                <th>Especie</th>
+                <th>Raza</th>
+                <th>Peso (Kg)</th>
+                <th>Edad (Semanas)</th>
+                <th>Sexo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($insumos as $insumo)
-            <tr>
+            @foreach ($mascotas as $mascota)
+                <tr>
 
-                <td class="fw-bold">{{$insumo->id}}</td>
-                <td>{{$insumo->nombre_Insumo}}</td>
-                <td>{{$insumo->cantidad_Insumo}}</td>
-                <td>{{$insumo->costo_Insumo}}</td>
-                <td>{{$insumo->estado_Insumo }}</td>
-                <td>
-                    <!--<a href="" class="btn btn-danger">Agregar</a>-->
-                    <a href="insumo/{{$insumo->id}}/edit" class="btn btn-dark">Editar</a>
-                    <!--<form action="" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>-->
+                <td class="fw-bold">{{$mascota->nroChip_Mascota}}</td>
+                <td>{{$mascota->nombre_Mascota}}</td>
+                <td>{{$mascota->especie_Mascota}}</td>
+                <td>{{$mascota->razamascota ? $mascota->razamascota->nombre_Razamascota : 'N/A'}}</td>                
+                <td>{{$mascota->peso_Mascota}}</td>
+                <td>{{$mascota->edad_Mascota}}</td>
+                <td>{{$mascota->sexo_Mascota}}</td>
+
+                <td class="d-flex flex-wrap justify-content-start">
+                    <a href="" class="btn btn-dark mr-2 mb-2" id="boton-accion">ATENDER</a>
+                    <a href="" class="btn btn-danger mr-2 mb-2" id="boton-accion">PDF</a>
+                    <a href="" class="btn btn-warning mr-2 mb-2" id="boton-accion">👁</a>
                 </td>
             </tr>
             @endforeach
@@ -63,7 +59,7 @@
         <script>
             $(document).ready( function () { //cambia el idioma a español
                 
-                $('#table-insumos').DataTable({
+                $('#table-mascotas').DataTable({
                     language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
                 }

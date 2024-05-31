@@ -31,7 +31,7 @@
                     <a class="nav-link" href="/rolesIndex">Roles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/insumoIndex">Insumos</a>
+                    <a class="nav-link" href="{{route('insumoIndexAdmin')}}">Insumos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/usuarios">Usuarios</a>

@@ -31,12 +31,15 @@ class RolController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_Rol' =>'required'
-
+            'nombre_Rol' =>'required',
+            'estado_Rol' =>'required'
         ]);
 
-        Rol::create($request->all());
-        //dd($request->all());
+        $rol = new Rol();
+        $rol->nombre_Rol = ucfirst($request->nombre_Rol);
+        $rol->estado_Rol = $request->estado_Rol;
+        $rol->save();
+
         return redirect()->route('rolesIndex')->with('succes','Rol agregado con éxito al sistema');  
     }
 

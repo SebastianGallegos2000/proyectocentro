@@ -30,11 +30,16 @@ class RazaMascotaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_Razamascota' =>'required'
+            'nombre_Razamascota' =>'required',
+            'estado_Razamascota' =>'required'
         ]);
 
-        RazaMascota::create($request->all());
-        return redirect()->route('razamascotaIndex')->with('succes','La raza de la mascota fue agregado con éxito al sistema');
+        $razamascotum = new RazaMascota();
+        $razamascotum->nombre_Razamascota = ucfirst($request->nombre_Razamascota);
+        $razamascotum->estado_Razamascota = $request->estado_Razamascota;
+        $razamascotum->save();
+
+        return redirect()->route('razamascotaIndex')->with('success','La raza de la mascota fue agregado con éxito al sistema');
     }
 
     /**
@@ -61,7 +66,7 @@ class RazaMascotaController extends Controller
         $request->validate([
             'nombre_Razamascota' =>'required'
         ]);
-
+        
         $razamascotum->update($request ->all());
         return redirect()->route('razamascotaIndex')->with('succes','Se ha actualizado con éxito la raza de la mascota');
     }

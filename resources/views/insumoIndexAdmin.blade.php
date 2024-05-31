@@ -1,6 +1,6 @@
 
 
-@extends('layouts.layoutpersonal')
+@extends('layouts.layoutadmin')
 @section('title','Insumos')
 @section('content')
 
@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-sm-8">
                     <div>
-                        <a href="/insumo/create" class="btn btn-info">Agregar Insumo</a>
+                        <a href="{{route('createInsumoAdmin')}}" class="btn btn-info">Agregar Insumo</a>
                     </div>
                 </div>
                     @if(Session::get('success'))

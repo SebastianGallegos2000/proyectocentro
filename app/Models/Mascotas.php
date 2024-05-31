@@ -11,6 +11,11 @@ class Mascotas extends Model
 
     //Relacion uno a muchos con tutor
     public function tutores(){
-        return $this->belongsTo('App\Models\Tutores','id_Tutor');
+        return $this->belongsTo('App\Models\Tutores','tutor_id');
+    }
+
+    //Relación uno a muchos con raza mascota
+    public function razamascotas(){
+        return $this->belongsTo('App\Models\RazaMascota');
     }
 }

@@ -25,55 +25,55 @@ class TutorController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    //public function create()
-    //{
-    //    $comunas = Comuna::all();
-    //    return view('createTutor', compact('comunas'));
-    //}
+    public function create()
+    {
+        $comunas = Comuna::all();
+        return view('createTutorAdmin', compact('comunas'));
+    }
 
     /**
      * Store a newly created resource in storage.
      */
-    //public function store(Request $request)
-    //{
-    //    $request->validate([
-    //        'rut_Tutor' => 'required',
-    //        'dv_Tutor' => 'required',
-    //        'nombre_Tutor' => 'required',
-    //        'apellido_Tutor' => 'required',
-    //        'correo_Tutor' => 'required',
-    //        'fechaNac_Tutor' => 'required',
-    //        'telefono_Tutor' => 'required',
-    //        'id_Comuna_Tutor' => 'required',
-    //        'fotocopiacarnet_Tutor' => 'required',
-    //        'registrosocial_Tutor' => 'required',
-    //        'id_Rol_Tutor' => 'required',
-    //        'estado_Tutor' => 'required'
-    //    ]);
-    //
-    //    $tutor = new Tutor();
-    //
-    //    $tutor->rut_Tutor = $request->rut_Tutor;
-    //    $tutor->dv_Tutor = $request->dv_Tutor;
-    //    $tutor->password_Tutor = Hash::make($request->password_Tutor);
-    //    $tutor->nombre_Tutor = $request->nombre_Tutor;
-    //    $tutor->apellido_Tutor = $request->apellido_Tutor;
-    //    $tutor->correo_Tutor = $request->correo_Tutor;
-    //    $tutor->fechaNac_Tutor = $request->fechaNac_Tutor;
-    //    $tutor->telefono_Tutor = $request->telefono_Tutor;
-    //    $tutor->id_Comuna_Tutor = $request->id_Comuna_Tutor;
-    //    $tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $tutor->rut_Tutor.'_'.'Fotocopia_Carnet'.'.pdf');
-    //    $tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $tutor->rut_Tutor .'_'.'Registro_Social'. '.pdf');
-    //    $tutor->id_Rol_Tutor = $request->id_Rol_Tutor;
-    //    $tutor->estado_Tutor = $request->estado_Tutor;
-    //    $tutor->save();
-    //
-    //
-    //    //dd($request);
-    //    Auth::login($tutor);
-    //    return redirect()->route('tutorIndex')->with('success','Has creado tu usuario correctamente');
-    //
-    //}
+    public function store(Request $request)
+    {
+        
+        //Insertar datos en la tabl usuarios.
+        $usuario = new User();
+        $usuario->id= User::all()->max('id') + 1;
+        $usuario->password_Usuario = Hash::make($request->password_Usuario);
+        $usuario->estado_Usuario = $request->estado_Usuario;
+        $usuario->rol_id = $request->rol_id;
+        $usuario->save();
+
+        //Insertar en la tabla personas.
+        $persona = new Persona();
+        $persona->id = Persona::all()->max('id') + 1;
+        $persona->user_id = $usuario->id;
+        $persona->rut_Persona = $request->rut_Persona;
+        $persona->dv_Persona = $request->dv_Persona;
+        $persona->nombre_Persona = ucfirst($request->nombre_Persona);
+        $persona->apellido_Persona = ucfirst($request->apellido_Persona);
+        $persona->correo_Persona = $request->correo_Persona;
+        $persona->fechaNac_Persona = $request->fechaNac_Persona;
+        $persona->telefono_Persona = $request->telefono_Persona;
+        $persona->estado_Persona = $request->estado_Persona;
+        $persona->save();
+
+        //Insertar en la tabla tutores.
+
+
+
+        $tutor = new Tutor();
+    
+        $tutor->persona_id = $persona->id;
+        $tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $persona->apellido_Persona.'_'.'Fotocopia_Carnet'.'.pdf');
+        $tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $persona->apellido_Persona .'_'.'Registro_Social'. '.pdf');
+        $tutor->comuna_id = $request->comuna_id;
+        $tutor->estado_Tutor = $request->estado_Tutor;
+        $tutor->save();
+    
+        return redirect()->route('usuarios')->with('success','Has creado tu usuario correctamente');
+    }
 
     /**
      * Display the specified resource.
@@ -119,6 +119,42 @@ class TutorController extends Controller
         
     }
 
+    //Editar tutores desde la vista administrador
+    public function editAdmin(Request $request)
+    {
+        //Busca los datos de la persona seleccionada.
+        $tutor = Tutor::find($request->id);
+
+        $comunas = Comuna::all();
+        return view('editTutorAdmin', compact('tutor','comunas'));
+    }
+
+    //Actualizar tutores desde la vista administrador
+    public function updateAdmin(Request $request)
+    {
+        $persona = Persona::find($request->id);
+        $user = User::find($persona->user_id);
+        $tutor = Tutor::find($request->id);
+
+
+        //Actualizar los datos
+        $persona->update($request->all());
+        $user->update([
+            'password_Usuario' => Hash::make($request->password_Usuario)
+        ]);
+        $tutor->update($request->all());
+
+            return redirect(route('usuarios'))->with('success','Usuario actualizado con éxito en el sistema');   
+        
+    }
+
+
+    public function list()
+    {
+        //Obtener todos los tutores del sistema.
+        $tutores = User::where('rol_id', '1')->with(['persona.tutor.comuna'])->get();
+        return view('tutoresList', compact('tutores',));
+    }
     /**
      * Remove the specified resource from storage.
      */

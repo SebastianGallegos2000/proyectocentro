@@ -30,12 +30,15 @@ class EspecialidadController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_Especialidad' =>'required'
-
+            'nombre_Especialidad' =>'required',
+            'estado_Especialidad' =>'required'
         ]);
 
-        Especialidad::create($request->all());
-        //dd($request->all());
+        $especialidad = new Especialidad();
+        $especialidad->nombre_Especialidad = ucfirst($request->nombre_Especialidad);
+        $especialidad->estado_Especialidad = $request->estado_Especialidad;
+        $especialidad->save();
+
         return redirect()->route('especialidadIndex')->with('succes','Especialidad agregado con éxito al sistema');    }
 
     /**
@@ -60,8 +63,10 @@ class EspecialidadController extends Controller
     public function update(Request $request, Especialidad $especialidad)
     {
         $request->validate([
-            'nombre_Especialidad'
+            'nombre_Especialidad',
+            'estado_Especialidad'
             ]);
+            
             $especialidad->update($request->all());
             return redirect()->route('especialidadIndex')->with('succes','Especialidad actualizada con éxito en el sistema');
     }

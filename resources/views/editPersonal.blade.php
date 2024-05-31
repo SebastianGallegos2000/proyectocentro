@@ -66,7 +66,7 @@
                 <input type="text" name="telefono_Persona" class="form-control" placeholder="+56912345678" value="{{$persona->telefono_Persona}}" >
             </div>
             <div class="mb-3">
-                <strong>Comuna:</strong>
+                <strong>Especialidad:</strong>
                 <select name="especialidad_id" class="form-select" id="">
                     <option value="">-- Elige Especialidad --</option>
                     @foreach ($especialidades as $especialidad)

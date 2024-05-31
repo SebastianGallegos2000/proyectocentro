@@ -76,18 +76,22 @@ Route::get('no-autorizado',function(){
 |--------------------------------------------------------------------------
 */
 
-Route::get('/usuarios',UsuarioController::class);
+Route::get('/usuarios',UsuarioController::class)->name('usuarios');
 
 
 //Route::get('/registroTutor', [TutorController::class, 'create'])->name('registroTutor');
+Route::get('/tutor/create', [TutorController::class, 'create'])->name('createTutorAdmin');
 Route::post('/tutor/store', [TutorController::class, 'store'])->name('storeTutor');
 Route::get('/tutor/{tutor}/edit', [TutorController::class, 'edit'])->name('editTutor');
 Route::post('/tutor/{tutor}/update', [TutorController::class, 'update'])->name('updateTutor');
 
-//El rol del usuario debe ser 1 para ingresar a la vista de perfilTutor
-Route::get('/perfilTutor', [TutorController::class, 'show'])->middleware(['auth','roltutor'])->name('perfilTutor');
-//Route::get('/perfilTutor', [TutorController::class, 'show'])->middleware('auth')->name('perfilTutor');
+//Editar tutores desde la vista administrador
+Route::get('/tutor/{tutor}/editAdmin', [TutorController::class, 'editAdmin'])->name('editTutorAdmin');
+//Actualizar tutores desde la vista administrador
+Route::post('/tutor/{tutor}/updateAdmin', [TutorController::class, 'updateAdmin'])->name('updateTutorAdmin');
 
+
+Route::get('/perfilTutor', [TutorController::class, 'show'])->middleware(['auth','roltutor'])->name('perfilTutor');
 Route::get('/mascotaIndex', [MascotasController::class, 'index'])->middleware(['auth','roltutor'])->name('mascotaIndex');
 Route::get('/crearMascota', [MascotasController::class, 'create'])->middleware(['auth','roltutor'])->name('createMascota');
 Route::post('/mascota/store', [MascotasController::class, 'store'])->middleware(['auth','roltutor'])->name('storeMascota');
@@ -95,17 +99,29 @@ Route::get('/mascota/{mascota}/edit', [MascotasController::class, 'edit'])->midd
 Route::post('/mascota/{mascota}/update', [MascotasController::class, 'update'])->middleware(['auth','roltutor'])->name('updateMascota');
 
 
-Route::get('/adminIndex', [AdminController::class, 'index'])->name('adminIndex');
-Route::get('/admin/create', [AdminController::class, 'create'])->name('createAdmin');
-Route::post('/admin/store', [AdminController::class, 'store'])->name('storeAdmin');
-Route::get('/admin/{admin}/edit', [AdminController::class, 'edit'])->name('editAdmin');
-Route::post('/admin/{admin}/update', [AdminController::class, 'update'])->name('updateAdmin');
+//RUTAS DE PERSONAL
 
 Route::get('/insumoIndex', [InsumoController::class, 'index'])->middleware(['auth','rolpersonal'])->name('insumoIndex');
 Route::get('/insumo/create', [InsumoController::class, 'create'])->middleware(['auth','rolpersonal'])->name('createInsumo');
 Route::post('/insumo/store', [InsumoController::class, 'store'])->middleware(['auth','rolpersonal'])->name('storeInsumo');
 Route::get('/insumo/{insumo}/edit', [InsumoController::class, 'edit'])->middleware(['auth','rolpersonal'])->name('editInsumo');
 Route::post('/insumo/{insumo}/update', [InsumoController::class, 'update'])->middleware(['auth','rolpersonal'])->name('updateInsumo'); 
+
+Route::get('/mascotaList', [MascotasController::class, 'list'])->middleware(['auth','rolpersonal'])->name('mascotaList');
+
+Route::get('/tutoresList', [TutorController::class, 'list'])->middleware(['auth','rolpersonal'])->name('tutoresList');
+
+//RUTAS DE ADMINISTRADOR
+
+Route::get('/adminIndex', [AdminController::class, 'index'])->name('adminIndex');
+Route::get('/admin/create', [AdminController::class, 'create'])->name('createAdmin');
+Route::post('/admin/store', [AdminController::class, 'store'])->name('storeAdmin');
+Route::get('/admin/{admin}/edit', [AdminController::class, 'edit'])->name('editAdmin');
+Route::post('/admin/{admin}/update', [AdminController::class, 'update'])->name('updateAdmin');
+
+Route::get('/insumoIndexAdmin', [InsumoController::class, 'indexAdmin'])->name('insumoIndexAdmin');
+Route::get('/insumo/createAdmin', [InsumoController::class, 'createAdmin'])->name('createInsumoAdmin');
+Route::post('/insumo/storeAdmin', [InsumoController::class, 'storeAdmin'])->name('storeInsumoAdmin');
 
 
 Route::get('/rolesIndex', [RolController::class, 'index'])->name('rolesIndex');

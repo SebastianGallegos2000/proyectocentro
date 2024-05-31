@@ -24,17 +24,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
   </head>
 
+    <!-- Link para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <body>
     <header>
     <div class="header-container">
       <div class="container-btn">
         <div class="btn-box">
           <a id="a-header" href="{{route('privadaPersonal')}}">Inicio</a>
-          <a id="a-header" href="{{route('perfilPersonal')}}">Perfil</a>
-          <a id="a-header" href="/tutores">Tutores</a>
-          <a id="a-header" href="/mascotas">Mascotas</a>
-          <a id="a-header" href="{{'insumoIndex'}}">Insumos</a>
+          <a id="a-header" href="{{route('tutoresList')}}">Tutores</a>
+          <a id="a-header" href="{{route('mascotaList')}}">Mascotas</a>
+          <a id="a-header" href="{{route('insumoIndex')}}">Insumos</a>
           <a id="a-header" href="/citas">Citas</a>
+          <a id="a-header" href="{{route('perfilPersonal')}}">Perfil</a>
+
           <a id="a-header" href="{{route('logout')}}">Cerrar sesión</a>
         </div>
       </div>

@@ -22,6 +22,11 @@ class Tutor extends Model
         return $this->belongsTo('\App\Models\Persona');
     }
 
+    //Relacion uno a muchos (inversa) con mascotas
+    public function mascotas(){
+        return $this->belongsTo('App\Models\Mascotas');
+    }
+
     protected $table = 'tutores';
     protected $dates = ['fechaNac_Tutor'];
     protected $fillable = [
@@ -31,6 +36,8 @@ class Tutor extends Model
         'registrosocial_Tutor'=>'required',//mimes:pdf
         'estado_Tutor'
     ];
+
+
 
 
 

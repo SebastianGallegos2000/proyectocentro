@@ -1,4 +1,4 @@
-@extends('layouts.layouttutores')
+@extends('layouts.layoutadmin')
 
 @section('content')
 <div class="container p-4">
@@ -7,7 +7,7 @@
             <h2>Editar Tutor</h2>
         </div>
         <div>
-            <a href="{{route('perfilTutor')}}" class="btn btn-primary">Volver</a>
+            <a href="/usuarios" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -23,7 +23,7 @@
 @endif
 
 
-<form action="{{route('updateTutor',$tutor,$persona,$user,$comunas )}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('updateTutor',$tutor,$comunas )}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="container p-5">
         <div class="mb-3 row">

@@ -14,4 +14,9 @@ class RazaMascota extends Model
         'nombre_Razamascota',
         'estado_Razamascota'
     ];
+
+    //Relación uno a muchos con mascotas
+    public function mascotas(){
+        return $this->hasMany('App\Models\Mascotas');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Personal;
 use App\Models\User;
 use App\Models\Persona;
+use App\Models\Insumo;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Especialidad;
@@ -24,7 +25,9 @@ class PersonalController extends Controller
 
     public function indexPersonal(){
         $personal = Personal::all();
-        return view('personalIndex', ['personals'=>$personal]);
+        $insumos = Insumo::all();
+
+        return view('personalIndex', ['personals'=>$personal,'insumos'=>$insumos]);
     }
 
     /**
@@ -72,8 +75,8 @@ class PersonalController extends Controller
         $persona->user_id = $usuario->id;
         $persona->rut_Persona = $request->rut_Persona;
         $persona->dv_Persona = $request->dv_Persona;
-        $persona->nombre_Persona = $request->nombre_Persona;
-        $persona->apellido_Persona = $request->apellido_Persona;
+        $persona->nombre_Persona = ucfirst($request->nombre_Persona);
+        $persona->apellido_Persona = ucfirst($request->apellido_Persona);
         $persona->correo_Persona = $request->correo_Persona;
         $persona->fechaNac_Persona = $request->fechaNac_Persona;
         $persona->telefono_Persona = $request->telefono_Persona;

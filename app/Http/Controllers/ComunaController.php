@@ -30,13 +30,16 @@ class ComunaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_Comuna' =>'required'
-
+            'nombre_Comuna' =>'required',
+            'estado_Comuna' =>'required'
         ]);
 
-        Comuna::create($request->all());
-        //dd($request->all());
-        return redirect()->route('comunaIndex')->with('succes','Comuna agregado con éxito al sistema');        
+        $comuna = new Comuna();
+        $comuna->nombre_Comuna = ucfirst($request->nombre_Comuna);
+        $comuna->estado_Comuna = $request->estado_Comuna;
+        $comuna->save();
+
+        return redirect(route('comunaIndex'))->with('success','Comuna agregado con éxito al sistema');        
     }
 
     /**
@@ -61,8 +64,10 @@ class ComunaController extends Controller
     public function update(Request $request, Comuna $comuna)
     {
         $request->validate([
-        'nombre_Comuna'
+        'nombre_Comuna',
+        'estado_Comuna'
         ]);
+
         $comuna->update($request->all());
         return redirect()->route('comunaIndex')->with('succes','Comuna actualizada con éxito en el sistema');
     }

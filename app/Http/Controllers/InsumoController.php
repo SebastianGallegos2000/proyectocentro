@@ -18,12 +18,23 @@ class InsumoController extends Controller
         return view('insumoIndex', ['insumos'=>$insumos]);
     }
 
+    public function indexAdmin():View
+    {
+        $insumos= Insumo::all();
+        return view('insumoIndexAdmin', ['insumos'=>$insumos]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create():View
     {
         return view('createInsumo');
+    }
+
+    public function createAdmin():View
+    {
+        return view('createInsumoAdmin');
     }
 
     /**
@@ -38,9 +49,31 @@ class InsumoController extends Controller
 
         ]);
 
-        Insumo::create($request->all());
-        //dd($request->all());
-        return redirect()->route('insumoIndex')->with('succes','Insumo agregado con éxito al sistema');    
+        $insumo = new Insumo();
+        $insumo->nombre_Insumo = ucfirst($request->nombre_Insumo);
+        $insumo->cantidad_Insumo = $request->cantidad_Insumo;
+        $insumo->costo_Insumo = $request->costo_Insumo;
+        $insumo->save();
+
+        return redirect(route('insumoIndex'))->with('success','Insumo agregado con éxito al sistema');    
+    }
+
+    public function storeAdmin(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'nombre_Insumo' =>'required',
+            'cantidad_Insumo' => 'required',
+            'costo_Insumo' => 'required'
+
+        ]);
+
+        $insumo = new Insumo();
+        $insumo->nombre_Insumo = ucfirst($request->nombre_Insumo);
+        $insumo->cantidad_Insumo = $request->cantidad_Insumo;
+        $insumo->costo_Insumo = $request->costo_Insumo;
+        $insumo->save();
+        
+        return redirect(route('insumoIndexAdmin'))->with('success','Insumo agregado con éxito al sistema');    
     }
 
     /**

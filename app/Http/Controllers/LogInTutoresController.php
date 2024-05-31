@@ -55,8 +55,8 @@ class LogInTutoresController extends Controller
     $persona->user_id = $usuario->id;
     $persona->rut_Persona = $request->rut_Persona;
     $persona->dv_Persona = $request->dv_Persona;
-    $persona->nombre_Persona = $request->nombre_Persona;
-    $persona->apellido_Persona = $request->apellido_Persona;
+    $persona->nombre_Persona = ucfirst($request->nombre_Persona);
+    $persona->apellido_Persona = ucfirst($request->apellido_Persona);
     $persona->correo_Persona = $request->correo_Persona;
     $persona->fechaNac_Persona = $request->fechaNac_Persona;
     $persona->telefono_Persona = $request->telefono_Persona;
@@ -69,8 +69,8 @@ class LogInTutoresController extends Controller
     // Insertar en la tabla tutores
     $tutor = new Tutor();
     $tutor->persona_id = $persona->id;
-    $tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $tutor->rut_Tutor.'_'.'Fotocopia_Carnet'.'.pdf');
-    $tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $tutor->rut_Tutor .'_'.'Registro_Social'. '.pdf');
+    $tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $persona->apellido_Persona.'_'.'Fotocopia_Carnet'.'.pdf');
+    $tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $persona->apellido_Persona .'_'.'Registro_Social'. '.pdf');
     $tutor->comuna_id = $request->comuna_id;
     $tutor->estado_Tutor = $request->estado_Tutor;
     $tutor->save();

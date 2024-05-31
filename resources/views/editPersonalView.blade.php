@@ -66,7 +66,7 @@
                 <input type="text" name="telefono_Personal" class="form-control" placeholder="+56912345678" value="{{$personal->telefono_Personal}}" >
             </div>
             <div class="mb-3">
-                <strong>Comuna:</strong>
+                <strong>Especialidad:</strong>
                 <select name="id_Especialidad_Personal" class="form-select" id="">
                     <option value="">-- Elige comuna --</option>
                     <option value="1" {{ $personal->id_Especialidad_Personal == 1 ? 'selected' : '' }}>Veterinario</option>

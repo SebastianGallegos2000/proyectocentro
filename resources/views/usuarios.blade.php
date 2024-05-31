@@ -141,15 +141,15 @@
                 No disponible
             @endif
         </td>
-        <td><a href="{{ asset('storage/fotocopiacarnet/' . $tutor->rut_Tutor .'_Fotocopia_Carnet.pdf') }}">Ver Fotocopia Carnet</a></td>
-        <td><a href="{{ asset('storage/registrosocial/' . $tutor->rut_Tutor .'_Registro_Social.pdf') }}">Ver Registro Social</a></td>
+        <td><a href="{{ asset('storage/fotocopiacarnet/' . $tutor->persona->apellido_Persona .'_Fotocopia_Carnet.pdf') }}">Ver Fotocopia Carnet</a></td>
+        <td><a href="{{ asset('storage/registrosocial/' . $tutor->persona->apellido_Persona .'_Registro_Social.pdf') }}">Ver Registro Social</a></td>
         <td>{{$tutor->persona->estado_Persona }}</td>
 
 
 
         <td>
             <!--<a href="" class="btn btn-danger">Agregar</a>-->
-            <a href="tutor/{{$tutor->id}}/edit" class="btn btn-dark">Editar</a>
+            <a href="tutor/{{$tutor->persona->id}}/editAdmin" class="btn btn-dark">Editar</a>
             <!--<form action="" method="post" class="d-inline">
                 <button type="submit" class="btn btn-danger">Eliminar</button>
             </form>-->

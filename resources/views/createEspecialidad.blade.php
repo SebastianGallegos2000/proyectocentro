@@ -1,13 +1,14 @@
 @extends('layouts.layoutadmin')
 
 @section('content')
-<div class="container p-4">
-    <div class="col-12">
+<div class="container" id="container-user">
+    <div class="row" id="container-text">
+        <div class="col-sm-3">
         <div>
-            <h2>Agregar Especialidad</h2>
+            <h4>Agregar Especialidad</h4>
         </div>
         <div>
-            <a href="/especialidad" class="btn btn-primary">Volver</a>
+            <a href="{{route('especialidadIndex')}}" class="btn btn-primary">Volver</a>
         </div>
     </div>
 

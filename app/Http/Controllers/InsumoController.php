@@ -53,7 +53,9 @@ class InsumoController extends Controller
         $insumo->nombre_Insumo = ucfirst($request->nombre_Insumo);
         $insumo->cantidad_Insumo = $request->cantidad_Insumo;
         $insumo->costo_Insumo = $request->costo_Insumo;
+        $insumo->estado_Insumo = $request->estado_Insumo;
         $insumo->save();
+
 
         return redirect(route('insumoIndex'))->with('success','Insumo agregado con éxito al sistema');    
     }
@@ -71,6 +73,7 @@ class InsumoController extends Controller
         $insumo->nombre_Insumo = ucfirst($request->nombre_Insumo);
         $insumo->cantidad_Insumo = $request->cantidad_Insumo;
         $insumo->costo_Insumo = $request->costo_Insumo;
+        $insumo->estado_Insumo = $request->estado_Insumo;
         $insumo->save();
         
         return redirect(route('insumoIndexAdmin'))->with('success','Insumo agregado con éxito al sistema');    
@@ -89,8 +92,12 @@ class InsumoController extends Controller
      */
     public function edit(Insumo $insumo): View
     {
-        //dd($insumo);
         return view('editInsumo',['insumo'=> $insumo]);
+    }
+
+    public function editInsumoAdmin(Insumo $insumo): View
+    {
+        return view('editInsumoAdmin',['insumo'=> $insumo]);
     }
 
     /**
@@ -108,11 +115,46 @@ class InsumoController extends Controller
         return redirect()->route('insumoIndex')->with('success','Insumo actualizado con éxito al sistema');    
     }
 
+    public function updateInsumoAdmin(Request $request, Insumo $insumo):RedirectResponse
+    {
+        $request->validate([
+            'nombre_Insumo' =>'required',
+            'cantidad_Insumo' => 'required',
+            'costo_Insumo' => 'required'
+
+        ]);
+        $insumo->update($request->all());
+        return redirect()->route('insumoIndexAdmin')->with('success','Insumo actualizado con éxito al sistema');    
+    }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Insumo $insumo)
+    public function destroy($id)
     {
-        //
+        $insumo = Insumo::find($id);
+    
+        if ($insumo == null) {
+            return redirect(route('insumoIndex'))->with('error', 'Insumo no encontrado.');
+        }
+    
+        $insumo->estado_Insumo = 0;
+        $insumo->save();
+    
+        return redirect(route('insumoIndex'))->with('success', 'Insumo eliminado correctamente.');
+    }
+
+    public function destroyAdmin($id)
+    {
+        $insumo = Insumo::find($id);
+    
+        if ($insumo == null) {
+            return redirect(route('insumoIndexAdmin'))->with('error', 'Insumo no encontrado.');
+        }
+    
+        $insumo->estado_Insumo = 0;
+        $insumo->save();
+    
+        return redirect(route('insumoIndexAdmin'))->with('success', 'Insumo eliminado correctamente.');
     }
 }

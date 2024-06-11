@@ -12,16 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('atenciones', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_SolicitudCita_Atencion');
-            $table->unsignedBigInteger('id_Personal_Atencion');
+            $table->id();
+            $table->unsignedBigInteger('solicitudcita_id');
+            $table->unsignedBigInteger('personal_id');
             $table->string('observacion_Atencion');
             $table->integer('peso_Atencion');
             $table->boolean('estado_Atencion');
             $table->timestamps();
 
 
-            $table->foreign('id_SolicitudCita_Atencion')->references('id')->on('solicitudcitas');
-            $table->foreign('id_Personal_Atencion')->references('id')->on('personales');
+            $table->foreign('solicitudcita_id')->references('id')->on('solicitudcitas');
+            $table->foreign('personal_id')->references('id')->on('personales');
 
         });
     }

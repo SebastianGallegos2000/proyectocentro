@@ -69,7 +69,7 @@ class ComunaController extends Controller
         ]);
 
         $comuna->update($request->all());
-        return redirect()->route('comunaIndex')->with('succes','Comuna actualizada con éxito en el sistema');
+        return redirect()->route('comunaIndex')->with('success','Comuna actualizada con éxito en el sistema');
     }
 
     /**

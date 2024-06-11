@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tipoatenciones', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion_TipoAtencion');
+            $table->string('nombre_TipoAtencion');
             $table->integer('costo_TipoAtencion');
             $table->integer('estado_TipoAtencion');
             $table->timestamps();

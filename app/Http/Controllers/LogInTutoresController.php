@@ -69,8 +69,12 @@ class LogInTutoresController extends Controller
     // Insertar en la tabla tutores
     $tutor = new Tutor();
     $tutor->persona_id = $persona->id;
-    $tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $persona->apellido_Persona.'_'.'Fotocopia_Carnet'.'.pdf');
-    $tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $persona->apellido_Persona .'_'.'Registro_Social'. '.pdf');
+    //Captura el rut de la persona y le agrega el nombre del archivo
+    $tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $request->rut_Persona.'_'.'Fotocopia_Carnet'.'.pdf');
+    $tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $request->rut_Persona .'_'.'Registro_Social'. '.pdf');
+    
+    //$tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $persona->rut_Persona.'_'.'Fotocopia_Carnet'.'.pdf');
+    //$tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $persona->rut_Persona .'_'.'Registro_Social'. '.pdf');
     $tutor->comuna_id = $request->comuna_id;
     $tutor->estado_Tutor = $request->estado_Tutor;
     $tutor->save();

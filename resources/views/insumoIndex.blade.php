@@ -41,18 +41,21 @@
         <tbody>
             @foreach ($insumos as $insumo)
             <tr>
-
                 <td class="fw-bold">{{$insumo->id}}</td>
                 <td>{{$insumo->nombre_Insumo}}</td>
                 <td>{{$insumo->cantidad_Insumo}}</td>
                 <td>{{$insumo->costo_Insumo}}</td>
                 <td>{{$insumo->estado_Insumo }}</td>
                 <td>
-                    <!--<a href="" class="btn btn-danger">Agregar</a>-->
-                    <a href="insumo/{{$insumo->id}}/edit" class="btn btn-dark">Editar</a>
-                    <!--<form action="" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>-->
+                    @if ($insumo->estado_Insumo != 0)
+                    <a href="insumo/{{$insumo->id}}/edit" class="btn btn-dark" >Editar</a>
+                    <!--<a href="insumo/{{$insumo->id}}/edit" class="btn btn-warning" >Agregar</a>-->
+                    <form action="{{ route('destroyInsumo', $insumo->id) }}"  method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar este insumo?')">Eliminar</button>
+                    </form>                    
+                    @endif
                 </td>
             </tr>
             @endforeach

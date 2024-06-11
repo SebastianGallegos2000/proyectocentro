@@ -25,10 +25,11 @@ class Personal extends Model
         //relación muchos a muchos (inversa) Especialidades
         public function especialidad()
         {
-            return $this->belongsToMany('\App\Models\Especialidad','especialidad_id');
+            return $this->belongsTo('\App\Models\Especialidad');
         }
 
     protected $table = 'personales';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'persona_id',
         'especialidad_id',

@@ -38,8 +38,8 @@
             </div>
 
             <div class="mb-3">
-                <strong>Crea tu contraseña:</strong>
-                <input type="password" name="password_Usuario" class="form-control" placeholder="*******" value="{{$user->password_Usuario}}" >
+                <strong>Actualiza tu contraseña:</strong>
+                <input type="password" name="password_Usuario" class="form-control" placeholder="*******" value="" >
             </div>
 
             <div class="mb-3">
@@ -54,7 +54,7 @@
 
             <div class="mb-3">
                 <strong>Correo:</strong>
-                <input type="text" name="correo_Persona" class="form-control" placeholder="correo@ejemplo.com" value="{{$persona->correo_Persona}}" >
+                <input type="email" name="correo_Persona" class="form-control" placeholder="correo@ejemplo.com" value="{{$persona->correo_Persona}}" >
             </div>
 
             <div class="mb-3">

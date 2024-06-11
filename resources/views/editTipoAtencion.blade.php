@@ -3,12 +3,12 @@
 @section('content')
 <div class="container" id="container-user">
     <div class="row" id="container-text">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
         <div>
-            <h4>Editar Comuna</h4>
+            <h4>Editar Tipo de Atención</h4>
         </div>
         <div>
-            <a href="/comunaIndex" class="btn btn-primary">Volver</a>
+            <a href="{{route('tipoAtencionIndex')}}" class="btn btn-primary">Volver</a>
         </div>
     </div>
 
@@ -23,21 +23,21 @@
     </div>
 @endif
 
-    <form action="{{ route('updateComuna',$comuna) }}" method="POST">
+    <form action="{{ route('updateTipoAtencion', $tipoAtencion) }}" method="POST">
     @csrf
-        <div class="container p-5">
-            <div class="mb-3 row">
+    <div class="container p-5">
+        <div class="mb-3 row">
 
                 <div class="mb-3">
                     <strong>Nombre:</strong>
-                    <input type="text" name="nombre_Comuna" class="form-control" placeholder="Nombre ejemplo" value="{{$comuna->nombre_Comuna}}" >
+                    <input type="text" name="nombre_TipoAtencion" class="form-control" placeholder="Nombre ejemplo" value="{{$tipoAtencion->nombre_TipoAtencion}}" >
                 </div>
                 <div class="mb-3">
-                    <div class="form-check form-switch">
-                        <input type="hidden" name="estado_Comuna" value="0">
-                        <input class="form-check-input" type="checkbox" name="estado_Comuna" id="flexSwitchCheckChecked" {{ $comuna->estado_Comuna ? 'checked' : '' }} value="1">
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Estado</label>
-                    </div>
+                    <strong>Costo:</strong>
+                    <input type="text" name="costo_TipoAtencion" class="form-control" placeholder="Nombre ejemplo" value="{{$tipoAtencion->costo_TipoAtencion}}" >
+                </div>
+                <div class="mb-3">
+                    <input type="hidden" name="estado_TipoAtencion" value="1" hidden>
                 </div>
                 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">

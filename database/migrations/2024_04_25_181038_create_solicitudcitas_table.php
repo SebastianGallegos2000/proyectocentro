@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('solicitudcitas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_Mascota_SolicitudCita');
-            $table->unsignedBigInteger('id_TipoAtencion_SolicitudCita');
+            $table->unsignedBigInteger('mascota_id');
+            $table->unsignedBigInteger('tipoatencion_id');
             $table->timestamp('fecha_SolicitudCita',precision:0);
             $table->integer('estado_SolicitudCita');
 
-            $table->foreign('id_Mascota_SolicitudCita')->references('id')->on('mascotas');
-            $table->foreign('id_TipoAtencion_SolicitudCita')->references('id')->on('tipoatenciones');
+            $table->foreign('mascota_id')->references('id')->on('mascotas');
+            $table->foreign('tipoatencion_id')->references('id')->on('tipoatenciones');
 
         });
     }

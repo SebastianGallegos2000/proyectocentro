@@ -15,6 +15,7 @@ use App\Http\Controllers\RazaMascotaController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\TipoAtencionController;
 use GuzzleHttp\Middleware;
 
 /*
@@ -43,8 +44,8 @@ Route::post('/validar-registro', [LogInTutoresController::class, 'register'])->n
 Route::post('/inicia-sesion', [LogInTutoresController::class, 'login'])->name('inicia-sesion');
 Route::post('/inicia-sesion-personal', [LogInPersonalesController::class, 'login'])->name('inicia-sesion-personal');
 
-Route::get('/logoutTutores', [LogInTutoresController::class, 'logout'])->name('logout');
-Route::get('/logoutPersonal', [LogInPersonalesController::class, 'logout'])->name('logout');
+Route::get('/logoutTutores', [LogInTutoresController::class, 'logout'])->name('logoutTutor');
+Route::get('/logoutPersonal', [LogInPersonalesController::class, 'logout'])->name('logoutPersonal');
 
 
 /*
@@ -82,13 +83,13 @@ Route::get('/usuarios',UsuarioController::class)->name('usuarios');
 //Route::get('/registroTutor', [TutorController::class, 'create'])->name('registroTutor');
 Route::get('/tutor/create', [TutorController::class, 'create'])->name('createTutorAdmin');
 Route::post('/tutor/store', [TutorController::class, 'store'])->name('storeTutor');
-Route::get('/tutor/{tutor}/edit', [TutorController::class, 'edit'])->name('editTutor');
+Route::get('/tutor/{id}/edit', [TutorController::class, 'edit'])->name('editTutor');
 Route::post('/tutor/{tutor}/update', [TutorController::class, 'update'])->name('updateTutor');
 
 //Editar tutores desde la vista administrador
-Route::get('/tutor/{tutor}/editAdmin', [TutorController::class, 'editAdmin'])->name('editTutorAdmin');
+Route::get('/tutor/{tutor}/editTutorAdmin', [TutorController::class, 'editTutorAdmin'])->name('editTutorAdmin');
 //Actualizar tutores desde la vista administrador
-Route::post('/tutor/{tutor}/updateAdmin', [TutorController::class, 'updateAdmin'])->name('updateTutorAdmin');
+Route::post('/tutor/{tutor}/updateTutorAdmin', [TutorController::class, 'updateTutorAdmin'])->name('updateTutorAdmin');
 
 
 Route::get('/perfilTutor', [TutorController::class, 'show'])->middleware(['auth','roltutor'])->name('perfilTutor');
@@ -106,10 +107,16 @@ Route::get('/insumo/create', [InsumoController::class, 'create'])->middleware(['
 Route::post('/insumo/store', [InsumoController::class, 'store'])->middleware(['auth','rolpersonal'])->name('storeInsumo');
 Route::get('/insumo/{insumo}/edit', [InsumoController::class, 'edit'])->middleware(['auth','rolpersonal'])->name('editInsumo');
 Route::post('/insumo/{insumo}/update', [InsumoController::class, 'update'])->middleware(['auth','rolpersonal'])->name('updateInsumo'); 
+Route::delete('/insumo/{id}', [InsumoController::class, 'destroy'])->name('destroyInsumo');
 
+Route::get('/insumo/{insumo}/editInsumoAdmin', [InsumoController::class, 'editInsumoAdmin'])->name('editInsumoAdmin');
+Route::post('insumo/{insumo}/updateInsumoAdmin', [InsumoController::class, 'updateInsumoAdmin'])->name('updateInsumoAdmin');
 Route::get('/mascotaList', [MascotasController::class, 'list'])->middleware(['auth','rolpersonal'])->name('mascotaList');
 
 Route::get('/tutoresList', [TutorController::class, 'list'])->middleware(['auth','rolpersonal'])->name('tutoresList');
+
+Route::get('/perfilPersonal', [PersonalController::class, 'show'])->middleware(['auth','rolpersonal'])->name('perfilPersonal');
+Route::post('/personal/{personal}/update', [PersonalController::class, 'update'])->middleware(['auth','rolpersonal'])->name('updatePersonal');
 
 //RUTAS DE ADMINISTRADOR
 
@@ -123,6 +130,14 @@ Route::get('/insumoIndexAdmin', [InsumoController::class, 'indexAdmin'])->name('
 Route::get('/insumo/createAdmin', [InsumoController::class, 'createAdmin'])->name('createInsumoAdmin');
 Route::post('/insumo/storeAdmin', [InsumoController::class, 'storeAdmin'])->name('storeInsumoAdmin');
 
+//Route para utilizar el destroy de insumo
+Route::delete('/insumoAdmin/{id}', [InsumoController::class, 'destroyAdmin'])->name('destroyInsumoAdmin');
+
+Route::get('/tipoAtencionIndex', [TipoAtencionController::class, 'index'])->name('tipoAtencionIndex');
+Route::get('/tipoAtencion/create', [TipoAtencionController::class, 'create'])->name('createTipoAtencion');
+Route::post('/tipoAtencion/store', [TipoAtencionController::class, 'store'])->name('storeTipoAtencion');
+Route::get('/tipoAtencion/{tipoAtencion}/edit', [TipoAtencionController::class, 'edit'])->name('editTipoAtencion');
+Route::post('/tipoAtencion/{tipoAtencion}/update', [TipoAtencionController::class, 'update'])->name('updateTipoAtencion');
 
 Route::get('/rolesIndex', [RolController::class, 'index'])->name('rolesIndex');
 Route::get('/roles/create', [RolController::class, 'create'])->name('createRol');
@@ -155,6 +170,4 @@ Route::get('/personal/{id}/edit', [PersonalController::class, 'edit'])->name('ed
 Route::post('/updatePersonalUser', [PersonalController::class, 'UpdateUser'])->name('updatePersonalUser');
 Route::get('/personal/create', [PersonalController::class, 'create'])->name('createPersonal');
 Route::post('/personal/store', [PersonalController::class, 'store'])->name('storePersonal');
-Route::post('/personal/{personal}/update', [PersonalController::class, 'update'])->name('updatePersonal');
-Route::get('/perfilPersonal', [PersonalController::class, 'show'])->middleware(['auth','rolpersonal'])->name('perfilPersonal');
 

@@ -10,6 +10,7 @@ class RazaMascota extends Model
     use HasFactory;
 
     protected $table = 'razamascotas';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'nombre_Razamascota',
         'estado_Razamascota'

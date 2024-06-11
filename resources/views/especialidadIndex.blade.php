@@ -3,12 +3,13 @@
 @section('content')
 
 
-<div class="row">
-    <div class="col-sm-3">
-        <h4>
-            Especialidades
-        </h4>
-    </div>
+<div class="container" id="container-user">
+    <div class="row" id="container-text">
+        <div class="col-sm-3">
+            <h4>
+                Especialidades
+            </h4>
+        </div>
         <div class="row">
             <div class="col-sm-8">
                 <div>
@@ -64,6 +65,7 @@
                 });
             } );
         </script>
+    </div>
 </div>
 
 

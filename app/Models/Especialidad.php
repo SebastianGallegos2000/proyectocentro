@@ -12,10 +12,11 @@ class Especialidad extends Model
     //relacion muchos a muchos
         public function personal()
         {
-            return $this->belongsToMany('\App\Models\Personal');
+            return $this->belongsTo('\App\Models\Personal');
         }
 
     protected $table = 'especialidades';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'nombre_Especialidad',
         'estado_Especialidad'

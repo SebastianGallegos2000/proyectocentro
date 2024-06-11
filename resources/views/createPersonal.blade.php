@@ -4,10 +4,11 @@
 
 <!--<script src="js/rutValidador.js"></script> -->
 <!-- <script src="js/funciones.js"></script> -->
-<div class="container p-4">
-    <div class="col-12">
-        <div>
-            <h2>Crear Cuenta</h2>
+<div class="container" id="container-user">
+    <div class="row" id="container-text">
+        <div class="col-sm-3">
+            <div>
+            <h4>Crear Cuenta Personal</h4>
         </div>
         <div>
             <a href="/usuarios" class="btn btn-primary">Volver</a>

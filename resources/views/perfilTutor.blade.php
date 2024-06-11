@@ -71,7 +71,7 @@
                 <strong>Fotocopia de Carnet</strong>
             </div>
             <div class="col-sm" id="user-perfil">
-                <a href="{{ asset('storage/fotocopiacarnet/' . auth()->user()->rut_Tutor .'_Fotocopia_Carnet.pdf') }}">Ver Fotocopia Carnet</a>
+                <a href="{{ asset('storage/fotocopiacarnet/' . auth()->user()->persona->rut_Persona .'_Fotocopia_Carnet.pdf') }}">Ver Fotocopia Carnet</a>
             </div>
         </div>
         <div class="row">
@@ -79,7 +79,7 @@
                 <strong>Registro Social</strong>
             </div>
             <div class="col-sm" id="user-perfil">
-                <a href="{{ asset('storage/registrosocial/' . auth()->user()->rut_Tutor .'_Registro_Social.pdf') }}">Ver Registro Social</a>
+                <a href="{{ asset('storage/registrosocial/' . auth()->user()->persona->rut_Persona .'_Registro_Social.pdf') }}">Ver Registro Social</a>
             </div>
         </div>
         <div class="row">

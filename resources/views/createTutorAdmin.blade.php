@@ -4,15 +4,14 @@
 
 <!--<script src="js/rutValidador.js"></script> -->
 <!-- <script src="js/funciones.js"></script> -->
-<div class="container p-4">
-    <div class="col-12">
+<div class="container" id="container-user">
+    <div class="row" id="container-text">
         <div>
-            <h2>Crear Cuenta</h2>
+            <h4>Crear Cuenta Tutor</h4>
         </div>
         <div>
             <a href="{{route('usuarios')}}" class="btn btn-primary">Volver</a>
         </div>
-    </div>
 
     @if ($errors->any())
     <div class="alert alert-danger">

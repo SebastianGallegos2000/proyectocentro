@@ -1,13 +1,14 @@
-@extends('layouts.layoutpersonal')
+@extends('layouts.layoutadmin')
 
 @section('content')
-<div class="container p-4">
-    <div class="col-12">
+<div class="container" id="container-user">
+    <div class="row" id="container-text">
+        <div class="col-sm-3">
         <div>
-            <h2>Agregar Comuna</h2>
+            <h4>Agregar Comuna</h4>
         </div>
         <div>
-            <a href="/comunas" class="btn btn-primary">Volver</a>
+            <a href="{{route('comunaIndex')}}" class="btn btn-primary">Volver</a>
         </div>
     </div>
 

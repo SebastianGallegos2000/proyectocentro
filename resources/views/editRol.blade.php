@@ -1,10 +1,11 @@
 @extends('layouts.layoutadmin')
 
 @section('content')
-<div class="container p-4">
-    <div class="col-12">
+<div class="container" id="container-user">
+    <div class="row" id="container-text">
+        <div class="col-sm-3">
         <div>
-            <h2>Editar Rol</h2>
+            <h4>Editar Rol</h4>
         </div>
         <div>
             <a href="/rolesIndex" class="btn btn-primary">Volver</a>

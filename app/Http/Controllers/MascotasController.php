@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Mascotas;
 use App\Models\RazaMascota;
+use App\Models\Tutor;
+use App\Models\User;
+use App\Models\Persona;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MascotasController extends Controller
 {
@@ -13,7 +17,7 @@ class MascotasController extends Controller
      */
     public function index()
     {
-        $mascotas = Mascotas::where('tutor_id', auth()->id())->get();
+        $mascotas = Mascotas::where('tutor_id', Auth::user()->persona->tutor->id)->get();
         return view('tutorIndex', ['mascotas' => $mascotas]);
     }
 
@@ -31,9 +35,10 @@ class MascotasController extends Controller
      */
     public function store(Request $request)
     {
+        //dd(Auth::user(), Auth::user()->persona, Auth::user()->persona->tutor);
+
         //Validar los datos - Los datos nroChip_Mascota puede ser null
         $request->validate([
-            'tutor_id' => 'required|integer',
             'nombre_Mascota' => 'required|string|max:50',
             'razamascota_id' => 'required|integer',
             'nroChip_Mascota' => 'nullable|integer',
@@ -45,7 +50,7 @@ class MascotasController extends Controller
         ]);
         $mascota = new Mascotas();
         $mascota->id = Mascotas::max('id')+1;
-        $mascota->tutor_id = auth()->id();
+        $mascota->tutor_id = Auth::user()->persona->tutor->id;
         $mascota->nombre_Mascota = ucfirst($request->nombre_Mascota);
         $mascota->razamascota_id = $request->razamascota_id;
         $mascota->nroChip_Mascota = $request->nroChip_Mascota;

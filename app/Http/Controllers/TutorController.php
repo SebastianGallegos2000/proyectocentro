@@ -66,8 +66,8 @@ class TutorController extends Controller
         $tutor = new Tutor();
     
         $tutor->persona_id = $persona->id;
-        $tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $persona->apellido_Persona.'_'.'Fotocopia_Carnet'.'.pdf');
-        $tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $persona->apellido_Persona .'_'.'Registro_Social'. '.pdf');
+        $tutor->fotocopiacarnet_Tutor = $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $persona->rut_Persona.'_'.'Fotocopia_Carnet'.'.pdf');
+        $tutor->registrosocial_Tutor = $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $persona->rut_Persona .'_'.'Registro_Social'. '.pdf');
         $tutor->comuna_id = $request->comuna_id;
         $tutor->estado_Tutor = $request->estado_Tutor;
         $tutor->save();
@@ -110,42 +110,69 @@ class TutorController extends Controller
 
         //Actualizar los datos
         $persona->update($request->all());
-        $user->update([
-            'password_Usuario' => Hash::make($request->password_Usuario)
-        ]);
-        $tutor->update($request->all());
+        //Si el usuario no modifica la contraseña, se mantiene la misma.
+        if($request->password_Usuario == null){
+            $user->update([
+                'password_Usuario' => $user->password_Usuario
+            ]);
+
+        }else{
+            $user->update([
+                'password_Usuario' => Hash::make($request->password_Usuario)
+            ]);
+        }
+
+        //Update a cada dato del tutor por separado. Si no se modificó el archivo, se mantiene el mismo.
+        if($request->file('fotocopiacarnet_Tutor' && 'registrosocial_Tutor') == null){
+            $tutor->update([
+                'comuna_id' => $request->comuna_id,
+                'estado_Tutor' => $tutor->estado_Tutor
+            ]);
+            return redirect(route('perfilTutor'))->with('success','Usuario actualizado con éxito en el sistema');   
+        }
+        else{
+            $tutor->update([
+                'fotocopiacarnet_Tutor' => $request->file('fotocopiacarnet_Tutor')->storeAs('public/fotocopiacarnet', $persona->rut_Persona.'_'.'Fotocopia_Carnet'.'.pdf'),
+                'registrosocial_Tutor' => $request->file('registrosocial_Tutor')->storeAs('public/registrosocial', $persona->rut_Persona .'_'.'Registro_Social'. '.pdf'),
+                'comuna_id' => $request->comuna_id,
+                'estado_Tutor' => $request->estado_Tutor
+            ]);
 
             return redirect(route('perfilTutor'))->with('success','Usuario actualizado con éxito en el sistema');   
         
+        }
     }
 
     //Editar tutores desde la vista administrador
-    public function editAdmin(Request $request)
+    public function editTutorAdmin($id)
     {
-        //Busca los datos de la persona seleccionada.
-        $tutor = Tutor::find($request->id);
-
+        $user = User::find($id);
         $comunas = Comuna::all();
-        return view('editTutorAdmin', compact('tutor','comunas'));
+    
+    
+        $persona = $user->persona;
+        $tutor = $persona->tutor;
+    
+
+    
+        return view('editTutorAdmin', ['user' => $user, 'persona' => $persona, 'tutor' => $tutor, 'comunas' => $comunas]);
     }
 
     //Actualizar tutores desde la vista administrador
-    public function updateAdmin(Request $request)
+    public function updateTutorAdmin(Request $request, $tutor)
     {
-        $persona = Persona::find($request->id);
+        $persona = Persona::find($tutor);
         $user = User::find($persona->user_id);
-        $tutor = Tutor::find($request->id);
-
-
+        $tutor = Tutor::find($tutor);
+    
         //Actualizar los datos
         $persona->update($request->all());
         $user->update([
             'password_Usuario' => Hash::make($request->password_Usuario)
         ]);
         $tutor->update($request->all());
-
-            return redirect(route('usuarios'))->with('success','Usuario actualizado con éxito en el sistema');   
-        
+    
+        return redirect(route('usuarios'))->with('success','Usuario actualizado con éxito en el sistema');   
     }
 
 

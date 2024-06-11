@@ -32,7 +32,7 @@
         <div class="btn-box">
           <a id="a-header" href="{{route('privada')}}">Inicio</a>
           <a id="a-header" href="{{route('perfilTutor')}}">Perfil</a>
-          <a id="a-header" href="{{route('logout')}}">Cerrar sesión</a>
+          <a id="a-header" href="{{route('logoutTutor')}}">Cerrar sesión</a>
 
         </div>
       </div>

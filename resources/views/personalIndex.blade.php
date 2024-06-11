@@ -38,34 +38,41 @@
         </div>
         <canvas id="myChart"></canvas>
         <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Guantes talla L', 'Guantes talla M', 'Guantes talla S','Biusturí'],
-                datasets: [{
-                    label: 'Cantidad de guantes',
-                    data: [
-                        @json($insumos->where('nombre_Insumo', 'Guantes Talla L')->first()->cantidad_Insumo),
-                        @json($insumos->where('nombre_Insumo', 'Guantes Talla M')->first()->cantidad_Insumo),
-                        @json($insumos->where('nombre_Insumo', 'Guantes Talla S')->first()->cantidad_Insumo),
-                        @json($insumos->where('nombre_Insumo', 'Bisturí')->first()->cantidad_Insumo),
-
-                    ],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Guantes talla L', 'Guantes talla M', 'Guantes talla S','Biusturí'],
+                    datasets: [{
+                        label: 'Cantidad de guantes',
+                        data: [
+                            @json($insumos->where('nombre_Insumo', 'Guantes Talla L')->first()->cantidad_Insumo),
+                            @json($insumos->where('nombre_Insumo', 'Guantes Talla M')->first()->cantidad_Insumo),
+                            @json($insumos->where('nombre_Insumo', 'Guantes Talla S')->first()->cantidad_Insumo),
+                            @json($insumos->where('nombre_Insumo', 'Bisturí')->first()->cantidad_Insumo),
+                        ],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        type: 'line',
+                        label: 'Cantidad crítica',
+                        data: Array(4).fill(20),
+                        fill: false,
+                        borderColor: 'rgba(255, 0, 0, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        });
-        </script>
+            });
+            </script>
     </div>
 </html>
 @endsection

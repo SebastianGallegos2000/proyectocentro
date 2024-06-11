@@ -130,9 +130,18 @@ class PersonalController extends Controller
 
         //Actualizar los datos
         $persona->update($request->all());
-        $user->update([
-            'password_Usuario' => Hash::make($request->password_Usuario)
-        ]);
+        //Si el usuario no modifica la contraseña, se mantiene la misma.
+        if($request->password_Usuario == null){
+            $user->update([
+                'password_Usuario' => $user->password_Usuario
+            ]);
+
+        }else{
+            $user->update([
+                'password_Usuario' => Hash::make($request->password_Usuario)
+            ]);
+        }
+
         $personal->update($request->all());
 
             return redirect(route('perfilPersonal'))->with('success','Usuario actualizado con éxito en el sistema');     

@@ -39,7 +39,7 @@
           <a id="a-header" href="/citas">Citas</a>
           <a id="a-header" href="{{route('perfilPersonal')}}">Perfil</a>
 
-          <a id="a-header" href="{{route('logout')}}">Cerrar sesión</a>
+          <a id="a-header" href="{{route('logoutPersonal')}}">Cerrar sesión</a>
         </div>
       </div>
     </div>

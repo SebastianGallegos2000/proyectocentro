@@ -38,7 +38,7 @@
 
             <div class="mb-3">
                 <strong>Contraseña:</strong>
-                <input type="password" name="password_Persona" class="form-control" placeholder="*******" value="{{$user->password_Usuario}}" >
+                <input type="password" name="password_Persona" class="form-control" placeholder="*******" value="" >
             </div>
 
             <div class="mb-3">

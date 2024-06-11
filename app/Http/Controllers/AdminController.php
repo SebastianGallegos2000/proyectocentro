@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admins;
+use App\Models\Insumo;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,7 +13,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('adminIndex');
+        $insumos = Insumo::all();
+        return view('adminIndex', ['insumos'=>$insumos]);
     }
 
     /**

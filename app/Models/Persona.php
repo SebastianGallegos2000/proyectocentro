@@ -34,8 +34,8 @@ class Persona extends Model
     }
 
     protected $table = 'personas';
-    protected $primaryKey = 'rut_Persona';
     protected $fillable = [
+        'rut_Persona',
         'dv_Persona',
         'nombre_Persona',
         'apellido_Persona',

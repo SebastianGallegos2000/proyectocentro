@@ -6,6 +6,7 @@ use App\Models\Comuna;
 use App\Models\Persona;
 use App\Models\Tutor;
 use App\Models\User;
+use App\Models\Mascotas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -189,4 +190,6 @@ class TutorController extends Controller
     {
         //
     }
+
+
 }

@@ -202,6 +202,14 @@ class PersonalController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+
+    public function citas(Personal $personal)
+    {
+        $citas = $personal->citas;
+        return view('citasPersonal', ['citas'=>$citas]);
+    }
+
     public function destroy(Personal $personal)
     {
         //

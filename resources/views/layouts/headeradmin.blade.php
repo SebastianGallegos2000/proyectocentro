@@ -22,6 +22,10 @@
     <!-- Link para gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Link para Fullcalendar -->
+    <link href='https://fullcalendar.io/releases/main/base.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
+
 </head>
 <body>
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -53,7 +57,7 @@
                     <a class="nav-link" href="{{route('tipoAtencionIndex')}}">Tipo Atención</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('tipoAtencionIndex')}}">Citas</a>
+                    <a class="nav-link" href="{{route('citasAdmin')}}">Citas</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"> Perfil</a>

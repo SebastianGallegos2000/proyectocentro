@@ -36,7 +36,7 @@
         </h4>
     </div>
     <canvas id="myChart"></canvas>
-        <script>
+    <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
@@ -49,11 +49,23 @@
                         @json($insumos->where('nombre_Insumo', 'Guantes Talla M')->first()->cantidad_Insumo),
                         @json($insumos->where('nombre_Insumo', 'Guantes Talla S')->first()->cantidad_Insumo),
                         @json($insumos->where('nombre_Insumo', 'Bisturí')->first()->cantidad_Insumo),
-
                     ],
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
+                },
+                {
+                    type: 'line',
+                    label: 'Cantidad crítica',
+                    data: [
+                        @json($insumos->where('nombre_Insumo', 'Guantes Talla L')->first()->stockCritico_Insumo),
+                        @json($insumos->where('nombre_Insumo', 'Guantes Talla M')->first()->stockCritico_Insumo),
+                        @json($insumos->where('nombre_Insumo', 'Guantes Talla S')->first()->stockCritico_Insumo),
+                        @json($insumos->where('nombre_Insumo', 'Bisturí')->first()->stockCritico_Insumo),
+                    ],
+                    fill: false,
+                    borderColor: 'rgba(255, 0, 0, 1)',
+                    borderWidth: 2
                 }]
             },
             options: {
@@ -64,7 +76,7 @@
                 }
             }
         });
-        </script>
+    </script>
     </div>
 </html>
 @endsection

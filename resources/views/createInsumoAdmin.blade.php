@@ -37,7 +37,11 @@
                     <input type="text" name="cantidad_Insumo" class="form-control" placeholder="10" value="{{old('cantidad_Insumo')}}">
                 </div>
                 <div class="mb-3">
-                    <strong>Costo Unitario</strong>
+                    <strong>Stock Critico:</strong>
+                    <input type="text" name="stockCritico_Insumo" class="form-control" placeholder="20" value="{{old('stockCritico_Insumo')}}">
+                </div>
+                <div class="mb-3">
+                    <strong>Costo Unitario:</strong>
                     <input type="text" name="costo_Insumo" class="form-control" placeholder="14300" value="{{old('costo_Insumo')}}">
                 </div>
                 <div class="mb-3">

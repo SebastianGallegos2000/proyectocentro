@@ -14,6 +14,7 @@ use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\RazaMascotaController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\SolicitudCitasController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\TipoAtencionController;
 use GuzzleHttp\Middleware;
@@ -99,7 +100,11 @@ Route::post('/mascota/store', [MascotasController::class, 'store'])->middleware(
 Route::get('/mascota/{mascota}/edit', [MascotasController::class, 'edit'])->middleware(['auth','roltutor'])->name('editMascota');
 Route::post('/mascota/{mascota}/update', [MascotasController::class, 'update'])->middleware(['auth','roltutor'])->name('updateMascota');
 
+Route::get('/solicitudCitas/create/{mascota}', [SolicitudCitasController::class, 'create'])->middleware(['auth','roltutor'])->name('solicitudCitas');
+Route::post('/solicitudCitas/store', [SolicitudCitasController::class, 'store'])->middleware(['auth','roltutor'])->name('storeSolicitudCitas');
+Route::get('/events', [SolicitudCitasController::class, 'getEvents']);
 
+Route::get('/citaAgendada', [SolicitudCitasController::class, 'citaAgendada'])->middleware(['auth','roltutor'])->name('citaAgendada');
 //RUTAS DE PERSONAL
 
 Route::get('/insumoIndex', [InsumoController::class, 'index'])->middleware(['auth','rolpersonal'])->name('insumoIndex');
@@ -118,6 +123,8 @@ Route::get('/tutoresList', [TutorController::class, 'list'])->middleware(['auth'
 Route::get('/perfilPersonal', [PersonalController::class, 'show'])->middleware(['auth','rolpersonal'])->name('perfilPersonal');
 Route::post('/personal/{personal}/update', [PersonalController::class, 'update'])->middleware(['auth','rolpersonal'])->name('updatePersonal');
 
+Route::get('/citasPersonal', [PersonalController::class, 'citas'])->middleware(['auth','rolpersonal'])->name('citasPersonal');
+
 //RUTAS DE ADMINISTRADOR
 
 Route::get('/adminIndex', [AdminController::class, 'index'])->name('adminIndex');
@@ -130,6 +137,7 @@ Route::get('/insumoIndexAdmin', [InsumoController::class, 'indexAdmin'])->name('
 Route::get('/insumo/createAdmin', [InsumoController::class, 'createAdmin'])->name('createInsumoAdmin');
 Route::post('/insumo/storeAdmin', [InsumoController::class, 'storeAdmin'])->name('storeInsumoAdmin');
 
+Route::get('citasAdmin', [AdminController::class, 'citas'])->name('citasAdmin');
 //Route para utilizar el destroy de insumo
 Route::delete('/insumoAdmin/{id}', [InsumoController::class, 'destroyAdmin'])->name('destroyInsumoAdmin');
 

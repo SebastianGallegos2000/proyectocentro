@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('mascota_id');
             $table->unsignedBigInteger('tipoatencion_id');
-            $table->timestamp('fecha_SolicitudCita',precision:0);
+            $table->date('fecha_SolicitudCita');
+            $table->string('horaInicio_SolicitudCita');
+            $table->string('horaTermino_SolicitudCita');
             $table->integer('estado_SolicitudCita');
+            $table->timestamps();
 
             $table->foreign('mascota_id')->references('id')->on('mascotas');
             $table->foreign('tipoatencion_id')->references('id')->on('tipoatenciones');

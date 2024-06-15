@@ -33,6 +33,7 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Cantidad Disponible</th>
+                <th>Stock Critico</th>
                 <th>Costo</th>
                 <th>Estado</th>
                 <th>Acciones</th>
@@ -44,6 +45,7 @@
                 <td class="fw-bold">{{$insumo->id}}</td>
                 <td>{{$insumo->nombre_Insumo}}</td>
                 <td>{{$insumo->cantidad_Insumo}}</td>
+                <td>{{$insumo->stockCritico_Insumo}}</td>
                 <td>{{$insumo->costo_Insumo}}</td>
                 <td>{{$insumo->estado_Insumo }}</td>
                 <td>

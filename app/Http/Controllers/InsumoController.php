@@ -45,6 +45,7 @@ class InsumoController extends Controller
         $request->validate([
             'nombre_Insumo' =>'required',
             'cantidad_Insumo' => 'required',
+            'stockCritico_Insumo' => 'required',
             'costo_Insumo' => 'required'
 
         ]);
@@ -53,6 +54,7 @@ class InsumoController extends Controller
         $insumo->nombre_Insumo = ucfirst($request->nombre_Insumo);
         $insumo->cantidad_Insumo = $request->cantidad_Insumo;
         $insumo->costo_Insumo = $request->costo_Insumo;
+        $insumo->stockCritico_Insumo = $request->stockCritico_Insumo;
         $insumo->estado_Insumo = $request->estado_Insumo;
         $insumo->save();
 
@@ -65,6 +67,7 @@ class InsumoController extends Controller
         $request->validate([
             'nombre_Insumo' =>'required',
             'cantidad_Insumo' => 'required',
+            'stockCritico_Insumo' => 'required',
             'costo_Insumo' => 'required'
 
         ]);
@@ -73,6 +76,7 @@ class InsumoController extends Controller
         $insumo->nombre_Insumo = ucfirst($request->nombre_Insumo);
         $insumo->cantidad_Insumo = $request->cantidad_Insumo;
         $insumo->costo_Insumo = $request->costo_Insumo;
+        $insumo->stockCritico_Insumo = $request->stockCritico_Insumo;
         $insumo->estado_Insumo = $request->estado_Insumo;
         $insumo->save();
         
@@ -108,6 +112,7 @@ class InsumoController extends Controller
         $request->validate([
             'nombre_Insumo' =>'required',
             'cantidad_Insumo' => 'required',
+            'stockCritico_Insumo' => 'required',
             'costo_Insumo' => 'required'
 
         ]);
@@ -120,6 +125,7 @@ class InsumoController extends Controller
         $request->validate([
             'nombre_Insumo' =>'required',
             'cantidad_Insumo' => 'required',
+            'stockCritico_Insumo' => 'required',
             'costo_Insumo' => 'required'
 
         ]);

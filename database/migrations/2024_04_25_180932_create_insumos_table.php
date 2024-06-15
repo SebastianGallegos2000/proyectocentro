@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre_Insumo');
             $table->integer('cantidad_Insumo');
+            $table->integer('stockCritico_Insumo');
             $table->integer('costo_Insumo');
             $table->integer('estado_Insumo');
             $table->timestamps();

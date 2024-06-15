@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('incrementoinsumos', function (Blueprint $table) {
+        Schema::create('modificacioninsumos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('personal_id');
             $table->unsignedBigInteger('insumo_id');
-            $table->timestamp('fechayhora_IncrementoInventario',precision:0);
-            $table->string('cantidad_IncrementoInventario');
-            $table->integer('estado_IncrementoInventario');
+            $table->timestamp('fechayhora_ModificacionInventario',precision:0);
+            $table->string('cantidad_ModificacionInventario');
+            $table->integer('estado_ModificacionInventario');
+            $table->timestamps();
 
             $table->foreign('personal_id')->references('id')->on('personales');
             $table->foreign('insumo_id')->references('id')->on('insumos');
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('incrementoinsumos');
+        Schema::dropIfExists('modificacioninsumos');
     }
 };

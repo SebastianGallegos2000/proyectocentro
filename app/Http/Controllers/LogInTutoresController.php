@@ -105,7 +105,8 @@ class LogInTutoresController extends Controller
             return back()->withErrors(['rut_Persona' => 'Ningún usuario asociado con el RUT']);
         }
         
-        if (!Hash::check($validatedData['password_Usuario'], $usuario->password_Usuario)) {
+        if (!Hash::check(
+            $validatedData['password_Usuario'], $usuario->password_Usuario)) {
             return back()->withErrors(['password_Usuario' => 'La contraseña no es correcta']);
         }
         //Verificar que el rol sea 1

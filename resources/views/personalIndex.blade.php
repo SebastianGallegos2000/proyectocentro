@@ -58,7 +58,12 @@
                     {
                         type: 'line',
                         label: 'Cantidad crítica',
-                        data: Array(4).fill(20),
+                        data: [
+                            @json($insumos->where('nombre_Insumo', 'Guantes Talla L')->first()->stockCritico_Insumo),
+                            @json($insumos->where('nombre_Insumo', 'Guantes Talla M')->first()->stockCritico_Insumo),
+                            @json($insumos->where('nombre_Insumo', 'Guantes Talla S')->first()->stockCritico_Insumo),
+                            @json($insumos->where('nombre_Insumo', 'Bisturí')->first()->stockCritico_Insumo),
+                        ],
                         fill: false,
                         borderColor: 'rgba(255, 0, 0, 1)',
                         borderWidth: 2
@@ -72,7 +77,7 @@
                     }
                 }
             });
-            </script>
+        </script>
     </div>
 </html>
 @endsection

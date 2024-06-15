@@ -58,8 +58,7 @@
                                 <td>{{$mascota->nombre_Mascota}}</td>
                                 <td>{{$mascota->especie_Mascota}}</td>
                                 <td class="d-flex flex-wrap justify-content-start">
-                                    <a href="" class="btn btn-dark mr-2 mb-2" id="boton-accion">AGENDAR HORA</a>
-                                    <a href="" class="btn btn-danger mr-2 mb-2" id="boton-accion">PDF</a>
+                                    <a href="/solicitudCitas/create/{{$mascota->id}}" class="btn btn-dark mr-2 mb-2" id="boton-accion">AGENDAR HORA</a>                                    <a href="" class="btn btn-danger mr-2 mb-2" id="boton-accion">PDF</a>
                                     <a href="" class="btn btn-warning mr-2 mb-2" id="boton-accion">👁</a>
                                 </td>
                             </tr>

@@ -9,6 +9,11 @@ class TipoAtencion extends Model
 {
     use HasFactory;
 
+    //Relación uno a muchos con mascotas (inversa)
+    public function mascotas(){
+        return $this->hasMany('App\Models\Mascotas');
+    }
+
     protected $table = 'tipoatenciones';
     protected $fillable = [
         'nombre_TipoAtencion',

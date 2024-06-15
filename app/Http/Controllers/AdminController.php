@@ -25,6 +25,19 @@ class AdminController extends Controller
         //
     }
 
+    public function citas()
+    {
+        return view('citasAdmin');
+    }
+
+
+    //Funcionalidad para bloquear el día seleccionado
+    public function bloquearDia(Request $request)
+    {
+
+    }
+
+
     /**
      * Store a newly created resource in storage.
      */

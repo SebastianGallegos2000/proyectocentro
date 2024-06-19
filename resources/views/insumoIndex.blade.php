@@ -49,14 +49,16 @@
                 <td>{{$insumo->costo_Insumo}}</td>
                 <td>{{$insumo->estado_Insumo }}</td>
                 <td>
-                    @if ($insumo->estado_Insumo != 0)
-                    <a href="insumo/{{$insumo->id}}/edit" class="btn btn-dark" >Editar</a>
-                    <!--<a href="insumo/{{$insumo->id}}/edit" class="btn btn-warning" >Agregar</a>-->
-                    <form action="{{ route('destroyInsumo', $insumo->id) }}"  method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar este insumo?')">Eliminar</button>
-                    </form>                    
+                    @if ($insumo->estado_Insumo == 0)
+                        <a href="insumo/{{$insumo->id}}/activate" class="btn btn-success">Activar</a>
+                    @elseif ($insumo->estado_Insumo != 0)
+                        <a href="insumo/{{$insumo->id}}/edit" class="btn btn-dark" >Editar</a>
+                        <a href="" class="btn btn-warning">Agregar Inventario</a>
+                        <form action="{{ route('destroyInsumo', $insumo->id) }}"  method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar este insumo?')">Eliminar</button>
+                        </form>                    
                     @endif
                 </td>
             </tr>

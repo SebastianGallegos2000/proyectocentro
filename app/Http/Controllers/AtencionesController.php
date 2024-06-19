@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Atenciones;
+use App\Models\Mascotas;
+use App\Models\SolicitudCitas;
 use Illuminate\Http\Request;
 
 class AtencionesController extends Controller
@@ -18,9 +20,12 @@ class AtencionesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $solicitud = SolicitudCitas::find($id);
+        $mascota = $solicitud->mascota;
+        $user = auth()->user();
+        return view('atencion', ['solicitud' => $solicitud, 'mascota' => $mascota, 'user' => $user]);
     }
 
     /**

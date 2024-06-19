@@ -44,7 +44,7 @@
     <!-- End Example Code -->
     <div>
       <CENTER>
-      <h1>SEVICIOS</h1>
+      <h1>SERVICIOS</h1>
       </CENTER>
     <div class="container" id="containerServicios">
       <div class="row g-3">
@@ -52,7 +52,7 @@
         <div class="flip-box">
           <div class="flip-box-inner">
             <div class="flip-box-front">
-              <h2>Front Side</h2>
+              <h2>Consulta Control Sano</h2>
             </div>
             <div class="flip-box-back">
               <h2>Back Side</h2>
@@ -63,10 +63,10 @@
         <div class="flip-box">
           <div class="flip-box-inner">
             <div class="flip-box-front">
-              <h2>Front Side</h2>
+              <h2>Esterilización de Perros</h2>
             </div>
             <div class="flip-box-back">
-              <h2>Back Side</h2>
+              <h2>$19.555</h2>
             </div>
           </div>
         </div>
@@ -74,10 +74,10 @@
         <div class="flip-box">
           <div class="flip-box-inner">
             <div class="flip-box-front">
-              <h2>Front Side</h2>
+              <h2>Esterilización de Gatas</h2>
             </div>
             <div class="flip-box-back">
-              <h2>Back Side</h2>
+              <h2>$13.037</h2>
             </div>
           </div>
         </div>
@@ -85,10 +85,10 @@
         <div class="flip-box">
           <div class="flip-box-inner">
             <div class="flip-box-front">
-              <h2>Front Side</h2>
+              <h2>Esterilización de Gatos</h2>
             </div>
             <div class="flip-box-back">
-              <h2>Back Side</h2>
+              <h2>$11.407</h2>
             </div>
           </div>
         </div>
@@ -96,10 +96,54 @@
         <div class="flip-box">
           <div class="flip-box-inner">
             <div class="flip-box-front">
-              <h2>Front Side</h2>
+              <h2>Vacuna Antirrábica</h2>
             </div>
             <div class="flip-box-back">
-              <h2>Back Side</h2>
+              <h2>$8.148</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front">
+              <h2>Vacuna Sextuple</h2>
+            </div>
+            <div class="flip-box-back">
+              <h2>$8.148</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front">
+              <h2>Vacuna Triple Felina</h2>
+            </div>
+            <div class="flip-box-back">
+              <h2>$8.148</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front">
+              <h2>Desparacitación Interna</h2>
+            </div>
+            <div class="flip-box-back">
+              <h2>$2.608</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front">
+              <h2>Instalación de Microchip </h2>
+            </div>
+            <div class="flip-box-back">
+              <h2>$16.296</h2>
             </div>
           </div>
         </div>

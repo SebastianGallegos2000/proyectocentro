@@ -8,23 +8,24 @@
             Datos del usuario
         </h4>
 
+
         <div class="col-sm" id="user-1">
-            11.111.111-1
+            <label id="dato">{{ auth()->user()->persona->rut_Persona }}</label>
         </div>
         <div class="col-sm" id="user-1">
-            Nombre
+            <label id="dato">{{ auth()->user()->persona->nombre_Persona}}</label>
         </div>
         <div class="col-sm" id="user-1">
-            Apellido
+            <label id="dato">{{ auth()->user()->persona->apellido_Persona }}</label>
         </div>
         <div class="col-sm" id="user-1">
-            Correo@ejemplo.com
+            <label id="dato">{{ auth()->user()->persona->correo_Persona }}</label>
         </div>
         <div class="col-sm" id="user-1">
-            Fecha/Nacimiento/Tutor
+            <label id="dato">{{ \Carbon\Carbon::parse(auth()->user()->persona->fechaNac_Persona)->format('d-m-Y') }}</label>
         </div>
         <div class="col-sm" id="user-1">
-            +56911111111
+            <label id="dato">{{ auth()->user()->persona->telefono_Persona }}</label>
         </div>
     </div>
 </div>

@@ -22,7 +22,7 @@
     </div>
 @endif
 
-<form action="{{route('updatePersonal',$personal,$persona,$user,$especialidades)}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('updatePersonal')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="container p-5">
         <div class="mb-3 row">

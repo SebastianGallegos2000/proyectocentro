@@ -58,12 +58,12 @@
             <td>{{$personal->persona->correo_Persona}}</td>
             <td>{{ \Carbon\Carbon::parse($personal->persona->fechaNac_Persona)->format('d-m-Y') }}</td>
             <td>{{$personal->persona->telefono_Persona}}</td>
-            <td>{{$personal->especialidad_id}}</td>
+            <td>{{$personal->especialidad->nombre_Especialidad}}</td>
             
             <td>{{$personal->persona->estado_Persona }}</td>
             <td>
                 <!--<a href="" class="btn btn-danger">Agregar</a>-->
-                <a href="personal/{{$personal->rut_Personal}}/edit" class="btn btn-dark">Editar</a>
+                <a href="personal/{{$personal->id}}/editPersonalAdmin" class="btn btn-dark">Editar</a>
                 <!--<form action="" method="post" class="d-inline">
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>-->

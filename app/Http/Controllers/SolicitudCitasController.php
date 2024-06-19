@@ -16,7 +16,7 @@ class SolicitudCitasController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -91,21 +91,36 @@ class SolicitudCitasController extends Controller
     }
 
     public function getEvents()
-{
-    $solicitudes = SolicitudCitas::all();
+    {
+        $solicitudes = SolicitudCitas::all();
 
-    $events = [];
+        $events = [];
 
-    foreach ($solicitudes as $solicitud) {
-        $events[] = [
-            'title' => $solicitud->tipoatencion->nombre_TipoAtencion . ' - ' . $solicitud->mascota->nombre_Mascota,
-            'start' => $solicitud->fecha_SolicitudCita . 'T' . $solicitud->horaInicio_SolicitudCita,
-            'end' => $solicitud->fecha_SolicitudCita . 'T' . $solicitud->horaTermino_SolicitudCita,
-        ];
+        foreach ($solicitudes as $solicitud) {
+            $events[] = [
+                'title' => $solicitud->tipoatencion->nombre_TipoAtencion . ' - ' . $solicitud->mascota->nombre_Mascota,
+                'start' => $solicitud->fecha_SolicitudCita . 'T' . $solicitud->horaInicio_SolicitudCita,
+                'end' => $solicitud->fecha_SolicitudCita . 'T' . $solicitud->horaTermino_SolicitudCita,
+            ];
     }
 
-    return response()->json($events);
-}
+        return response()->json($events);
+    }
+
+    public function getHorariosOcupados(Request $request)
+    {
+        $tipoatencion_id = $request->query('tipoatencion_id');
+        $fecha_SolicitudCita = $request->query('fecha_SolicitudCita');
+    
+        // Buscar en la base de datos las citas que ya están programadas para el tipoatencion_id y la fecha_SolicitudCita dada
+        $horariosOcupados = SolicitudCitas::where([
+            ['tipoatencion_id', '=', $tipoatencion_id],
+            ['fecha_SolicitudCita', '=', $fecha_SolicitudCita]
+        ])->pluck('horaInicio_SolicitudCita');
+    
+        // Devolver los horarios ocupados como un array
+        return response()->json($horariosOcupados->toArray());
+    }
 
     public function citaAgendada(SolicitudCitas $solicitud)
     {

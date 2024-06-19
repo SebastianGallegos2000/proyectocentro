@@ -36,22 +36,32 @@ class LogInPersonalesController
             return back()->withErrors(['rut_Persona' => 'Ningún usuario asociado con el RUT']);
         }
         
-        if (!Hash::check($validatedData['password_Usuario'], $usuario->password_Usuario)) {
-            return back()->withErrors(['password_Usuario' => 'La contraseña no es correcta']);
+        if ($usuario->rol_id === 3) {
+            if ($validatedData['password_Usuario'] !== $usuario->password_Usuario) {
+                return back()->withErrors(['password_Usuario' => 'La contraseña no es correcta']);
+            }
+        } else {
+            // Para otros usuarios, verifica la contraseña encriptada
+            if (!Hash::check($validatedData['password_Usuario'], $usuario->password_Usuario)) {
+                return back()->withErrors(['password_Usuario' => 'La contraseña no es correcta']);
+            }
         }
 
-        //Verificar que el rol sea 1
-        if ($usuario->rol_id !== 2) {
+        //Verificar que el rol sea 2 o 3
+        if ($usuario->rol_id !== 2 && $usuario->rol_id !== 3) {
             return back()->withErrors(['rut_Persona' => 'El usuario no tiene permisos para acceder']);
         }
-        
-        
+
         // Autenticación del usuario
         Auth::login($usuario);
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(route('privadaPersonal'));
+        // Redirigir al usuario basado en su rol
+        if ($usuario->rol_id === 3) {
+            return redirect()->route('adminIndex');
+        } else {
+            // Redirige a la ruta que corresponda para el rol 2
+            return redirect()->route('PersonalIndex');
+        }
     }
     
     public function logout(Request $request){

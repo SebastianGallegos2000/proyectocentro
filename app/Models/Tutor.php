@@ -24,7 +24,7 @@ class Tutor extends Model
 
     //Relacion uno a muchos (inversa) con mascotas
     public function mascotas(){
-        return $this->belongsTo('App\Models\Mascotas');
+        return $this->hasMany('App\Models\Mascotas');
     }
 
     protected $table = 'tutores';

@@ -191,5 +191,12 @@ class TutorController extends Controller
         //
     }
 
+    public function mascotasTutor($id)
+    {
+        $tutor = Tutor::find($id);
+        $mascotas = $tutor->mascotas;
+        return view('mascotasTutor', compact('mascotas', 'tutor'));
+    }
+
 
 }

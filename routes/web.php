@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AtencionesController;
 use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\MyVController;
@@ -78,19 +79,15 @@ Route::get('no-autorizado',function(){
 |--------------------------------------------------------------------------
 */
 
-Route::get('/usuarios',UsuarioController::class)->name('usuarios');
 
 
 //Route::get('/registroTutor', [TutorController::class, 'create'])->name('registroTutor');
 Route::get('/tutor/create', [TutorController::class, 'create'])->name('createTutorAdmin');
 Route::post('/tutor/store', [TutorController::class, 'store'])->name('storeTutor');
-Route::get('/tutor/{id}/edit', [TutorController::class, 'edit'])->name('editTutor');
-Route::post('/tutor/{tutor}/update', [TutorController::class, 'update'])->name('updateTutor');
+Route::get('/tutor/{id}/edit', [TutorController::class, 'edit'])->middleware(['auth','roltutor'])->name('editTutor');
+Route::post('/tutor/{tutor}/update', [TutorController::class, 'update'])->middleware(['auth','roltutor'])->name('updateTutor');
 
-//Editar tutores desde la vista administrador
-Route::get('/tutor/{tutor}/editTutorAdmin', [TutorController::class, 'editTutorAdmin'])->name('editTutorAdmin');
-//Actualizar tutores desde la vista administrador
-Route::post('/tutor/{tutor}/updateTutorAdmin', [TutorController::class, 'updateTutorAdmin'])->name('updateTutorAdmin');
+
 
 
 Route::get('/perfilTutor', [TutorController::class, 'show'])->middleware(['auth','roltutor'])->name('perfilTutor');
@@ -105,6 +102,8 @@ Route::post('/solicitudCitas/store', [SolicitudCitasController::class, 'store'])
 Route::get('/events', [SolicitudCitasController::class, 'getEvents']);
 
 Route::get('/citaAgendada', [SolicitudCitasController::class, 'citaAgendada'])->middleware(['auth','roltutor'])->name('citaAgendada');
+
+Route::get('/horarios_ocupados', [SolicitudCitasController::class, 'getHorariosOcupados']);
 //RUTAS DE PERSONAL
 
 Route::get('/insumoIndex', [InsumoController::class, 'index'])->middleware(['auth','rolpersonal'])->name('insumoIndex');
@@ -113,6 +112,7 @@ Route::post('/insumo/store', [InsumoController::class, 'store'])->middleware(['a
 Route::get('/insumo/{insumo}/edit', [InsumoController::class, 'edit'])->middleware(['auth','rolpersonal'])->name('editInsumo');
 Route::post('/insumo/{insumo}/update', [InsumoController::class, 'update'])->middleware(['auth','rolpersonal'])->name('updateInsumo'); 
 Route::delete('/insumo/{id}', [InsumoController::class, 'destroy'])->name('destroyInsumo');
+Route::get('/insumo/{id}/activate', [InsumoController::class, 'activate'])->middleware(['auth','rolpersonal'])->name('activeInsumo');
 
 Route::get('/insumo/{insumo}/editInsumoAdmin', [InsumoController::class, 'editInsumoAdmin'])->name('editInsumoAdmin');
 Route::post('insumo/{insumo}/updateInsumoAdmin', [InsumoController::class, 'updateInsumoAdmin'])->name('updateInsumoAdmin');
@@ -125,57 +125,70 @@ Route::post('/personal/{personal}/update', [PersonalController::class, 'update']
 
 Route::get('/citasPersonal', [PersonalController::class, 'citas'])->middleware(['auth','rolpersonal'])->name('citasPersonal');
 
+Route::get('/tutor/{id}/mascotas', [TutorController::class, 'mascotasTutor'])->middleware('auth','rolpersonal')->name('mascotasTutor');
+
+
+Route::get('/atencion/create/{id}', [AtencionesController::class, 'create'])->name('createAtencion');
 //RUTAS DE ADMINISTRADOR
 
-Route::get('/adminIndex', [AdminController::class, 'index'])->name('adminIndex');
-Route::get('/admin/create', [AdminController::class, 'create'])->name('createAdmin');
-Route::post('/admin/store', [AdminController::class, 'store'])->name('storeAdmin');
-Route::get('/admin/{admin}/edit', [AdminController::class, 'edit'])->name('editAdmin');
-Route::post('/admin/{admin}/update', [AdminController::class, 'update'])->name('updateAdmin');
+Route::get('/adminIndex', [AdminController::class, 'index'])->middleware(['auth','roladmin'])->name('adminIndex');
+Route::get('/admin/create', [AdminController::class, 'create'])->middleware(['auth','roladmin'])->name('createAdmin');
+Route::post('/admin/store', [AdminController::class, 'store'])->middleware(['auth','roladmin'])->name('storeAdmin');
+Route::get('/admin/{admin}/edit', [AdminController::class, 'edit'])->middleware(['auth','roladmin'])->name('editAdmin');
+Route::post('/admin/{admin}/update', [AdminController::class, 'update'])->middleware(['auth','roladmin'])->name('updateAdmin');
 
-Route::get('/insumoIndexAdmin', [InsumoController::class, 'indexAdmin'])->name('insumoIndexAdmin');
-Route::get('/insumo/createAdmin', [InsumoController::class, 'createAdmin'])->name('createInsumoAdmin');
-Route::post('/insumo/storeAdmin', [InsumoController::class, 'storeAdmin'])->name('storeInsumoAdmin');
+Route::get('/insumoIndexAdmin', [InsumoController::class, 'indexAdmin'])->middleware(['auth','roladmin'])->name('insumoIndexAdmin');
+Route::get('/insumo/createAdmin', [InsumoController::class, 'createAdmin'])->middleware(['auth','roladmin'])->name('createInsumoAdmin');
+Route::post('/insumo/storeAdmin', [InsumoController::class, 'storeAdmin'])->middleware(['auth','roladmin'])->name('storeInsumoAdmin');
 
-Route::get('citasAdmin', [AdminController::class, 'citas'])->name('citasAdmin');
+Route::get('citasAdmin', [AdminController::class, 'citas'])->middleware(['auth','roladmin'])->name('citasAdmin');
 //Route para utilizar el destroy de insumo
-Route::delete('/insumoAdmin/{id}', [InsumoController::class, 'destroyAdmin'])->name('destroyInsumoAdmin');
-
-Route::get('/tipoAtencionIndex', [TipoAtencionController::class, 'index'])->name('tipoAtencionIndex');
-Route::get('/tipoAtencion/create', [TipoAtencionController::class, 'create'])->name('createTipoAtencion');
-Route::post('/tipoAtencion/store', [TipoAtencionController::class, 'store'])->name('storeTipoAtencion');
-Route::get('/tipoAtencion/{tipoAtencion}/edit', [TipoAtencionController::class, 'edit'])->name('editTipoAtencion');
-Route::post('/tipoAtencion/{tipoAtencion}/update', [TipoAtencionController::class, 'update'])->name('updateTipoAtencion');
-
-Route::get('/rolesIndex', [RolController::class, 'index'])->name('rolesIndex');
-Route::get('/roles/create', [RolController::class, 'create'])->name('createRol');
-Route::post('/roles/store', [RolController::class, 'store'])->name('storeRol');
-Route::get('/roles/{role}/edit', [RolController::class, 'edit'])->name('editRol');
-Route::post('/roles/{role}/update', [RolController::class, 'update'])->name('updateRol');
+Route::delete('/insumoAdmin/{id}', [InsumoController::class, 'destroyAdmin'])->middleware(['auth','roladmin'])->name('destroyInsumoAdmin');
+Route::get('/insumo/{id}/activateAdmin', [InsumoController::class, 'activateAdmin'])->middleware(['auth','roladmin'])->name('activeInsumoAdmin');
 
 
-Route::get('/comunaIndex', [ComunaController::class, 'index'])->name('comunaIndex');
-Route::get('/comuna/create', [ComunaController::class, 'create'])->name('createComuna');
-Route::post('/comuna/store', [ComunaController::class, 'store'])->name('storeComuna');
-Route::get('/comuna/{comuna}/edit', [ComunaController::class, 'edit'])->name('editComuna');
-Route::post('/comuna/{comuna}/update', [ComunaController::class, 'update'])->name('updateComuna');
+Route::get('/tipoAtencionIndex', [TipoAtencionController::class, 'index'])->middleware(['auth','roladmin'])->name('tipoAtencionIndex');
+Route::get('/tipoAtencion/create', [TipoAtencionController::class, 'create'])->middleware(['auth','roladmin'])->name('createTipoAtencion');
+Route::post('/tipoAtencion/store', [TipoAtencionController::class, 'store'])->middleware(['auth','roladmin'])->name('storeTipoAtencion');
+Route::get('/tipoAtencion/{tipoAtencion}/edit', [TipoAtencionController::class, 'edit'])->middleware(['auth','roladmin'])->name('editTipoAtencion');
+Route::post('/tipoAtencion/{tipoAtencion}/update', [TipoAtencionController::class, 'update'])->middleware(['auth','roladmin'])->name('updateTipoAtencion');
 
-Route::get('/razamascotaIndex', [RazaMascotaController::class, 'index'])->name('razamascotaIndex');
-Route::get('/razamascota/create', [RazaMascotaController::class, 'create'])->name('createRazaMascota');
-Route::post('/razamascota/store', [RazaMascotaController::class, 'store'])->name('storeRazaMascota');
-Route::get('/razamascota/{razamascotum}/edit', [RazaMascotaController::class, 'edit'])->name('editRazaMascota');
-Route::post('/razamascota/{razamascotum}/update', [RazaMascotaController::class, 'update'])->name('updateRazaMascota');
+Route::get('/rolesIndex', [RolController::class, 'index'])->middleware(['auth','roladmin'])->name('rolesIndex');
+Route::get('/roles/create', [RolController::class, 'create'])->middleware(['auth','roladmin'])->name('createRol');
+Route::post('/roles/store', [RolController::class, 'store'])->middleware(['auth','roladmin'])->name('storeRol');
+Route::get('/roles/{role}/edit', [RolController::class, 'edit'])->middleware(['auth','roladmin'])->name('editRol');
+Route::post('/roles/{role}/update', [RolController::class, 'update'])->middleware(['auth','roladmin'])->name('updateRol');
 
-Route::get('/especialidadIndex', [EspecialidadController::class, 'index'])->name('especialidadIndex');
-Route::get('/especialidad/create', [EspecialidadController::class, 'create'])->name('createEspecialidad');
-Route::post('/especialidad/store', [EspecialidadController::class, 'store'])->name('storeEspecialidad');
-Route::get('/especialidad/{especialidad}/edit', [EspecialidadController::class, 'edit'])->name('editEspecialidad');
-Route::post('/especialidad/{especialidad}/update', [EspecialidadController::class, 'update'])->name('updateEspecialidad');
 
-Route::get('/personal/{id}/edit', [PersonalController::class, 'edit'])->name('editPersonal');
+Route::get('/comunaIndex', [ComunaController::class, 'index'])->middleware(['auth','roladmin'])->name('comunaIndex');
+Route::get('/comuna/create', [ComunaController::class, 'create'])->middleware(['auth','roladmin'])->name('createComuna');
+Route::post('/comuna/store', [ComunaController::class, 'store'])->middleware(['auth','roladmin'])->name('storeComuna');
+Route::get('/comuna/{comuna}/edit', [ComunaController::class, 'edit'])->middleware(['auth','roladmin'])->name('editComuna');
+Route::post('/comuna/{comuna}/update', [ComunaController::class, 'update'])->middleware(['auth','roladmin'])->name('updateComuna');
 
+Route::get('/razamascotaIndex', [RazaMascotaController::class, 'index'])->middleware(['auth','roladmin'])->name('razamascotaIndex');
+Route::get('/razamascota/create', [RazaMascotaController::class, 'create'])->middleware(['auth','roladmin'])->name('createRazaMascota');
+Route::post('/razamascota/store', [RazaMascotaController::class, 'store'])->middleware(['auth','roladmin'])->name('storeRazaMascota');
+Route::get('/razamascota/{razamascotum}/edit', [RazaMascotaController::class, 'edit'])->middleware(['auth','roladmin'])->name('editRazaMascota');
+Route::post('/razamascota/{razamascotum}/update', [RazaMascotaController::class, 'update'])->middleware(['auth','roladmin'])->name('updateRazaMascota');
+
+Route::get('/especialidadIndex', [EspecialidadController::class, 'index'])->middleware(['auth','roladmin'])->name('especialidadIndex');
+Route::get('/especialidad/create', [EspecialidadController::class, 'create'])->middleware(['auth','roladmin'])->name('createEspecialidad');
+Route::post('/especialidad/store', [EspecialidadController::class, 'store'])->middleware(['auth','roladmin'])->name('storeEspecialidad');
+Route::get('/especialidad/{especialidad}/edit', [EspecialidadController::class, 'edit'])->middleware(['auth','roladmin'])->name('editEspecialidad');
+Route::post('/especialidad/{especialidad}/update', [EspecialidadController::class, 'update'])->middleware(['auth','roladmin'])->name('updateEspecialidad');
+
+Route::get('/usuarios',[UsuarioController::class,'index'])->middleware(['auth','roladmin'])->name('usuarios');
+
+
+Route::get('/personal/{id}/edit', [PersonalController::class, 'edit'])->middleware(['auth','roladmin'])->name('editPersonal');
+
+Route::get('/tutor/{id}/editTutorAdmin', [TutorController::class, 'editTutorAdmin'])->middleware(['auth','roladmin'])->name('editTutorAdmin');
+Route::post('/tutor/{id}/updateTutorAdmin', [TutorController::class, 'updateTutorAdmin'])->middleware(['auth','roladmin'])->name('updateTutorAdmin');
+Route::get('/personal/{id}/editPersonalAdmin', [PersonalController::class, 'editPersonalAdmin'])->middleware(['auth','roladmin'])->name('editPersonalAdmin');
+Route::post('/personal/{id}/updatePersonalAdmin', [PersonalController::class, 'updatePersonalAdmin'])->middleware(['auth','roladmin'])->name('updatePersonalAdmin');
 //Route::get('/editPersonalUser', [PersonalController::class, 'editUserView'])->name('editPersonalView');
-Route::post('/updatePersonalUser', [PersonalController::class, 'UpdateUser'])->name('updatePersonalUser');
-Route::get('/personal/create', [PersonalController::class, 'create'])->name('createPersonal');
-Route::post('/personal/store', [PersonalController::class, 'store'])->name('storePersonal');
+Route::post('/updatePersonalUser', [PersonalController::class, 'UpdateUser'])->middleware(['auth','roladmin'])->name('updatePersonalUser');
+Route::get('/personal/create', [PersonalController::class, 'create'])->middleware(['auth','roladmin'])->name('createPersonal');
+Route::post('/personal/store', [PersonalController::class, 'store'])->middleware(['auth','roladmin'])->name('storePersonal');
 

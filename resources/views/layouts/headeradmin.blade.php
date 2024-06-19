@@ -59,12 +59,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('citasAdmin')}}">Citas</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"> Perfil</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/logout">Editar Perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('logoutPersonal')}}">Cerrar sesión</a>
                 </li>
             </ul>
         </div>

@@ -19,6 +19,11 @@ class SolicitudCitas extends Model
         return $this->belongsTo(TipoAtencion::class);
     }
 
+    //Relación uno a muchos (inversa) con Atenciones
+    public function atenciones(){
+        return $this->belongsTo(Atenciones::class);
+    }
+
     protected $table = 'solicitudcitas';
     protected $primaryKey = 'id';
     protected $fillable = [

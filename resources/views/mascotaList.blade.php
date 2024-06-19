@@ -40,7 +40,7 @@
                 <td class="fw-bold">{{$mascota->nroChip_Mascota}}</td>
                 <td>{{$mascota->nombre_Mascota}}</td>
                 <td>{{$mascota->especie_Mascota}}</td>
-                <td>{{$mascota->razamascota ? $mascota->razamascota->nombre_Razamascota : 'N/A'}}</td>                
+                <td>{{$mascota->razamascotas ? $mascota->razamascotas->nombre_Razamascota : 'N/A'}}</td>                
                 <td>{{$mascota->peso_Mascota}}</td>
                 <td>{{$mascota->edad_Mascota}}</td>
                 <td>{{$mascota->sexo_Mascota}}</td>

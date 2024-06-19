@@ -163,4 +163,30 @@ class InsumoController extends Controller
     
         return redirect(route('insumoIndexAdmin'))->with('success', 'Insumo eliminado correctamente.');
     }
+
+    public function activate($id){
+        $insumo = Insumo::find($id);
+    
+        if ($insumo == null) {
+            return redirect(route('insumoIndex'))->with('error', 'Insumo no encontrado.');
+        }
+    
+        $insumo->estado_Insumo = 1;
+        $insumo->save();
+    
+        return redirect(route('insumoIndex'))->with('success', 'Insumo activado correctamente.');
+    }
+
+    public function activateAdmin($id){
+        $insumo = Insumo::find($id);
+    
+        if ($insumo == null) {
+            return redirect(route('insumoIndexAdmin'))->with('error', 'Insumo no encontrado.');
+        }
+    
+        $insumo->estado_Insumo = 1;
+        $insumo->save();
+    
+        return redirect(route('insumoIndexAdmin'))->with('success', 'Insumo activado correctamente.');
+    }
 }

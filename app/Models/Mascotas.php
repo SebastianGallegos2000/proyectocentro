@@ -16,7 +16,7 @@ class Mascotas extends Model
 
     //Relación uno a muchos con raza mascota
     public function razamascotas(){
-        return $this->belongsTo('App\Models\RazaMascota');
+        return $this->belongsTo('App\Models\RazaMascota','razamascota_id');
     }
 
     //Relación uno a muchos con tipo atencion
@@ -25,6 +25,7 @@ class Mascotas extends Model
     }
 
     protected $table = 'mascotas';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'tutor_id',
         'nombre_Mascota',

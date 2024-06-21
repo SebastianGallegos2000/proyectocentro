@@ -10,8 +10,16 @@
     Quienes somos
 </h1>
 <p>
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
-</p>
+    Bienvenidos al Centro Veterinario Municipal de Atención Primaria de Viña del Mar, 
+    una iniciativa comprometida con la salud y el bienestar de las mascotas de nuestra comuna. 
+    Nuestro centro fue creado como parte de la promesa de nuestra alcaldesa Ripamonti, enfocada 
+    en fomentar la tenencia responsable de mascotas a través de servicios veterinarios de alta 
+    calidad a un costo accesible.
+
+    Nuestro equipo está compuesto por profesionales dedicados, apasionados por los animales y 
+    comprometidos con brindar la mejor atención a cada uno de nuestros pacientes. Contamos con 
+    instalaciones modernas y equipadas para ofrecer una amplia gama de servicios, desde consultas 
+    y vacunaciones hasta Cirugías para sus mascotas.</p>
 </center>
 
 @endsection

@@ -18,6 +18,8 @@ use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\SolicitudCitasController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\TipoAtencionController;
+use App\Http\Controllers\BlockTimeController;
+use App\Http\Controllers\BlockDayController;
 use GuzzleHttp\Middleware;
 
 /*
@@ -49,6 +51,7 @@ Route::post('/inicia-sesion-personal', [LogInPersonalesController::class, 'login
 Route::get('/logoutTutores', [LogInTutoresController::class, 'logout'])->name('logoutTutor');
 Route::get('/logoutPersonal', [LogInPersonalesController::class, 'logout'])->name('logoutPersonal');
 
+Route::get('/mascotas/{mascota}/historial', [MascotasController::class, 'historial'])->name('historialMascota');
 
 /*
 |--------------------------------------------------------------------------	
@@ -99,6 +102,7 @@ Route::post('/mascota/{mascota}/update', [MascotasController::class, 'update'])-
 
 Route::get('/solicitudCitas/create/{mascota}', [SolicitudCitasController::class, 'create'])->middleware(['auth','roltutor'])->name('solicitudCitas');
 Route::post('/solicitudCitas/store', [SolicitudCitasController::class, 'store'])->middleware(['auth','roltutor'])->name('storeSolicitudCitas');
+
 Route::get('/events', [SolicitudCitasController::class, 'getEvents']);
 
 Route::get('/citaAgendada', [SolicitudCitasController::class, 'citaAgendada'])->middleware(['auth','roltutor'])->name('citaAgendada');
@@ -129,6 +133,10 @@ Route::get('/tutor/{id}/mascotas', [TutorController::class, 'mascotasTutor'])->m
 
 
 Route::get('/atencion/create/{id}', [AtencionesController::class, 'create'])->name('createAtencion');
+Route::post('/atencion/store', [AtencionesController::class, 'store'])->name('storeAtencion');
+
+Route::post('/solicitud_citas/{id}/cancelar', [SolicitudCitasController::class, 'cancelar' ]);
+
 //RUTAS DE ADMINISTRADOR
 
 Route::get('/adminIndex', [AdminController::class, 'index'])->middleware(['auth','roladmin'])->name('adminIndex');
@@ -191,4 +199,9 @@ Route::post('/personal/{id}/updatePersonalAdmin', [PersonalController::class, 'u
 Route::post('/updatePersonalUser', [PersonalController::class, 'UpdateUser'])->middleware(['auth','roladmin'])->name('updatePersonalUser');
 Route::get('/personal/create', [PersonalController::class, 'create'])->middleware(['auth','roladmin'])->name('createPersonal');
 Route::post('/personal/store', [PersonalController::class, 'store'])->middleware(['auth','roladmin'])->name('storePersonal');
+
+Route::post('/blockTime', [BlockTimeController::class, 'store'])->name('blockTime');
+Route::post('/blockDay', [BlockDayController::class, 'store'])->name('blockDay');
+Route::post('/unblockDay', [BlockDayController::class, 'unblockDay'])->name('unblockDay');
+Route::post('/unblockTime', [BlockTimeController::class, 'unblockTime'])->name('unblockTime');
 

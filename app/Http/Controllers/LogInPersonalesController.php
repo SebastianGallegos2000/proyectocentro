@@ -60,7 +60,7 @@ class LogInPersonalesController
             return redirect()->route('adminIndex');
         } else {
             // Redirige a la ruta que corresponda para el rol 2
-            return redirect()->route('PersonalIndex');
+            return redirect()->route('privadaPersonal');
         }
     }
     

@@ -8,6 +8,9 @@ use App\Models\TipoAtencion;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Models\BlockedDay;
+use App\Models\BlockedTime;
 
 class SolicitudCitasController extends Controller
 {
@@ -35,29 +38,53 @@ class SolicitudCitasController extends Controller
      */
     public function store(Request $request)
     {
-        //Validacion de los campos
-        $request->validate([
-            'mascota_id' => 'required',
-            'tipoatencion_id' => 'required',
-            'fecha_SolicitudCita' => 'required',
-            'horaInicio_SolicitudCita' => 'required',
-            'horaTermino_SolicitudCita' => 'required',
-            'estado_SolicitudCita' => 'required',
-        ]);
-    
-        // Verificar si ya existe una solicitud de cita con la misma fecha, hora y tipo de atención
-        $existingSolicitud = SolicitudCitas::where('fecha_SolicitudCita', $request->fecha_SolicitudCita)
-            ->where('horaInicio_SolicitudCita', $request->horaInicio_SolicitudCita)
-            ->where('tipoatencion_id', $request->tipoatencion_id)
-            ->first();
-    
-        if ($existingSolicitud) {
-            // Si existe, mostrar un mensaje de error
-            return back()->withErrors(['error' => 'No puede agendar porque ya está agendado en ese horario.']);
+    //Validacion de los campos
+    $request->validate([
+        'mascota_id' => 'required',
+        'tipoatencion_id' => 'required',
+        'fecha_SolicitudCita' => 'required',
+        'horaInicio_SolicitudCita' => 'required',
+        'estado_SolicitudCita' => 'required',
+    ]);
+
+        // Verificar si el día está bloqueado
+        $diaBloqueado = BlockedDay::where('date', $request->fecha_SolicitudCita)->first();
+        if ($diaBloqueado) {
+            // Si el día está bloqueado, mostrar un mensaje de error
+            return back()->withErrors(['error' => 'No puedes agendar en día bloqueado.']);
         }
-    
+
+
+        // Calcular la hora de término que es 30 minutos después de la hora de inicio
+        $horaInicio = Carbon::createFromFormat('H:i:s', $request->horaInicio_SolicitudCita);
+        $horaTermino = $horaInicio->addMinutes(30)->format('H:i:s');
+
+        // Verificar si el horario está bloqueado
+        $horaBloqueada = BlockedTime::where('blockDate', $request->fecha_SolicitudCita)
+            ->where('hora_inicio', '<=', $request->horaInicio_SolicitudCita)
+            ->where('hora_termino', '>=', $horaTermino)
+            ->first();
+        if ($horaBloqueada) {
+            // Si el horario está bloqueado, mostrar un mensaje de error
+            return back()->withErrors(['error' => 'No puedes agendar en un horario bloqueado.']);
+        }
+
+
+        // Verificar si ya existen dos solicitudes de cita con la misma fecha, misma hora de inicio y diferentes tipoatencion_id
+        $existingSolicitudesCount = SolicitudCitas::where('fecha_SolicitudCita', $request->fecha_SolicitudCita)
+            ->where('horaInicio_SolicitudCita', $request->horaInicio_SolicitudCita)
+            ->distinct('tipoatencion_id')
+            ->count();
+        
+        if ($existingSolicitudesCount >= 2) {
+            // Si existen, mostrar un mensaje de error
+            return back()->withErrors(['error' => 'No puede agendar porque ya existen dos citas con la misma fecha, misma hora de inicio y diferentes tipos de atención.']);
+        }    
+
+
         //Se crea una nueva solicitud de cita
         $solicitud = new SolicitudCitas();
+
         //Se le asignan los datos del formulario
         $solicitud->mascota_id = $request->mascota_id;
         $solicitud->tipoatencion_id = $request->tipoatencion_id;
@@ -68,18 +95,16 @@ class SolicitudCitasController extends Controller
         // Calcula la hora de término
         $horaInicio = Carbon::createFromFormat('H:i:s', $request->horaInicio_SolicitudCita);
         if ($request->tipoatencion_id == 1) {
-            $horaTermino = $horaInicio->addMinutes(30)->format('H:i:s');
+            $horaTermino = $horaInicio->copy()->addMinutes(30)->format('H:i:s');
         } else {
-            $horaTermino = $horaInicio->addHour()->format('H:i:s');
+            $horaTermino = $horaInicio->copy()->addHour()->format('H:i:s');
         }
 
         $solicitud->horaTermino_SolicitudCita = $horaTermino;
         $solicitud->estado_SolicitudCita = $request->estado_SolicitudCita;
         $solicitud->save();
-    
         // Almacenar la solicitud en la sesión
         session(['solicitud' => $solicitud]);
-
 
         return redirect()->route('citaAgendada', ['solicitud' => $solicitud]);
         //Se le envía un correo electrónico a la persona que agendó la cita
@@ -90,22 +115,54 @@ class SolicitudCitasController extends Controller
         //Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
     }
 
-    public function getEvents()
-    {
-        $solicitudes = SolicitudCitas::all();
+public function getEvents()
+{
+    // Obtener las citas
+    $citas = SolicitudCitas::where('estado_SolicitudCita', 1)->get();
+    
+    // Obtener los días bloqueados
+    $blockedDays = DB::table('blocked_days')->get();
 
-        $events = [];
+    // Obtener los horarios bloqueados
+    $blockedTimes = DB::table('blocked_time')->get();
 
-        foreach ($solicitudes as $solicitud) {
-            $events[] = [
-                'title' => $solicitud->tipoatencion->nombre_TipoAtencion . ' - ' . $solicitud->mascota->nombre_Mascota,
-                'start' => $solicitud->fecha_SolicitudCita . 'T' . $solicitud->horaInicio_SolicitudCita,
-                'end' => $solicitud->fecha_SolicitudCita . 'T' . $solicitud->horaTermino_SolicitudCita,
-            ];
+    $events = [];
+
+    // Agregar las citas al array de eventos
+    foreach ($citas as $cita) {
+        $events[] = [
+            'title' => $cita->mascota->nombre_Mascota . ' - ' . $cita->tipoatencion->nombre_TipoAtencion,
+            'start' => $cita->fecha_SolicitudCita . 'T' . $cita->horaInicio_SolicitudCita,
+            'end' => $cita->fecha_SolicitudCita . 'T' . $cita->horaTermino_SolicitudCita,
+        ];
     }
 
-        return response()->json($events);
+    // Agregar los días bloqueados al array de eventos
+    foreach ($blockedDays as $day) {
+        $events[] = [
+            'title' => 'Bloqueado',
+            'start' => $day->date,
+            'end' => $day->date,
+            'display' => 'background',
+            'overlap' => false,
+            'color' => '#ff9f89'
+        ];
     }
+
+    // Agregar los horarios bloqueados al array de eventos
+    foreach ($blockedTimes as $time) {
+        $events[] = [
+            'title' => 'Bloqueado',
+            'start' => $time->blockDate . 'T' . $time->hora_inicio,
+            'end' => $time->blockDate . 'T' . $time->hora_termino,
+            'display' => 'background',
+            'overlap' => false,
+            'color' => '#ff9f89'
+        ];
+    }
+
+    return response()->json($events);
+}
 
     public function getHorariosOcupados(Request $request)
     {
@@ -116,10 +173,21 @@ class SolicitudCitasController extends Controller
         $horariosOcupados = SolicitudCitas::where([
             ['tipoatencion_id', '=', $tipoatencion_id],
             ['fecha_SolicitudCita', '=', $fecha_SolicitudCita]
-        ])->pluck('horaInicio_SolicitudCita');
+        ])->get(['horaInicio_SolicitudCita', 'horaFin_SolicitudCita']);
+    
+        // Convertir los horarios ocupados a un formato que FullCalendar pueda entender
+        $events = [];
+        foreach ($horariosOcupados as $horario) {
+            $events[] = [
+                'title' => 'Ocupado',
+                'start' => $horario->horaInicio_SolicitudCita,
+                'end' => $horario->horaFin_SolicitudCita,
+                'color' => '#ff9f89'
+            ];
+        }
     
         // Devolver los horarios ocupados como un array
-        return response()->json($horariosOcupados->toArray());
+        return response()->json($events);
     }
 
     public function citaAgendada(SolicitudCitas $solicitud)
@@ -129,6 +197,15 @@ class SolicitudCitasController extends Controller
 
 
         return view('agendada',['solicitud' => $solicitud]);
+    }
+
+    public function cancelar($id)
+    {
+        $solicitud = SolicitudCitas::find($id);
+        $solicitud->estado_SolicitudCita = 0;
+        $solicitud->save();
+
+        return response()->json(['success' => true]);
     }
 
     /**

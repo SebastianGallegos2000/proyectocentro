@@ -10,9 +10,10 @@
             Misión
         </h3>
         <h4>
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            Nuestra misión es proporcionar servicios veterinarios de calidad a precios accesibles, 
+            promoviendo la salud y el bienestar de las mascotas en Viña del Mar. Trabajamos incansablemente 
+            para fomentar la tenencia responsable de animales, ofreciendo educación, prevención y tratamientos 
+            adecuados para garantizar una mejor calidad de vida para nuestras mascotas y sus familias.
         </h4>
     </div>
     <div>
@@ -20,9 +21,10 @@
             Visión
         </h3>
         <h4>
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            Ser reconocidos como el centro veterinario líder en atención primaria de la comuna, destacándonos 
+            por nuestro compromiso con la excelencia en el cuidado de mascotas y la educación de sus dueños. 
+            Aspiramos a crear una comunidad donde todos los animales reciban el cuidado y el respeto que merecen, 
+            contribuyendo a una sociedad más consciente y responsable con sus mascotas.
         </h4>
     </div>
     <div>
@@ -30,9 +32,19 @@
             Compromiso
         </h3>
         <h4>
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            En el Centro Veterinario Municipal de Atención Primaria de Viña del Mar, estamos comprometidos con:
+            <h4> 1.)Calidad en la Atención: Proporcionar servicios veterinarios de alta calidad, 
+                asegurando que cada mascota reciba el mejor cuidado posible.
+            </h4>
+            <h4> 2.)Accesibilidad: Ofrecer nuestros servicios a precios accesibles para todas 
+                las familias de la comuna, facilitando el acceso a la atención veterinaria.
+            </h4>
+            <h4> 3.)Educación y Prevención: Promover la tenencia responsable a través de la educación de los 
+                dueños de mascotas, impartiendo conocimientos sobre prevención y cuidado.
+            </h4>
+            <h4> 4.)Bienestar Animal: Priorizar el bienestar y la salud de cada animal que atendemos, 
+                tratando a cada mascota con cariño, respeto y profesionalismo.
+            </h4>
         </h4>
     </div>
 </div>

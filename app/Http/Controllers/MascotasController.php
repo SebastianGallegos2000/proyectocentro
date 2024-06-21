@@ -6,6 +6,7 @@ use App\Models\Mascotas;
 use App\Models\RazaMascota;
 use App\Models\Tutor;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,6 +62,9 @@ class MascotasController extends Controller
         $mascota->estado_Mascota = $request->estado_Mascota;
         $mascota->save();
 
+        $this->historial($mascota->id);
+
+
         return redirect(route('privada'));
     }
 
@@ -79,6 +83,16 @@ class MascotasController extends Controller
         $razamascotas = RazaMascota::all();
 
         return view('mascotaList', compact('mascotas','razamascotas'));
+    }
+
+    public function historial($id)
+    {
+        $mascota = Mascotas::find($id);
+        $atenciones = $mascota->atenciones; // Asegúrate de tener una relación "atenciones" en tu modelo Mascota
+
+        $pdf = PDF::loadView('historial', compact('mascota', 'atenciones'));
+
+        return $pdf->download('historial.pdf');
     }
 
     /**

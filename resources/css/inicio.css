@@ -167,10 +167,21 @@ footer{
     width: 20%;
 
 }
+#form-control-atencion{
+    width: 100%;
+    padding-left: 1%;
+}
+#form-group-atencion{
+    padding-left: 0%;
+}
+#peso_Atencion{
+    width: 6%;
+}
 .form-select{
     width: 20%;
 
 }
+
 #btnCancelarSesion{
     color: white;
     background-color: #DB1111;

@@ -28,6 +28,7 @@ class Personal extends Model
             return $this->belongsTo('\App\Models\Especialidad');
         }
 
+
     protected $table = 'personales';
     protected $primaryKey = 'id';
     protected $fillable = [

@@ -70,7 +70,7 @@
                 <select name="especialidad_id" class="form-select" id="">
                     <option value="">-- Elige especialidad --</option>
                     @foreach($especialidades as $especialidad)
-                        <option value="{{ $especialidad->id }}">
+                        <option value="{{ $especialidad->id }}" {{ $personal->especialidad->id == $especialidad->id ? 'selected' : '' }}>
                             {{ $especialidad->nombre_Especialidad }}
                         </option>
                     @endforeach
@@ -90,7 +90,7 @@
             </div>
 
         <div id="botonCrear" class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
-            <button type="submit" class="btn btn-primary">Crear</button>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
         </div>
     </div>
 </form>

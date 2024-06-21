@@ -6,8 +6,8 @@
     <div class="row" id="container-text">
 
         <div class="container p-5 my-5 border">
+            <H4 style="margin-bottom: 5%">SOLICITUDES</H4>
             <table id="table-solicitudes" class="display responsive nowrap" width="100%">
-                <H4>SOLICITUDES</H4>
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -33,7 +33,7 @@
                     @if($solicitud->estado_SolicitudCita == 1)
                     <td>
                         <a href="{{ route('createAtencion', ['id' => $solicitud->id]) }}" class="btn btn-success">Atender</a>
-                        <a href="" class="btn btn-danger" type="button">Cancelar</a>
+                        <a href="#" class="btn btn-danger cancel-button" data-id="{{ $solicitud->id }}" type="button">Cancelar</a>
                     </td>
                     @endif
                     @if($solicitud->estado_SolicitudCita == 0)
@@ -64,7 +64,7 @@
             } );
         </script>
 
-    <div id='calendar'></div>
+    <div id='calendar' style="margin-top: 10%"></div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -79,7 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
             minute: '2-digit',
             meridiem: 'short'
         },
-        slotMinTime: '07:00:00',
+        slotMinTime: '08:00:00',
+        slotMaxTime: '19:00:00',
+        contentHeight: 'auto',
         customButtons: {
             expandToday: {
                 text: 'Expandir Hoy',
@@ -97,6 +99,35 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     calendar.render();
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    $('.cancel-button').on('click', function(e) {
+        e.preventDefault();
+
+        var confirmation = confirm('¿Estás seguro de que quieres cancelar esta solicitud?');
+        if (!confirmation) {
+            return;
+        }
+
+        var solicitudId = $(this).data('id');
+
+        $.ajax({
+            url: '/solicitud_citas/' + solicitudId + '/cancelar',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function() {
+                location.reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error(textStatus, errorThrown);
+            }
+        });
+    });
 });
 </script>
 </div>

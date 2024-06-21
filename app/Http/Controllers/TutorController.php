@@ -167,11 +167,15 @@ class TutorController extends Controller
         $tutor = Tutor::find($tutor);
     
         //Actualizar los datos
-        $persona->update($request->all());
-        $user->update([
-            'password_Usuario' => Hash::make($request->password_Usuario)
-        ]);
+        //Si el usuario no modifica la contraseña, se mantiene la misma.
+        if($request->password_Usuario != null){
+            $user->password = Hash::make($request->password_Usuario);
+        }
+    
+        $user->save();
+    
         $tutor->update($request->all());
+        $persona->update($request->all());
     
         return redirect(route('usuarios'))->with('success','Usuario actualizado con éxito en el sistema');   
     }

@@ -156,27 +156,12 @@ class PersonalController extends Controller
     }
 
 
-    public function updatePersonalAdmin(Request $request)
+    public function updatePersonalAdmin(Request $request, $personal)
     {
-        //Validar los datos
-        $request->validate([
-            'rut_Persona' => 'required|integer',
-            'dv_Persona' => 'required|string|max:1',
-            'password_Usuario' => 'required|string|max:50',
-            'nombre_Persona' => 'required|string|max:50',
-            'apellido_Persona' => 'required|string|max:50',
-            'correo_Persona' => 'required|email|max:50',
-            'fechaNac_Persona' => 'required|date',
-            'telefono_Persona' => 'required|string|max:12',
-            'especialidad_id' => 'required|integer',
-            'estado_Persona' => 'required|integer',
-            'estado_Usuario' => 'required|integer',
-            'estado_Personal' => 'required|integer'
-        ]);
 
-        $personal = Personal::find(Auth::user()->persona->personal->id);
-        $persona = Persona::find(Auth::user()->persona->id);
-        $usuario = User::find(Auth::id());
+        $persona = Persona::find($personal);
+        $user = User::find($persona->user_id);
+        $personal = Personal::find($personal);
 
         //Actualizar los datos
         $persona->update($request->all());

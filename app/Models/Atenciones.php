@@ -14,6 +14,7 @@ class Atenciones extends Model
         return $this->hasMany(SolicitudCitas::class);
     }
 
+
     protected $table = 'atenciones';
     protected $primaryKey = 'id';
     protected $fillable = [

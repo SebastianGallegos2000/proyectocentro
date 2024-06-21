@@ -55,7 +55,7 @@
               <h2>Consulta Control Sano</h2>
             </div>
             <div class="flip-box-back">
-              <h2>Back Side</h2>
+              <h2>$2.500</h2>
             </div>
           </div>
         </div>

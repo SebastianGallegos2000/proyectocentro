@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('solicitudcita_id');
             $table->unsignedBigInteger('personal_id');
-            $table->string('observacion_Atencion');
+            $table->text('observacion_Atencion');
             $table->integer('peso_Atencion');
             $table->boolean('estado_Atencion');
             $table->timestamps();

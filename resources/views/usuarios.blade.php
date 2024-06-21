@@ -132,8 +132,8 @@
         <td>{{$tutor->persona->correo_Persona}}</td>
         <td>{{ \Carbon\Carbon::parse($tutor->persona->fechaNac_Persona)->format('d-m-Y') }}</td>
         <td>{{$tutor->persona->telefono_Persona}}</td>
-        <td><a href="{{ asset('storage/fotocopiacarnet/' . $tutor->persona->apellido_Persona .'_Fotocopia_Carnet.pdf') }}">Ver Fotocopia Carnet</a></td>
-        <td><a href="{{ asset('storage/registrosocial/' . $tutor->persona->apellido_Persona .'_Registro_Social.pdf') }}">Ver Registro Social</a></td>
+        <td><a href="{{ asset('storage/fotocopiacarnet/' . $tutor->persona->rut_Persona .'_Fotocopia_Carnet.pdf') }}">Ver Fotocopia Carnet</a></td>
+        <td><a href="{{ asset('storage/registrosocial/' . $tutor->persona->rut_Persona .'_Registro_Social.pdf') }}">Ver Registro Social</a></td>
         <td>{{$tutor->persona->estado_Persona }}</td>
 
 

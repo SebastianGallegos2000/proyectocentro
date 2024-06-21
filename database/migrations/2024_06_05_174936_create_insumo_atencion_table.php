@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('insumo_atencion', function (Blueprint $table) {
             $table->unsignedBigInteger('id_Insumo_Nav');
-            $table->unsignedBigInteger('id_SolicitudCita_Nav');
+            $table->unsignedBigInteger('id_Atencion_Nav');
+            $table->integer('cantidad');
+            $table->timestamps();
 
 
-            $table->foreign('id_SolicitudCita_Nav')->references('id')->on('solicitudcitas');
+            $table->foreign('id_Atencion_Nav')->references('id')->on('atenciones');
             $table->foreign('id_Insumo_Nav')->references('id')->on('insumos');
 
         });

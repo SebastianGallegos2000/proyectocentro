@@ -31,9 +31,7 @@ class User extends Authenticatable
         return $this->hasOne('\App\Models\Persona');
     }
 
-
     protected $fillable = [
-        'persona_id',
         'rut_Usuario',
         'password_Usuario',
         'estado_Usuario',

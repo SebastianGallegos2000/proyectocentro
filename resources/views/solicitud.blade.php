@@ -92,7 +92,7 @@
 
                 <div class="mb-3">
                     <strong>Horario Inicio:</strong>
-                    <input type="text" name="horaInicio_SolicitudCita" id="timepicker_inicio" class="form-control" placeholder="" value="" >
+                    <input type="text" name="horaInicio_SolicitudCita" id="timepicker_inicio" class="form-control" placeholder="" value="" readonly>
                     <h5>(Recuerda que los horarios de Cirugía y los Horarios de Control son diferentes)</h5>
                     <h5>(Si tienes una camada de 5 o más mascotas, debes agendar 2 horas con la opción Consulta)</h5>
                 </div>
@@ -103,26 +103,44 @@
             <div class="col-md-6">
             <div class="mb-3" id="controlSanoHorarios" style="display: none;">
                 <strong>Horarios disponibles control sano:</strong>
-                @for ($i = 8; $i <= 18; $i += 0.5)
-                    @php
-                        $hora = str_pad(floor($i), 2, '0', STR_PAD_LEFT) . ':' . (($i - floor($i)) == 0.5 ? '30' : '00') . ':00';
-                    @endphp
-                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '{{ $hora }}'">
-                        {{ $hora }}
-                    </button>
-                @endfor
+                <div>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '08:00:00'">08:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '08:30:00'">08:30:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '09:00:00'">09:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '09:30:00'">09:30:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '10:00:00'">10:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '10:30:00'">10:30:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '11:00:00'">11:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '11:30:00'">11:30:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '12:00:00'">12:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '12:30:00'">12:30:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '14:00:00'">14:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '14:30:00'">14:30:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '15:00:00'">15:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '15:30:00'">15:30:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '16:00:00'">16:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '16:30:00'">16:30:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '17:00:00'">17:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '17:30:00'">17:30:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '18:00:00'">18:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '18:30:00'">18:30:00</button>
+                </div>
             </div>
 
             <div class="mb-3" id="cirugiaHorarios" style="display: none;">
                 <strong>Horarios disponibles cirugía:</strong>
-                @for ($i = 8; $i <= 18; $i++)
-                    @php
-                        $hora = str_pad($i, 2, '0', STR_PAD_LEFT) . ':00'.':00';
-                    @endphp
-                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '{{ $hora }}'">
-                        {{ $hora }}
-                    </button>
-                @endfor
+                <div>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '08:00:00'">08:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '09:00:00'">09:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '10:00:00'">10:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '11:00:00'">11:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '12:00:00'">12:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '14:00:00'">14:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '15:00:00'">15:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '16:00:00'">16:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '17:00:00'">17:00:00</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('timepicker_inicio').value = '18:00:00'">18:00:00</button>
+                </div>
             </div>
 
             <div class="mb-3">
@@ -160,7 +178,9 @@
                             minute: '2-digit',
                             meridiem: 'short'
                         },
-                        slotMinTime: '07:00:00',
+                        slotMinTime: '08:00:00',
+                        slotMaxTime: '19:00:00',
+                        contentHeight: 'auto',
                         customButtons: {
                             expandToday: {
                                 text: 'Expandir Hoy',
@@ -181,60 +201,27 @@
                 });
             </script>
         </form>
-
         <script>
-        $(document).ready(function(){
-            // Configuración inicial del timepicker
-            $('#timepicker_inicio, #timepicker_final').timepicker({
-                timeFormat: 'HH:mm:ss',
-                minTime: '8:00',
-                maxTime: '17:00',
-                defaultTime: '8:00',
-                startTime: '8:00',
-                dynamic: false,
-                dropdown: true,
-                scrollbar: true,
-            });
-
-            // Detectar cambios en el select de tipoatencion_id y en el timepicker de horaInicio_SolicitudCita
-            $('select[name="tipoatencion_id"], #timepicker_inicio').change(function() {
-                var selectedValue = $('select[name="tipoatencion_id"]').val();
-                var startTime = $('#timepicker_inicio').timepicker('getTime');
-            
-                if (selectedValue == '1') {
-                    // Si el valor seleccionado es 1, establecer el intervalo a 30 minutos
-                    $('#timepicker_inicio').timepicker('option', 'interval', 30);
-                    var endTime = new Date(startTime.getTime() + 30*60000);
-                    $('#timepicker_final').timepicker('setTime', endTime);
-                } else if (selectedValue > '1') {
-                    // Si el valor seleccionado es mayor a 1, establecer el intervalo a 1 hora
-                    $('#timepicker_inicio').timepicker('option', 'interval', 60);
-                    var endTime = new Date(startTime.getTime() + 60*60000);
-                    $('#timepicker_final').timepicker('setTime', endTime);
-                }
-            });
-        });
-        </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            document.getElementById('tipoatencion_id').addEventListener('change', function() {
-                var cirugiaHorarios = document.getElementById('cirugiaHorarios');
-                var controlSanoHorarios = document.getElementById('controlSanoHorarios');
-                var horariosElement;
-                var fechaSolicitudCita = document.getElementById('datepicker').value;
-
-                if (this.value == '1') {
-                    controlSanoHorarios.style.display = 'block';
-                    cirugiaHorarios.style.display = 'none';
-                    horariosElement = controlSanoHorarios;
-                } else {
-                    controlSanoHorarios.style.display = 'none';
-                    cirugiaHorarios.style.display = 'block';
-                    horariosElement = cirugiaHorarios;
-                }
-            
-                // Hacer una solicitud AJAX para obtener los horarios ocupados
-                fetch(`/horarios_ocupados?tipoatencion_id=${this.value}&fecha_SolicitudCita=${fechaSolicitudCita}`)
+            document.addEventListener('DOMContentLoaded', () => {
+                const tipoAtencion = document.getElementById('tipoatencion_id');
+                tipoAtencion.addEventListener('change', function() {
+                    const cirugiaHorarios = document.getElementById('cirugiaHorarios');
+                    const controlSanoHorarios = document.getElementById('controlSanoHorarios');
+                    let horariosElement;
+                    const fechaSolicitudCita = document.getElementById('datepicker').value;
+        
+                    if (this.value == '1') {
+                        controlSanoHorarios.style.display = 'block';
+                        cirugiaHorarios.style.display = 'none';
+                        horariosElement = controlSanoHorarios;
+                    } else {
+                        controlSanoHorarios.style.display = 'none';
+                        cirugiaHorarios.style.display = 'block';
+                        horariosElement = cirugiaHorarios;
+                    }
+                    console.log(this.value, fechaSolicitudCita);
+                    // Hacer una solicitud AJAX para obtener los horarios ocupados
+                    fetch(`/horarios_ocupados?tipoatencion_id=${this.value}&fecha_SolicitudCita=${fechaSolicitudCita}`)
                     .then(response => response.json())
                     .then(data => {
                         // Iterar sobre los horarios y deshabilitar el botón si el horario está ocupado
@@ -242,19 +229,20 @@
                             let hora = String(Math.floor(i)).padStart(2, '0') + ':' + ((i - Math.floor(i)) == 0.5 ? '30' : '00') + ':00';
                             let button = horariosElement.querySelector(`button[value="${hora}"]`);
                             if (button) {
+                                // Verificar si la hora del botón está en los datos
                                 if (data.includes(hora)) {
-                                    button.setAttribute('disabled', 'disabled');
-                                    button.setAttribute('tabindex', '-1');
+                                    // Si es así, ocultar el botón
+                                    button.style.display = 'none';
                                 } else {
-                                    button.removeAttribute('disabled');
-                                    button.removeAttribute('tabindex');
+                                    // Si no, mostrar el botón
+                                    button.style.display = 'block';
                                 }
                             }
                         }
                     });
+                });
             });
-        });
-    </script>
+        </script>
     </div>
 </div>
     @endsection

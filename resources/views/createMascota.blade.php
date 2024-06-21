@@ -2,8 +2,9 @@
 @section('title','Crear Mascota')
 @section('content')
 
-<div class="container p-4">
-    <div class="col-12">
+<div class="container" id="container-user">
+    <div class="row" id="container-text">
+            <div class="col-12">
         <div>
             <h2>Crear Mascota</h2>
         </div>

@@ -50,9 +50,8 @@
                     @if ($insumo->estado_Insumo == 0)
                         <a href="insumo/{{$insumo->id}}/activateAdmin" class="btn btn-success">Activar</a>
                     @elseif ($insumo->estado_Insumo == 1)
-                        <a href="insumo/{{$insumo->id}}/edit" class="btn btn-dark" >Editar</a>
-                        <a href="" class="btn btn-warning">Agregar Inventario</a>
-                        <form action="{{ route('destroyInsumo', $insumo->id) }}"  method="POST">
+                        <a href="insumo/{{$insumo->id}}/editInsumoAdmin" class="btn btn-dark" >Editar</a>
+                        <form action="{{ route('destroyInsumoAdmin', $insumo->id) }}"  method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar este insumo?')">Eliminar</button>
@@ -65,13 +64,21 @@
         </table>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="//cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.js"></script>
+        <script src="https://cdn.datatables.net/responsive/3.0.2/js/responsive.bootstrap5.js"></script>
         <script>
             $(document).ready( function () { //cambia el idioma a español
                 
                 $('#table-insumos').DataTable({
+                    responsive:true,
                     language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
-                }
+                },
+                columnDefs: [
+                    { responsivePriority: 1, targets: 0 },
+                    { responsivePriority: 2, targets: 6 }
+                ]
+                    
                 });
             } );
         </script>

@@ -126,6 +126,11 @@
                 document.getElementById('unblockTime').value = time;
             }
         </script>
+                <script>
+                    function setTime(time) {
+                        document.getElementById('blockTime').value = time;
+                    }
+                </script>
         <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');

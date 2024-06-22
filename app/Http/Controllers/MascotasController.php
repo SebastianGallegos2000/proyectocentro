@@ -6,7 +6,7 @@ use App\Models\Mascotas;
 use App\Models\RazaMascota;
 use App\Models\Tutor;
 use App\Models\User;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -87,12 +87,64 @@ class MascotasController extends Controller
 
     public function historial($id)
     {
+        //Obtener a la mascota y sus atenciones
         $mascota = Mascotas::find($id);
-        $atenciones = $mascota->atenciones; // Asegúrate de tener una relación "atenciones" en tu modelo Mascota
+        // Cargar la relación 'solicitudcitas' junto con 'atenciones' si aún no está cargada.
+        $mascota->load('solicitudcitas.atenciones');
+        // Pasar el número de chip a la vista, si existe
+        $numeroChip = $mascota->nroChip_Mascota ?? null;
+        // Usar flatMap para aplanar todas las atenciones en una sola colección.
+        // Luego, filtrar para mantener solo aquellas atenciones con estado_Atencion igual a 2.
+        $atenciones = $mascota->solicitudcitas->flatMap(function ($solicitudCita) {
+            return $solicitudCita->atenciones;
+        })->filter(function ($atencion) {
+            return $atencion->estado_Atencion == 2;
+        });
+        // Pasar datos a la vista que genera el PDF
+        $datosParaPDF = [
+            'mascota' => $mascota,
+            'numeroChip' => $numeroChip,
+            'atenciones' => $atenciones,
+            // Otros datos necesarios para el PDF
+        ];
+    
+        $pdf = PDF::loadView('historial', $datosParaPDF);
+    
 
-        $pdf = PDF::loadView('historial', compact('mascota', 'atenciones'));
+        $fechaActual = date('Y-m-d');
+        $nombreArchivo = "Hoja_Procedimientos_{$mascota->nombre_Mascota}_{$fechaActual}.pdf";
+        return $pdf->download($nombreArchivo);
+    }
 
-        return $pdf->download('historial.pdf');
+    public function historialStream($id)
+    {
+        //Obtener a la mascota y sus atenciones
+        $mascota = Mascotas::find($id);
+        // Cargar la relación 'solicitudcitas' junto con 'atenciones' si aún no está cargada.
+        $mascota->load('solicitudcitas.atenciones');
+        // Pasar el número de chip a la vista, si existe
+        $numeroChip = $mascota->nroChip_Mascota ?? null;
+        // Usar flatMap para aplanar todas las atenciones en una sola colección.
+        // Luego, filtrar para mantener solo aquellas atenciones con estado_Atencion igual a 2.
+        $atenciones = $mascota->solicitudcitas->flatMap(function ($solicitudCita) {
+            return $solicitudCita->atenciones;
+        })->filter(function ($atencion) {
+            return $atencion->estado_Atencion == 2;
+        });
+        // Pasar datos a la vista que genera el PDF
+        $datosParaPDF = [
+            'mascota' => $mascota,
+            'numeroChip' => $numeroChip,
+            'atenciones' => $atenciones,
+            // Otros datos necesarios para el PDF
+        ];
+    
+        $pdf = PDF::loadView('historial', $datosParaPDF);
+    
+
+        $fechaActual = date('Y-m-d');
+        $nombreArchivo = "Hoja_Procedimientos_{$mascota->nombre_Mascota}_{$fechaActual}.pdf";
+        return $pdf->stream($nombreArchivo);
     }
 
     /**

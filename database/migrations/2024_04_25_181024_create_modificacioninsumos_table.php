@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('personal_id');
             $table->unsignedBigInteger('insumo_id');
-            $table->timestamp('fechayhora_ModificacionInventario',precision:0);
-            $table->string('cantidad_ModificacionInventario');
-            $table->integer('estado_ModificacionInventario');
+            $table->timestamp('fechayhora_ModificacionInsumo',precision:0);
+            $table->string('cantidad_ModificacionInsumo');
+            $table->integer('estado_ModificacionInsumo');
             $table->timestamps();
 
             $table->foreign('personal_id')->references('id')->on('personales');

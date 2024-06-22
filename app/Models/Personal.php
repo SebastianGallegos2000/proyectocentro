@@ -28,13 +28,18 @@ class Personal extends Model
             return $this->belongsTo('\App\Models\Especialidad');
         }
 
+        //Relacion uno a muchos (inversa) con Atenciones
+        public function atenciones(){
+            return $this->belongsTo('App\Models\Atenciones');
+        }
 
-    protected $table = 'personales';
-    protected $primaryKey = 'id';
-    protected $fillable = [
-        'persona_id',
-        'especialidad_id',
-        'estado_Personal'
-    ];
+
+        protected $table = 'personales';
+        protected $primaryKey = 'id';
+        protected $fillable = [
+            'persona_id',
+            'especialidad_id',
+            'estado_Personal'
+        ];
 }
 

@@ -24,7 +24,7 @@
     </div>
 @endif
 
-    <form action="{{ route('updateInsumo',$insumo) }}" method="POST">
+    <form action="{{ route('updateInsumoAdmin',$insumo) }}" method="POST">
     @csrf
         <div class="container p-4">
             <div class="mb-3 row">
@@ -46,7 +46,7 @@
                     <input type="text" name="costo_Insumo" class="form-control" placeholder="14300" value="{{$insumo->costo_Insumo}}">
                 </div>
                 <div class="mb-3">
-                    <input type="text" name="costo_Insumo" class="form-control" placeholder="" hidden value="1">
+                    <input type="text" name="estado_Insumo" class="form-control" placeholder="" hidden value="1">
                 </div>
                 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">

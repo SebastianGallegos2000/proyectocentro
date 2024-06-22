@@ -78,7 +78,7 @@ class SolicitudCitasController extends Controller
         
         if ($existingSolicitudesCount >= 2) {
             // Si existen, mostrar un mensaje de error
-            return back()->withErrors(['error' => 'No puede agendar porque ya existen dos citas con la misma fecha, misma hora de inicio y diferentes tipos de atención.']);
+            return back()->withErrors(['error' => 'No puede agendar porque ya están los cupos llenos para ese horario.']);
         }    
 
 

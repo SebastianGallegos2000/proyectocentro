@@ -52,6 +52,7 @@ Route::get('/logoutTutores', [LogInTutoresController::class, 'logout'])->name('l
 Route::get('/logoutPersonal', [LogInPersonalesController::class, 'logout'])->name('logoutPersonal');
 
 Route::get('/mascotas/{mascota}/historial', [MascotasController::class, 'historial'])->name('historialMascota');
+Route::get('/mascotas/{mascota}/historialStream', [MascotasController::class, 'historialStream'])->name('historialMascotaStream');
 
 /*
 |--------------------------------------------------------------------------	
@@ -115,7 +116,7 @@ Route::get('/insumo/create', [InsumoController::class, 'create'])->middleware(['
 Route::post('/insumo/store', [InsumoController::class, 'store'])->middleware(['auth','rolpersonal'])->name('storeInsumo');
 Route::get('/insumo/{insumo}/edit', [InsumoController::class, 'edit'])->middleware(['auth','rolpersonal'])->name('editInsumo');
 Route::post('/insumo/{insumo}/update', [InsumoController::class, 'update'])->middleware(['auth','rolpersonal'])->name('updateInsumo'); 
-Route::delete('/insumo/{id}', [InsumoController::class, 'destroy'])->name('destroyInsumo');
+Route::delete('/insumo/{id}', [InsumoController::class, 'destroy'])->name('destroyInsumoAdmin');
 Route::get('/insumo/{id}/activate', [InsumoController::class, 'activate'])->middleware(['auth','rolpersonal'])->name('activeInsumo');
 
 Route::get('/insumo/{insumo}/editInsumoAdmin', [InsumoController::class, 'editInsumoAdmin'])->name('editInsumoAdmin');
@@ -132,11 +133,13 @@ Route::get('/citasPersonal', [PersonalController::class, 'citas'])->middleware([
 Route::get('/tutor/{id}/mascotas', [TutorController::class, 'mascotasTutor'])->middleware('auth','rolpersonal')->name('mascotasTutor');
 
 
-Route::get('/atencion/create/{id}', [AtencionesController::class, 'create'])->name('createAtencion');
+Route::get('/atencion/create/{id}', [AtencionesController::class, 'create'])->middleware('auth','rolpersonal') ->name('createAtencion');
 Route::post('/atencion/store', [AtencionesController::class, 'store'])->name('storeAtencion');
 
 Route::post('/solicitud_citas/{id}/cancelar', [SolicitudCitasController::class, 'cancelar' ]);
 
+Route::get('/insumo/{id}/agregarCantidadView', [InsumoController::class,'agregarCantidadView'])->name('agregarCantidadView');
+Route::post('/insumo/{id}/agregarCantidad', [InsumoController::class,'procesarCantidad'])->name('agregarCantidad');
 //RUTAS DE ADMINISTRADOR
 
 Route::get('/adminIndex', [AdminController::class, 'index'])->middleware(['auth','roladmin'])->name('adminIndex');

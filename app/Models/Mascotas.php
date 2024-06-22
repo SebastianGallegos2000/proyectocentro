@@ -10,8 +10,8 @@ class Mascotas extends Model
     use HasFactory;
 
     //Relacion uno a muchos con tutor
-    public function tutores(){
-        return $this->belongsTo('App\Models\Tutores','tutor_id');
+    public function tutor(){
+        return $this->belongsTo('App\Models\Tutor','tutor_id');
     }
 
     //Relación uno a muchos con raza mascota
@@ -19,9 +19,9 @@ class Mascotas extends Model
         return $this->belongsTo('App\Models\RazaMascota','razamascota_id');
     }
 
-    //Relación uno a muchos con tipo atencion
-    public function tipoatencions(){
-        return $this->belongsTo('App\Models\TipoAtencion');
+    //Relacion con SolicitudCita
+    public function solicitudcitas(){
+        return $this->hasMany(SolicitudCitas::class,'mascota_id');
     }
 
     protected $table = 'mascotas';

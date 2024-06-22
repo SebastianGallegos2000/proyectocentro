@@ -40,7 +40,7 @@ class AtencionesController extends Controller
     {
         //Validacion de los campos
         $request->validate([
-            'solicitudcita_id' => 'required',
+            'solicitudcita_id' => 'required|unique:atenciones,solicitudcita_id',
             'personal_id' => 'required',
             'observacion_Atencion' => 'required',
             'peso_Atencion' => 'required',

@@ -132,3 +132,14 @@ th{
     border-color: #008419;
     box-shadow: 3px 3px 3px #999;
 }
+
+.guardar-btn-container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+}
+
+#div-formulario{
+    position: relative;
+}

@@ -38,7 +38,7 @@
 
                 <div class="mb-3">
                     <strong>Digito verificador:</strong>
-                    <input type="text" name="dv_Persona" class="form-control" placeholder="1" value="{{old('dv_Persona')}}" >
+                    <input type="text" name="dv_Persona" class="form-control" placeholder="1" maxlength="1" value="{{old('dv_Persona')}}" >
                 </div>
 
                 <div class="mb-3">

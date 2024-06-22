@@ -9,9 +9,10 @@ class TipoAtencion extends Model
 {
     use HasFactory;
 
-    //Relación uno a muchos con mascotas (inversa)
-    public function mascotas(){
-        return $this->hasMany('App\Models\Mascotas');
+
+    //Relación uno a muchos con SolicitudCitas
+    public function solicitudcitas(){
+        return $this->hasMany('App\Models\SolicitudCitas');
     }
 
     protected $table = 'tipoatenciones';

@@ -195,10 +195,28 @@ class TutorController extends Controller
         //
     }
 
-    public function mascotasTutor($id)
+    public function mascotasTutor($userId)
     {
-        $tutor = Tutor::find($id);
-        $mascotas = $tutor->mascotas;
+        $user = User::find($userId);
+        if (!$user) {
+            // Manejar el caso en que el usuario no se encuentra
+            return redirect()->back()->withErrors(['message' => 'Usuario no encontrado']);
+        }
+    
+        $persona = $user->persona; // Asumiendo que existe la relación persona en el modelo User
+        if (!$persona) {
+            // Manejar el caso en que la persona no se encuentra
+            return redirect()->back()->withErrors(['message' => 'Persona no encontrada para el usuario']);
+        }
+    
+        $tutor = $persona->tutor; // Asumiendo que existe la relación tutor en el modelo Persona
+        if (!$tutor) {
+            // Manejar el caso en que el tutor no se encuentra
+            return redirect()->back()->withErrors(['message' => 'Tutor no encontrado para la persona']);
+        }
+    
+        $mascotas = Mascotas::where('tutor_id', $tutor->id)->get();
+        
         return view('mascotasTutor', compact('mascotas', 'tutor'));
     }
 

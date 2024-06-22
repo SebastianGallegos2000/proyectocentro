@@ -53,7 +53,7 @@
                         <a href="insumo/{{$insumo->id}}/activate" class="btn btn-success">Activar</a>
                     @elseif ($insumo->estado_Insumo != 0)
                         <a href="insumo/{{$insumo->id}}/edit" class="btn btn-dark" >Editar</a>
-                        <a href="" class="btn btn-warning">Agregar Inventario</a>
+                        <a href="{{route('agregarCantidadView',$insumo->id)}}" class="btn btn-warning">Modificar Cantidad</a>
                         <form action="{{ route('destroyInsumo', $insumo->id) }}"  method="POST">
                             @csrf
                             @method('DELETE')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Insumo;
+use App\Models\ModificacionInsumo; // Add this line
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -111,12 +112,16 @@ class InsumoController extends Controller
     {
         $request->validate([
             'nombre_Insumo' =>'required',
-            'cantidad_Insumo' => 'required',
             'stockCritico_Insumo' => 'required',
             'costo_Insumo' => 'required'
 
         ]);
-        $insumo->update($request->all());
+        $insumo->nombre_Insumo = $request->nombre_Insumo;
+        if ($request->has('cantidad_Insumo')) {
+            $insumo->cantidad_Insumo = $request->cantidad_Insumo;
+        }        $insumo->stockCritico_Insumo = $request->stockCritico_Insumo;
+        $insumo->costo_Insumo = $request->costo_Insumo;
+        $insumo->save();        
         return redirect()->route('insumoIndex')->with('success','Insumo actualizado con éxito al sistema');    
     }
 
@@ -129,7 +134,12 @@ class InsumoController extends Controller
             'costo_Insumo' => 'required'
 
         ]);
-        $insumo->update($request->all());
+        $insumo->nombre_Insumo = $request->nombre_Insumo;
+        if ($request->has('cantidad_Insumo')) {
+            $insumo->cantidad_Insumo = $request->cantidad_Insumo;
+        }        $insumo->stockCritico_Insumo = $request->stockCritico_Insumo;
+        $insumo->costo_Insumo = $request->costo_Insumo;
+        $insumo->save();   
         return redirect()->route('insumoIndexAdmin')->with('success','Insumo actualizado con éxito al sistema');    
     }
 
@@ -188,5 +198,34 @@ class InsumoController extends Controller
         $insumo->save();
     
         return redirect(route('insumoIndexAdmin'))->with('success', 'Insumo activado correctamente.');
+    }
+
+    public function agregarCantidadView($id)
+    {
+        $insumo = Insumo::findOrFail($id);
+        return view('agregarCantidad', compact('insumo'));
+    }
+    
+    public function procesarCantidad(Request $request, $id)
+    {
+        $insumo = Insumo::findOrFail($id);
+        $cantidadAgregar = $request->input('cantidad');
+    
+        // Asumiendo que tienes un modelo User que está relacionado con Personal
+        $personalId = auth()->user()->persona->personal->id; // Asegúrate de ajustar esta línea según tu estructura de base de datos
+    
+        // Actualizar la cantidad del insumo
+        $insumo->cantidad_Insumo += $cantidadAgregar;
+        $insumo->save();
+    
+        // Crear el registro de modificación
+        $modificacion = new ModificacionInsumo();
+        $modificacion->personal_id = $personalId;
+        $modificacion->insumo_id = $id;
+        $modificacion->fechayhora_ModificacionInsumo = now();
+        $modificacion->cantidad_ModificacionInsumo = $cantidadAgregar;
+        $modificacion->estado_ModificacionInsumo = 1; // Asumiendo que 1 es el estado activo
+        $modificacion->save();    
+        return redirect()->route('insumoIndex')->with('success', 'Cantidad agregada correctamente.');
     }
 }

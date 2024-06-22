@@ -39,9 +39,8 @@
                     <td>{{$mascota->sexo_Mascota}}</td>
     
                     <td class="d-flex flex-wrap justify-content-start">
-                        <a href="" class="btn btn-dark mr-2 mb-2" id="boton-accion">ATENDER</a>
-                        <a href="" class="btn btn-danger mr-2 mb-2" id="boton-accion">PDF</a>
-                        <a href="" class="btn btn-warning mr-2 mb-2" id="boton-accion">👁</a>
+                        <a href="/mascotas/{{$mascota->id}}/historial" class="btn btn-danger mr-2 mb-2" id="boton-accion">PDF</a>
+                        <a href="/mascotas/{{$mascota->id}}/historialStream" target="_blank" class="btn btn-warning mr-2 mb-2" id="boton-accion">👁</a>
                     </td>
                 </tr>
                 @endforeach

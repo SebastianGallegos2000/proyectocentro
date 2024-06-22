@@ -68,6 +68,30 @@
     </div>
 </div>
 
+
+<div class="container" id="container-user">
+    <div class="row" id="container-text">
+        <h4>
+            Datos del tutor
+        </h4>
+        <div class="col-sm" id="user-1">
+            <label id="dato">{{ $mascota->tutor->persona->rut_Persona}}</label>
+        </div>
+        <div class="col-sm" id="user-1">
+            <label id="dato">{{ $mascota->tutor->persona->nombre_Persona}}</label>
+        </div>
+        <div class="col-sm" id="user-1">
+            <label id="dato">{{ $mascota->tutor->persona->apellido_Persona}}</label>
+        </div>
+        <div class="col-sm" id="user-1">
+            <label id="dato">{{ $mascota->tutor->persona->correo_Persona}}</label>
+        </div>
+        <div class="col-sm" id="user-1">
+            <label id="dato">{{ $mascota->tutor->persona->telefono_Persona}}</label>
+        </div>
+    </div>
+</div>
+
 <div class="container" id="container-user">
     <div class="row" id="container-text">
         @if ($errors->any())
@@ -100,6 +124,7 @@
     <div class="row" id="container-text">
         <form action="{{route('storeAtencion')}}" method="POST">
             @csrf
+            <div id="div-formulario">
             <input type="hidden" name="solicitudcita_id" value="{{ $solicitud->id }}">
             <input type="hidden" name="personal_id" value="{{ auth()->user()->persona->personal->id }}">
 
@@ -141,9 +166,10 @@
                 </div>
                 <button type="button" id="add-insumo" class="btn btn-primary mt-2">Agregar otro insumo</button>
             </div>
-            <div class="d-flex justify-content-center mt-3">
+            <div class="guardar-btn-container">
                 <button type="submit" class="btn btn-primary" id="botón-guardar-atencion">Guardar</button>
             </div>
+        </div>
         </form>
         
         <script>
@@ -161,6 +187,19 @@
                 newCantidad.className = 'col';
                 newCantidad.innerHTML = '<input type="number" class="form-control" name="cantidad[]" placeholder="0">';
                 newRow.appendChild(newCantidad);
+            
+                // Crear y añadir el botón de eliminar
+                var deleteButtonDiv = document.createElement('div');
+                deleteButtonDiv.className = 'col-auto';
+                var deleteButton = document.createElement('button');
+                deleteButton.className = 'btn btn-danger';
+                deleteButton.innerHTML = 'x';
+                deleteButton.type = 'button';
+                deleteButton.addEventListener('click', function() {
+                    newRow.remove();
+                });
+                deleteButtonDiv.appendChild(deleteButton);
+                newRow.appendChild(deleteButtonDiv);
             
                 insumosList.appendChild(newRow);
             });

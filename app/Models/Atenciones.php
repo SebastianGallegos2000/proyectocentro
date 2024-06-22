@@ -11,7 +11,12 @@ class Atenciones extends Model
 
     //Relación uno a muchos con SolicitudCitas
     public function solicitudcitas(){
-        return $this->hasMany(SolicitudCitas::class);
+        return $this->belongsTo(SolicitudCitas::class,'solicitudcita_id');
+    }
+
+    //Relación uno a muchos con Personal
+    public function personal(){
+        return $this->belongsTo(Personal::class);
     }
 
 

@@ -19,9 +19,9 @@ class SolicitudCitas extends Model
         return $this->belongsTo(TipoAtencion::class);
     }
 
-    //Relación uno a muchos (inversa) con Atenciones
+    //Relación uno a muchos con Atenciones
     public function atenciones(){
-        return $this->belongsTo(Atenciones::class);
+        return $this->hasMany(Atenciones::class,'solicitudcita_id','id');
     }
 
     protected $table = 'solicitudcitas';

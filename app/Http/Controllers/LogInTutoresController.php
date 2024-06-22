@@ -21,8 +21,8 @@ class LogInTutoresController extends Controller
 
         //validar los datos
         $request->validate([
-            'rut_Persona' => 'required|integer',
-            'dv_Persona' => 'required|string|max:1',
+            'rut_Persona' => ['required', 'numeric', 'valid_rut:'.$request->dv_Persona],
+            'dv_Persona' => 'required|size:1',
             'nombre_Persona' => 'required|string|max:50',
             'apellido_Persona' => 'required|string|max:50',
             'correo_Persona' => 'required|email|max:50',

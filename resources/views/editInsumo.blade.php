@@ -35,7 +35,7 @@
                 </div>
                 <div class="mb-3">
                     <strong>Cantidad:</strong>
-                    <input type="text" name="cantidad_Insumo" class="form-control" placeholder="10" value="{{$insumo->cantidad_Insumo}}">
+                    <input type="text" name="cantidad_Insumo" class="form-control" placeholder="10" value="{{$insumo->cantidad_Insumo}}"disabled readonly>
                 </div>
                 <div class="mb-3">
                     <strong>Stock Critico:</strong>
@@ -46,7 +46,7 @@
                     <input type="text" name="costo_Insumo" class="form-control" placeholder="14300" value="{{$insumo->costo_Insumo}}">
                 </div>
                 <div class="mb-3">
-                    <input type="text" name="costo_Insumo" class="form-control" placeholder="" hidden value="1">
+                    <input type="text" name="estado_Insumo" class="form-control" placeholder="" hidden value="1">
                 </div>
                 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">

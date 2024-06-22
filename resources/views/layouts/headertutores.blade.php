@@ -12,6 +12,7 @@
 
     <!-- Scripts para DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap5.css">
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
 
     <!-- Link para fuentes de google -->

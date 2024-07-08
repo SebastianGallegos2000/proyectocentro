@@ -4,17 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Mascotas;
 use App\Models\RazaMascota;
-use App\Models\Tutor;
-use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
-use App\Models\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MascotasController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega la vista de las mascotas que posean el tutor_id que está logueado.
      */
     public function index()
     {
@@ -23,7 +20,7 @@ class MascotasController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega el formulario para crear una nueva mascota, carga las razamascotas.
      */
     public function create()
     {
@@ -32,12 +29,10 @@ class MascotasController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Se almacena la peticion en la base de datos.
      */
     public function store(Request $request)
     {
-        //dd(Auth::user(), Auth::user()->persona, Auth::user()->persona->tutor);
-
         //Validar los datos - Los datos nroChip_Mascota puede ser null
         $request->validate([
             'nombre_Mascota' => 'required|string|max:50',
@@ -69,13 +64,8 @@ class MascotasController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra la vista de la mascota seleccionada.
      */
-    public function show(Mascotas $mascotas)
-    {
-        //
-    }
-
     public function list()
     {
         //Obtener todas las mascotas
@@ -85,6 +75,9 @@ class MascotasController extends Controller
         return view('mascotaList', compact('mascotas','razamascotas'));
     }
 
+    /**
+     * Se obtienen los datos de la mascota seleccionada para crear el pdf con el historial de atenciones.
+     */
     public function historial($id)
     {
         //Obtener a la mascota y sus atenciones
@@ -116,6 +109,9 @@ class MascotasController extends Controller
         return $pdf->download($nombreArchivo);
     }
 
+    /**
+     * Se obtienen los datos de la mascota seleccionada para crear el pdf en forma de stream con el historial de atenciones.
+     */
     public function historialStream($id)
     {
         //Obtener a la mascota y sus atenciones
@@ -145,29 +141,5 @@ class MascotasController extends Controller
         $fechaActual = date('Y-m-d');
         $nombreArchivo = "Hoja_Procedimientos_{$mascota->nombre_Mascota}_{$fechaActual}.pdf";
         return $pdf->stream($nombreArchivo);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Mascotas $mascotas)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Mascotas $mascotas)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Mascotas $mascotas)
-    {
-        //
     }
 }

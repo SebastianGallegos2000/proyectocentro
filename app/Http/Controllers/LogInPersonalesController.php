@@ -3,8 +3,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admins;
-use App\Models\Personales;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -36,6 +34,7 @@ class LogInPersonalesController
             return back()->withErrors(['rut_Persona' => 'Ningún usuario asociado con el RUT']);
         }
         
+        // Verifica la contraseña del usuario Administrador. (No se encuentra encriptada)
         if ($usuario->rol_id === 3) {
             if ($validatedData['password_Usuario'] !== $usuario->password_Usuario) {
                 return back()->withErrors(['password_Usuario' => 'La contraseña no es correcta']);

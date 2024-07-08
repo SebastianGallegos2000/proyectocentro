@@ -9,7 +9,7 @@ use App\Models\Rol;
 class RolController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega todos los roles que se encuentran en la plataforma.
      */
     public function index()
     {
@@ -18,7 +18,7 @@ class RolController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega el formulario para crear un rol nuevo.
      */
     public function create()
     {
@@ -26,7 +26,7 @@ class RolController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Se almacena el rol agregado.
      */
     public function store(Request $request)
     {
@@ -44,15 +44,7 @@ class RolController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $rol)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Despliega un formulario para editar el rol seleccionado.
      */
     public function edit(Rol $role)
     {
@@ -60,7 +52,7 @@ class RolController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza el rol editado.
      */
     public function update(Request $request, Rol $role)
     {
@@ -70,13 +62,5 @@ class RolController extends Controller
 
         $role->update($request->all());
         return redirect()->route('rolesIndex')->with('succes','Rol actualizado correctamente en el sistema');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $rol)
-    {
-        //
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ComunaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega la vista comunaIndex con los recursos de comuna.
      */
     public function index()
     {
@@ -17,7 +17,7 @@ class ComunaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega la vista con la vista para crear una comuna nueva.
      */
     public function create()
     {
@@ -25,7 +25,7 @@ class ComunaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena los datos de la comuna ingresada en el createComuna.
      */
     public function store(Request $request)
     {
@@ -43,15 +43,7 @@ class ComunaController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Comuna $comuna)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Muestra el formulario con la comuna seleccionada para editar.
      */
     public function edit(Comuna $comuna)
     {
@@ -59,7 +51,7 @@ class ComunaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza los datos de la comuna seleccionada previamente.
      */
     public function update(Request $request, Comuna $comuna)
     {
@@ -67,16 +59,10 @@ class ComunaController extends Controller
         'nombre_Comuna',
         'estado_Comuna'
         ]);
-
-        $comuna->update($request->all());
+        $comuna->nombre_Comuna = ucfirst($request->nombre_Comuna);
+        $comuna->estado_Comuna = $request->estado_Comuna;
+        $comuna->save();
         return redirect()->route('comunaIndex')->with('success','Comuna actualizada con éxito en el sistema');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Comuna $comuna)
-    {
-        //
-    }
 }

@@ -3,25 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Atenciones;
-use App\Models\Mascotas; // Add this line
+use App\Models\Mascotas;
 use App\Models\SolicitudCitas;
-use App\Models\Insumo; // Add this line
+use App\Models\Insumo;
 use App\Models\InsumoAtenciones;
-use App\Models\Personal; // Add this line
 use Illuminate\Http\Request;
 
 class AtencionesController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
+     * Muestra la vista con los recursos de solicitud, mascota y user.
      */
     public function create($id)
     {
@@ -29,12 +20,12 @@ class AtencionesController extends Controller
         $mascota = $solicitud->mascota;
         $user = auth()->user();
 
-        $insumos = Insumo::where('estado_Insumo', 1)->get();
+        $insumos = Insumo::all();
         return view('atencion', ['solicitud' => $solicitud, 'mascota' => $mascota, 'user' => $user, 'insumos'=>$insumos]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda la información en la base de datos.
      */
     public function store(Request $request)
     {
@@ -90,47 +81,7 @@ class AtencionesController extends Controller
             $mascota->nroChip_Mascota = $request->nroChip_Mascota;
             $mascota->update();
         }
-
-        //for ($i = 0; $i < count($request->insumos); $i++) {
-        //    $insumo = new Insumo;
-        //    $insumo->nombre_Insumo = $request->insumos[$i];
-        //    $insumo->cantidad = $request->cantidad[$i];
-        //    $insumo->atencion_id = $atencion->id; // Asume que tienes una relación entre insumos y atenciones
-        //    $insumo->save();
-        //}
         return redirect()->route('citasPersonal')->with('success','Ha terminado con éxito la atención la atención');
 
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Atenciones $atenciones)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Atenciones $atenciones)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Atenciones $atenciones)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Atenciones $atenciones)
-    {
-        //
     }
 }

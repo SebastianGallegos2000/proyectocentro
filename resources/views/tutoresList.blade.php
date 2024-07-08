@@ -46,7 +46,7 @@
                     <td><a href="{{ asset('storage/fotocopiacarnet/' . $tutor->persona->rut_Persona .'_Fotocopia_Carnet.pdf') }}">Ver Fotocopia Carnet</a></td>
                     <td><a href="{{ asset('storage/registrosocial/' . $tutor->persona->rut_Persona .'_Registro_Social.pdf') }}">Ver Registro Social</a></td>
                     <td class="d-flex flex-wrap justify-content-start">
-                    <a href="{{route('mascotasTutor',['id'=>$tutor->id])}}" class="btn btn-dark mr-2 mb-2" id="boton-accion">MASCOTAS</a>
+                    <a href="/tutor/{{$tutor->id}}/mascotas" class="btn btn-dark mr-2 mb-2" id="boton-accion">MASCOTAS</a>
                 </td>
             </tr>
             @endforeach

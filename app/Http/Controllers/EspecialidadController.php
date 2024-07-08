@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class EspecialidadController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega todas las especialdiades en la vista.
      */
     public function index()
     {
@@ -17,7 +17,7 @@ class EspecialidadController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega formulario para crear una especialidad nueva.
      */
     public function create()
     {
@@ -25,7 +25,7 @@ class EspecialidadController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena los datos ingresados en el create.
      */
     public function store(Request $request)
     {
@@ -42,15 +42,7 @@ class EspecialidadController extends Controller
         return redirect()->route('especialidadIndex')->with('succes','Especialidad agregado con éxito al sistema');    }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Especialidad $especialidad)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Muestra el formulario para editar la especialidad seleccionada.
      */
     public function edit(Especialidad $especialidad)
     {
@@ -58,7 +50,7 @@ class EspecialidadController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza los datos ingresados en la especialidad edit.
      */
     public function update(Request $request, Especialidad $especialidad)
     {
@@ -66,16 +58,10 @@ class EspecialidadController extends Controller
             'nombre_Especialidad',
             'estado_Especialidad'
             ]);
+            $especialidad->nombre_Especialidad = ucfirst($request->nombre_Especialidad);
+            $especialidad->estado_Especialidad = $request->estado_Especialidad;
+            $especialidad->save();
             
-            $especialidad->update($request->all());
             return redirect()->route('especialidadIndex')->with('succes','Especialidad actualizada con éxito en el sistema');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Especialidad $especialidad)
-    {
-        //
     }
 }

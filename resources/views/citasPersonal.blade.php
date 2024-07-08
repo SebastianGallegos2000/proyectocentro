@@ -4,7 +4,11 @@
 
 <div class="container" id="container-user">
     <div class="row" id="container-text">
-
+        @if(session('mensaje'))
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+    @endif
         <div class="container p-5 my-5 border">
             <H4 style="margin-bottom: 5%">SOLICITUDES</H4>
             <table id="table-solicitudes" class="display responsive nowrap" width="100%">

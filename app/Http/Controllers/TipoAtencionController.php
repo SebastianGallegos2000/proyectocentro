@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class TipoAtencionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega todas las tipo atencion que están en el sistema.
      */
     public function index()
     {
@@ -16,7 +16,7 @@ class TipoAtencionController extends Controller
         return view('tipoAtencionIndex', ['tipoatenciones'=>$tipoatencion]);    }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega el formulario para crear una nueva tipo de atencion.
      */
     public function create()
     {
@@ -24,7 +24,7 @@ class TipoAtencionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena la informacion.
      */
     public function store(Request $request)
     {
@@ -45,15 +45,7 @@ class TipoAtencionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(TipoAtencion $tipoAtencion)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Despliega un formulario para editar la tipo atencion seleccionada.
      */
     public function edit(TipoAtencion $tipoAtencion)
     {
@@ -61,7 +53,7 @@ class TipoAtencionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza los datos del tipo atencion seleccionado.
      */
     public function update(Request $request, TipoAtencion $tipoAtencion)
     {
@@ -70,17 +62,13 @@ class TipoAtencionController extends Controller
             'costo_TipoAtencion',
             'estado_TipoAtencion'
             ]);
-    
-            $tipoAtencion->update($request->all());
+            $tipoAtencion->nombre_TipoAtencion = ucfirst($request->nombre_TipoAtencion);
+            $tipoAtencion->costo_TipoAtencion = $request->costo_TipoAtencion;
+            $tipoAtencion->estado_TipoAtencion = $request->estado_TipoAtencion;
+            $tipoAtencion->save();
+
             return redirect()->route('tipoAtencionIndex')->with('success','Comuna actualizada con éxito en el sistema');
             
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(TipoAtencion $tipoAtencion)
-    {
-        //
-    }
 }

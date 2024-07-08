@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class BlockDayController extends Controller
 {
+
+    /**
+     * Almacena los días bloqueados en la vista admin..
+     */
     public function store(Request $request)
     {
         $blockDate = $request->input('blockDateOnly');
@@ -20,6 +24,10 @@ class BlockDayController extends Controller
         return back()->with('success', 'Día bloqueado exitosamente');
     }
 
+
+    /**
+     * Desbloquea un día en la vista admin.
+     */
     public function unblockDay(Request $request)
     {
         $date = $request->input('date');

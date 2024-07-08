@@ -28,13 +28,14 @@ class User extends Authenticatable
 
      //Relación uno a uno con Persona
     public function persona(){
-        return $this->hasOne('\App\Models\Persona');
+        return $this->hasOne(Persona::class);
     }
 
     protected $fillable = [
-        'rut_Usuario',
         'password_Usuario',
         'estado_Usuario',
+        'rol_id',
+        'remember_token'
     ];
 
     /**

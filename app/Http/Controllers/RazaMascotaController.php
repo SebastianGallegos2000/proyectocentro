@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class RazaMascotaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega a las razas de las mascotas que se encuentran en la base de datos.
      */
     public function index()
     {
@@ -17,7 +17,7 @@ class RazaMascotaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega el formulario para crear una nueva Raza de Mascota.
      */
     public function create()
     {
@@ -25,7 +25,7 @@ class RazaMascotaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena los datos ingresados para la Raza de Mascota.
      */
     public function store(Request $request)
     {
@@ -43,15 +43,7 @@ class RazaMascotaController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(RazaMascota $razaMascota)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Despliega el formulario para editar la raza de mascota seleccionada.
      */
     public function edit(RazaMascota $razamascotum)
     {
@@ -59,7 +51,7 @@ class RazaMascotaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza los datos de al mascota seleccionada.
      */
     public function update(Request $request, RazaMascota $razamascotum)
     {
@@ -69,13 +61,5 @@ class RazaMascotaController extends Controller
         
         $razamascotum->update($request ->all());
         return redirect()->route('razamascotaIndex')->with('succes','Se ha actualizado con éxito la raza de la mascota');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(RazaMascota $razaMascota)
-    {
-        //
     }
 }

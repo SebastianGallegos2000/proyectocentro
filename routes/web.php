@@ -20,7 +20,9 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\TipoAtencionController;
 use App\Http\Controllers\BlockTimeController;
 use App\Http\Controllers\BlockDayController;
+use App\Mail\AgendadaMailable;
 use GuzzleHttp\Middleware;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,7 +118,7 @@ Route::get('/insumo/create', [InsumoController::class, 'create'])->middleware(['
 Route::post('/insumo/store', [InsumoController::class, 'store'])->middleware(['auth','rolpersonal'])->name('storeInsumo');
 Route::get('/insumo/{insumo}/edit', [InsumoController::class, 'edit'])->middleware(['auth','rolpersonal'])->name('editInsumo');
 Route::post('/insumo/{insumo}/update', [InsumoController::class, 'update'])->middleware(['auth','rolpersonal'])->name('updateInsumo'); 
-Route::delete('/insumo/{id}', [InsumoController::class, 'destroy'])->name('destroyInsumoAdmin');
+Route::delete('/insumo/{id}', [InsumoController::class, 'destroy'])->name('destroyInsumo');
 Route::get('/insumo/{id}/activate', [InsumoController::class, 'activate'])->middleware(['auth','rolpersonal'])->name('activeInsumo');
 
 Route::get('/insumo/{insumo}/editInsumoAdmin', [InsumoController::class, 'editInsumoAdmin'])->name('editInsumoAdmin');
@@ -136,10 +138,17 @@ Route::get('/tutor/{id}/mascotas', [TutorController::class, 'mascotasTutor'])->m
 Route::get('/atencion/create/{id}', [AtencionesController::class, 'create'])->middleware('auth','rolpersonal') ->name('createAtencion');
 Route::post('/atencion/store', [AtencionesController::class, 'store'])->name('storeAtencion');
 
-Route::post('/solicitud_citas/{id}/cancelar', [SolicitudCitasController::class, 'cancelar' ]);
-
+Route::post('/solicitud_citas/{id}/cancelar', [SolicitudCitasController::class, 'cancelar'])->name('cancelarCita');
 Route::get('/insumo/{id}/agregarCantidadView', [InsumoController::class,'agregarCantidadView'])->name('agregarCantidadView');
 Route::post('/insumo/{id}/agregarCantidad', [InsumoController::class,'procesarCantidad'])->name('agregarCantidad');
+
+Route::get('citaAgendadaConÉxito', function(){
+    $solicitud = session('detallesSolicitud'); // Necesitas definir cómo obtener la solicitud
+    Mail::to('gallegostoro.sebastian@gmail.com')->send(new AgendadaMailable($solicitud));
+    return "Mensaje enviado";
+})->name('citaAgendadaConÉxito');
+
+
 //RUTAS DE ADMINISTRADOR
 
 Route::get('/adminIndex', [AdminController::class, 'index'])->middleware(['auth','roladmin'])->name('adminIndex');

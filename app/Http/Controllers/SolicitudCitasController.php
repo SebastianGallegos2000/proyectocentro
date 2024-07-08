@@ -11,19 +11,16 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\BlockedDay;
 use App\Models\BlockedTime;
+use App\Mail\AgendadaMailable;
+use App\Mail\CitaCanceladaMailable;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+
 
 class SolicitudCitasController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
+     * Despliega el formulario para crear una nueva solicitud.
      */
     public function create(Mascotas $mascota):View
     {
@@ -34,7 +31,7 @@ class SolicitudCitasController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena la solicitud de cita en el sistema, verifica si el dia u horario está disponible.
      */
     public function store(Request $request)
     {
@@ -105,37 +102,36 @@ class SolicitudCitasController extends Controller
         $solicitud->save();
         // Almacenar la solicitud en la sesión
         session(['solicitud' => $solicitud]);
+        Session::put('detallesSolicitud', $solicitud); // Asegúrate de reemplazar $detalles con los datos reales que necesitas
+        Mail::to($solicitud->mascota->tutor->persona->correo_Persona)->send(new AgendadaMailable($solicitud));
 
         return redirect()->route('citaAgendada', ['solicitud' => $solicitud]);
-        //Se le envía un correo electrónico a la persona que agendó la cita
-        //$to_name = Auth::user()->persona->nombre_Persona;
-        //$to_email = Auth::user()->persona->correo_Persona;
-        //$data = array('name' => 'Ogbonna Vitalis', 'body' => 'A test mail');
-    
-        //Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
     }
 
-public function getEvents()
-{
-    // Obtener las citas
-    $citas = SolicitudCitas::where('estado_SolicitudCita', 1)->get();
-    
-    // Obtener los días bloqueados
-    $blockedDays = DB::table('blocked_days')->get();
+    /**
+     * Obtiene las solicitudes de citas que se encuentran en el sistema.
+     */
+    public function getEvents()
+    {
+        // Obtener las citas
+        $citas = SolicitudCitas::where('estado_SolicitudCita', 1)->get();
 
-    // Obtener los horarios bloqueados
-    $blockedTimes = DB::table('blocked_time')->get();
+        // Obtener los días bloqueados
+        $blockedDays = DB::table('blocked_days')->get();
 
-    $events = [];
+        // Obtener los horarios bloqueados
+        $blockedTimes = DB::table('blocked_time')->get();
 
-    // Agregar las citas al array de eventos
-    foreach ($citas as $cita) {
-        $events[] = [
-            'title' => $cita->mascota->nombre_Mascota . ' - ' . $cita->tipoatencion->nombre_TipoAtencion,
-            'start' => $cita->fecha_SolicitudCita . 'T' . $cita->horaInicio_SolicitudCita,
-            'end' => $cita->fecha_SolicitudCita . 'T' . $cita->horaTermino_SolicitudCita,
-        ];
-    }
+        $events = [];
+
+        // Agregar las citas al array de eventos
+        foreach ($citas as $cita) {
+            $events[] = [
+                'title' => $cita->mascota->nombre_Mascota . ' - ' . $cita->tipoatencion->nombre_TipoAtencion,
+                'start' => $cita->fecha_SolicitudCita . 'T' . $cita->horaInicio_SolicitudCita,
+                'end' => $cita->fecha_SolicitudCita . 'T' . $cita->horaTermino_SolicitudCita,
+            ];
+        }
 
     // Agregar los días bloqueados al array de eventos
     foreach ($blockedDays as $day) {
@@ -161,9 +157,13 @@ public function getEvents()
         ];
     }
 
-    return response()->json($events);
-}
+        return response()->json($events);
+    }
 
+
+    /**
+     * Obtiene los horarios ocupados para un tipo de atención y una fecha dada.
+     */
     public function getHorariosOcupados(Request $request)
     {
         $tipoatencion_id = $request->query('tipoatencion_id');
@@ -190,53 +190,28 @@ public function getEvents()
         return response()->json($events);
     }
 
+    /**
+     * Despliega la vista de la cita agendada.
+     */
     public function citaAgendada(SolicitudCitas $solicitud)
     {
-    // Obtener la solicitud de la sesión
-    $solicitud = session('solicitud');
-
-
+        // Obtener la solicitud de la sesión
+        $solicitud = session('solicitud');
         return view('agendada',['solicitud' => $solicitud]);
     }
 
+    /**
+     * Cambia el estado de la solicitudCita seleccionada a 0 y se le envía un correo al tutor informando la cancelación de la cita.
+     */
     public function cancelar($id)
     {
         $solicitud = SolicitudCitas::find($id);
         $solicitud->estado_SolicitudCita = 0;
         $solicitud->save();
+        Mail::to($solicitud->mascota->tutor->persona->correo_Persona)->send(new CitaCanceladaMailable($solicitud));
 
-        return response()->json(['success' => true]);
+
+        return redirect()->route('citasPersonal')->with('mensaje', 'Solicitud cancelada con éxito y correo enviado.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(SolicitudCitas $solicitudCitas)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(SolicitudCitas $solicitudCitas)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, SolicitudCitas $solicitudCitas)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(SolicitudCitas $solicitudCitas)
-    {
-        //
-    }
 }

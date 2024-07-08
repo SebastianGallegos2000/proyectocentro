@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class BlockTimeController extends Controller
 {
+
+    /**
+     * Almacena las horas bloqueadas en la vista admin.
+     */
     public function store(Request $request)
     {
         // Validar los campos
@@ -32,6 +36,9 @@ class BlockTimeController extends Controller
         return back()->with('success', 'Hora bloqueada con éxito.');
     }
 
+    /**
+     * Desbloquea una hora en la vista admin.
+     */
     public function unblockTime(Request $request)
     {
         $date = $request->input('date');

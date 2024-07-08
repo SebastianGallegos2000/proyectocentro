@@ -14,26 +14,18 @@ use Illuminate\Support\Facades\Hash;
 
 class TutorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    //public function index()
-    //{
-    //    $tutor= Tutor::all();
-    //    return view('tutorIndex',$tutor);
-    //}
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega un formulario para crear un usuario con el rol tutor.
      */
     public function create()
     {
-        $comunas = Comuna::all();
+        $comunas = Comuna::where('estado_Comuna', 1)->get();
         return view('createTutorAdmin', compact('comunas'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena los datos ingresados en el formulario.
      */
     public function store(Request $request)
     {
@@ -61,9 +53,6 @@ class TutorController extends Controller
         $persona->save();
 
         //Insertar en la tabla tutores.
-
-
-
         $tutor = new Tutor();
     
         $tutor->persona_id = $persona->id;
@@ -77,7 +66,7 @@ class TutorController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Despliega el perfil del tutor que está en la sesión.
      */
     public function show(Tutor $tutor)
     {
@@ -86,7 +75,7 @@ class TutorController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Despliega formulario para editar datos del tutor.
      */
     public function edit(Tutor $tutor, Persona $persona, User $usuario)
     {
@@ -99,7 +88,7 @@ class TutorController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza los datos ingresados en el formulario edit.
      */
     public function update(Request $request)
     {
@@ -144,22 +133,23 @@ class TutorController extends Controller
         }
     }
 
-    //Editar tutores desde la vista administrador
+    
+    /**
+     * Despliega la vista para editar los datos del tutor en la vista del Administrador.
+     */
     public function editTutorAdmin($id)
     {
         $user = User::find($id);
-        $comunas = Comuna::all();
-    
-    
+        $comunas = Comuna::where('estado_Comuna', 1)->get();
         $persona = $user->persona;
         $tutor = $persona->tutor;
-    
 
-    
         return view('editTutorAdmin', ['user' => $user, 'persona' => $persona, 'tutor' => $tutor, 'comunas' => $comunas]);
     }
 
-    //Actualizar tutores desde la vista administrador
+    /**
+     * Actualiza los datos del tutor en la vista del Administrador.
+     */
     public function updateTutorAdmin(Request $request, $tutor)
     {
         $persona = Persona::find($tutor);
@@ -181,40 +171,23 @@ class TutorController extends Controller
     }
 
 
+    /**
+     * Despliega la vista para listar a los tutores.
+     */
     public function list()
     {
         //Obtener todos los tutores del sistema.
-        $tutores = User::where('rol_id', '1')->with(['persona.tutor.comuna'])->get();
+        $tutores = Tutor::all();
         return view('tutoresList', compact('tutores',));
     }
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Tutor $tutor)
-    {
-        //
-    }
 
-    public function mascotasTutor($userId)
+    /**
+     * Despliega las mascotas del tutor seleccionado.
+     */
+    public function mascotasTutor($id)
     {
-        $user = User::find($userId);
-        if (!$user) {
-            // Manejar el caso en que el usuario no se encuentra
-            return redirect()->back()->withErrors(['message' => 'Usuario no encontrado']);
-        }
-    
-        $persona = $user->persona; // Asumiendo que existe la relación persona en el modelo User
-        if (!$persona) {
-            // Manejar el caso en que la persona no se encuentra
-            return redirect()->back()->withErrors(['message' => 'Persona no encontrada para el usuario']);
-        }
-    
-        $tutor = $persona->tutor; // Asumiendo que existe la relación tutor en el modelo Persona
-        if (!$tutor) {
-            // Manejar el caso en que el tutor no se encuentra
-            return redirect()->back()->withErrors(['message' => 'Tutor no encontrado para la persona']);
-        }
-    
+        
+        $tutor = Tutor::find($id);
         $mascotas = Mascotas::where('tutor_id', $tutor->id)->get();
         
         return view('mascotasTutor', compact('mascotas', 'tutor'));

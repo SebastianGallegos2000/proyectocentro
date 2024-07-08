@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Insumo;
-use App\Models\ModificacionInsumo; // Add this line
+use App\Models\ModificacionInsumo;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class InsumoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega los insumos en el sistema en el rol Personal.
      */
     public function index():View
     {
@@ -19,6 +19,9 @@ class InsumoController extends Controller
         return view('insumoIndex', ['insumos'=>$insumos]);
     }
 
+    /**
+     * Despliega los insumos en el sistema en el rol Administrador.
+     */
     public function indexAdmin():View
     {
         $insumos= Insumo::all();
@@ -26,20 +29,23 @@ class InsumoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega el formulario para crear un nuevo insumo para el rol Personal.
      */
     public function create():View
     {
         return view('createInsumo');
     }
 
+    /**
+     * Despliega el formulario para crear un nuevo insumo para el rol Administrador.
+     */
     public function createAdmin():View
     {
         return view('createInsumoAdmin');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena los datos ingresados en el createInsumo con el rol Personal.
      */
     public function store(Request $request): RedirectResponse
     {
@@ -63,6 +69,10 @@ class InsumoController extends Controller
         return redirect(route('insumoIndex'))->with('success','Insumo agregado con éxito al sistema');    
     }
 
+
+    /**
+     * Almacena los datos ingresados en el createInsumo con el rol Administrador.
+     */
     public function storeAdmin(Request $request): RedirectResponse
     {
         $request->validate([
@@ -85,28 +95,24 @@ class InsumoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Insumo $insumo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Muestra el formulario para editar el insumo seleccionado con el rol Personal.
      */
     public function edit(Insumo $insumo): View
     {
         return view('editInsumo',['insumo'=> $insumo]);
     }
 
+    /**
+     * Muestra el formulario para editar el insumo seleccionado con el rol Administrador.
+     */
     public function editInsumoAdmin(Insumo $insumo): View
     {
         return view('editInsumoAdmin',['insumo'=> $insumo]);
     }
 
+
     /**
-     * Update the specified resource in storage.
+     * Actualiza los datos ingresados en el editInsumo con el rol Personal.
      */
     public function update(Request $request, Insumo $insumo):RedirectResponse
     {
@@ -125,6 +131,9 @@ class InsumoController extends Controller
         return redirect()->route('insumoIndex')->with('success','Insumo actualizado con éxito al sistema');    
     }
 
+    /**
+     * Actualiza los datos ingresados en el editInsumo con el rol Administrador.
+     */
     public function updateInsumoAdmin(Request $request, Insumo $insumo):RedirectResponse
     {
         $request->validate([
@@ -144,7 +153,7 @@ class InsumoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Cambia el estado del insumo seleccionado a 0 con el rol Personal.
      */
     public function destroy($id)
     {
@@ -160,6 +169,9 @@ class InsumoController extends Controller
         return redirect(route('insumoIndex'))->with('success', 'Insumo eliminado correctamente.');
     }
 
+    /**
+     * Cambia el estado del insumo seleccionado a 0 con el rol Administrador.
+     */
     public function destroyAdmin($id)
     {
         $insumo = Insumo::find($id);
@@ -174,6 +186,9 @@ class InsumoController extends Controller
         return redirect(route('insumoIndexAdmin'))->with('success', 'Insumo eliminado correctamente.');
     }
 
+    /**
+     * Cambia el estado del insumo seleccionado a 1 con el rol Personal.
+     */
     public function activate($id){
         $insumo = Insumo::find($id);
     
@@ -187,6 +202,9 @@ class InsumoController extends Controller
         return redirect(route('insumoIndex'))->with('success', 'Insumo activado correctamente.');
     }
 
+    /**
+     * Cambia el estado del insumo seleccionado a 1 con el rol Administrador.
+     */
     public function activateAdmin($id){
         $insumo = Insumo::find($id);
     
@@ -200,19 +218,24 @@ class InsumoController extends Controller
         return redirect(route('insumoIndexAdmin'))->with('success', 'Insumo activado correctamente.');
     }
 
+    /**
+     * Despliega la vista para agregar cantidad a un insumo.
+     */
     public function agregarCantidadView($id)
     {
         $insumo = Insumo::findOrFail($id);
         return view('agregarCantidad', compact('insumo'));
     }
     
+    /**
+     * Procesa la cantidad ingresada en la vista agregarCantidad.
+     */
     public function procesarCantidad(Request $request, $id)
     {
         $insumo = Insumo::findOrFail($id);
         $cantidadAgregar = $request->input('cantidad');
     
-        // Asumiendo que tienes un modelo User que está relacionado con Personal
-        $personalId = auth()->user()->persona->personal->id; // Asegúrate de ajustar esta línea según tu estructura de base de datos
+        $personalId = auth()->user()->persona->personal->id;
     
         // Actualizar la cantidad del insumo
         $insumo->cantidad_Insumo += $cantidadAgregar;
@@ -224,7 +247,7 @@ class InsumoController extends Controller
         $modificacion->insumo_id = $id;
         $modificacion->fechayhora_ModificacionInsumo = now();
         $modificacion->cantidad_ModificacionInsumo = $cantidadAgregar;
-        $modificacion->estado_ModificacionInsumo = 1; // Asumiendo que 1 es el estado activo
+        $modificacion->estado_ModificacionInsumo = 1;
         $modificacion->save();    
         return redirect()->route('insumoIndex')->with('success', 'Cantidad agregada correctamente.');
     }

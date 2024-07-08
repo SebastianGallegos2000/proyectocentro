@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 class PersonalController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega a todo el personal que se encuentra en la base de datos.
      */
     public function index()
     {
@@ -24,6 +24,9 @@ class PersonalController extends Controller
         return view('usuarios', ['personals'=>$personal]);
     }
 
+    /**
+     * Despliega los datos del personal que inició sesión y los insumos para ser mostrados en el dashboard.
+     */
     public function indexPersonal(){
         $personal = Personal::all();
         $insumos = Insumo::all();
@@ -32,7 +35,7 @@ class PersonalController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega el formulario para crear un personal.
      */
     public function create()
     {
@@ -41,13 +44,13 @@ class PersonalController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena los datos del personal creado en el formulario.
      */
     public function store(Request $request)
     {
         //Validar los datos
         $request->validate([
-            'rut_Persona' => 'required|integer',
+            'rut_Persona' => ['required', 'numeric', 'valid_rut:'.$request->dv_Persona],
             'dv_Persona' => 'required|string|max:1',
             'nombre_Persona' => 'required|string|max:50',
             'apellido_Persona' => 'required|string|max:50',
@@ -98,7 +101,7 @@ class PersonalController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Despliega el perfil del personal.
      */
     public function show(Personal $personal)
     {
@@ -108,7 +111,7 @@ class PersonalController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Despliega el formulario para editar datos del personal.
      */
     public function edit(Personal $personal, Persona $persona, User $usuario)
     {
@@ -121,6 +124,9 @@ class PersonalController extends Controller
         return view('editPersonal', compact('user','persona','personal','especialidades'));
     }
 
+    /**
+     * Actualiza los datos del personal.
+     */
     public function update(Request $request, Personal $personal)
     {
         $user = Auth::user();
@@ -148,6 +154,9 @@ class PersonalController extends Controller
             return redirect(route('perfilPersonal'))->with('success','Usuario actualizado con éxito en el sistema');     
     }
 
+    /**
+     * Despliega la vista para editar los datos del personal en la vista del Administrador.
+     */
     public function editPersonalAdmin($id)
     {
         $personal = Personal::find($id);
@@ -156,6 +165,9 @@ class PersonalController extends Controller
     }
 
 
+    /**
+     * Actualiza los datos del personal en la vista del Administrador.
+     */
     public function updatePersonalAdmin(Request $request, $personal)
     {
 
@@ -183,30 +195,14 @@ class PersonalController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Carga la vista y los datos de las citas agendadas.
      */
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
-
-
     public function citas(Personal $personal)
     {
-        //Se obtienen las Solicitudes de citas que tienen la fecha del dia de hoy
-        //$citas = $personal->solicitudcitas->where('fecha_SolicitudCita', date('Y-m-d'));
-        //return view('citasPersonal', ['citas'=>$citas]);
-        
         $citas = $personal->citas;
-        //Se obtienen todas las solicitudes de citas y se ordenan en base a la fecha la más antigua al ultimo
         $solicitudes = SolicitudCitas::all();
         return view('citasPersonal', compact('citas','solicitudes'));
     
     }
 
-    public function destroy(Personal $personal)
-    {
-        //
-    }
 }

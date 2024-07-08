@@ -12,13 +12,13 @@ class Persona extends Model
     //Relacion uno a uno con Tutor
     public function tutor()
     {
-        return $this->hasOne('\App\Models\Tutor','persona_id');
+        return $this->hasOne(Tutor::class,'persona_id');
     }
 
     //Relacion uno a uno con User
     public function user()
     {
-        return $this->belongsTo('\App\Models\User');
+        return $this->belongsTo('\App\Models\User',);
     }
 
     //Relación uno a uno con Personal

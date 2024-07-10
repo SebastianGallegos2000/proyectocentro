@@ -152,15 +152,15 @@
                 <label for="insumos">Insumos:</label>
                 <div id="insumos-list">
                     <div class="row insumo-row">
-                        <div class="col" id="cantidad_Insumo">
+                        <div class="col">
                             <select class="form-control" id="form-control-atencion" name="insumos[]">
                                 @foreach($insumos as $insumo)
-                                    <option value="{{ $insumo->id }}" >{{ $insumo->nombre_Insumo }}</option>
+                                    <option value="{{ $insumo->id }}" {{ $insumo->cantidad_Insumo == 0 ? 'disabled' : '' }}>{{ $insumo->nombre_Insumo }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col" id="cantidad_Insumo">
-                            <input type="number" class="form-control" id="cantidad_Insumo" name="cantidad[]" placeholder="0">
+                        <div class="col">
+                            <input type="number" class="form-control" name="cantidad[]" placeholder="0">
                         </div>
                     </div>
                 </div>
@@ -173,36 +173,37 @@
         </form>
         
         <script>
-            document.getElementById('add-insumo').addEventListener('click', function() {
-                var insumosList = document.getElementById('insumos-list');
-                var newRow = document.createElement('div');
-                newRow.className = 'row insumo-row mt-4';
-            
-                var newInsumo = document.createElement('div');
-                newInsumo.className = 'col';
-                newInsumo.innerHTML = '<select class="form-control" style="width:100%" name="insumos[]">@foreach($insumos as $insumo)<option value="{{ $insumo->id }}">{{ $insumo->nombre_Insumo }}</option>@endforeach</select>';
-                newRow.appendChild(newInsumo);
-            
-                var newCantidad = document.createElement('div');
-                newCantidad.className = 'col';
-                newCantidad.innerHTML = '<input type="number" class="form-control" name="cantidad[]" placeholder="0">';
-                newRow.appendChild(newCantidad);
-            
-                // Crear y añadir el botón de eliminar
-                var deleteButtonDiv = document.createElement('div');
-                deleteButtonDiv.className = 'col-auto';
-                var deleteButton = document.createElement('button');
-                deleteButton.className = 'btn btn-danger';
-                deleteButton.innerHTML = 'x';
-                deleteButton.type = 'button';
-                deleteButton.addEventListener('click', function() {
-                    newRow.remove();
-                });
-                deleteButtonDiv.appendChild(deleteButton);
-                newRow.appendChild(deleteButtonDiv);
-            
-                insumosList.appendChild(newRow);
-            });
+document.getElementById('add-insumo').addEventListener('click', function() {
+    var insumosList = document.getElementById('insumos-list');
+    var newRow = document.createElement('div');
+    newRow.className = 'row insumo-row mt-4';
+
+    var newInsumo = document.createElement('div');
+    newInsumo.className = 'col';
+    // Asumiendo que tienes una forma de verificar la cantidad de cada insumo, por ejemplo, $insumo->cantidad
+    newInsumo.innerHTML = '<select class="form-control" style="width:100%" name="insumos[]">@foreach($insumos as $insumo)<option value="{{ $insumo->id }}" {{ $insumo->cantidad_Insumo == 0 ? "disabled" : "" }}>{{ $insumo->nombre_Insumo }}</option>@endforeach</select>';
+    newRow.appendChild(newInsumo);
+
+    var newCantidad = document.createElement('div');
+    newCantidad.className = 'col';
+    newCantidad.innerHTML = '<input type="number" class="form-control" name="cantidad[]" placeholder="0">';
+    newRow.appendChild(newCantidad);
+
+    // Crear y añadir el botón de eliminar
+    var deleteButtonDiv = document.createElement('div');
+    deleteButtonDiv.className = 'col-auto';
+    var deleteButton = document.createElement('button');
+    deleteButton.className = 'btn btn-danger';
+    deleteButton.innerHTML = 'x';
+    deleteButton.type = 'button';
+    deleteButton.addEventListener('click', function() {
+        newRow.remove();
+    });
+    deleteButtonDiv.appendChild(deleteButton);
+    newRow.appendChild(deleteButtonDiv);
+
+    insumosList.appendChild(newRow);
+});
         </script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
